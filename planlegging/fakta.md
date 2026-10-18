@@ -60,7 +60,7 @@ Sist oppdatert: 2026-10-18 (etter full logikkrevisjon, manus v21).
 
 ### Dana (ekte)
 - Ser lobbyen via en **gammel kameramonitor** på 12 (lampen på desken, lysene). Kan ikke se spilleren i 11C.
-- Merker når spilleren skriver til andre: «the phone does a thing up here when you type». Lysene i korridoren dimmer mot heisen når heisen har noen i seg.
+- Merker når spilleren skriver til andre: «the phone does a thing up here when you type». Lysene i korridoren dimmer mot heisen når heisen har noen i seg. Hun merker **bare at** spilleren skriver, aldri **hva** – hun kan ikke sitere ord fra Tom-tråden eller andre tråder (rettet 18.10: «check what?» fjernet).
 - Leser journaler på Hallorans kontor fra dag 3. Vet om LANTERN, Resonatoren, Composite fra **dag 4** (ch5_lantern). Vet om «name rule» fra natt 2 (journal i rom 4). Vet at Det kopierer og ikke finner på (dag 3). Vet at Det skrev til Lindqvists kone som ham (dag 4, knows_copy).
 - Vet at Marjorie finnes og prater med alle; vet **ikke** på forhånd når Marjorie tekster.
 - Har aldri fortalt noen i bygget om Kevin før spilleren (dag 4).
@@ -136,6 +136,16 @@ Sist oppdatert: 2026-10-18 (etter full logikkrevisjon, manus v21).
 4. Det kopierer; det finner ikke på. Det kan bare skrive det det har fått. Stillhet er det Det lytter etter.
 5. Si fra til Dana før du svarer noen andre som tekster desken.
 6. Når Resonatoren er av, svekkes Det («weakens»).
+
+### Nav («spør mer»-huber) som bærer nøkkelinformasjon
+Regel (Ruben 18.10): informasjon historien bygger på senere skal ikke kunne hoppes over fordi spilleren spør om «feil ting». Derfor:
+- ch2_wristband: Dana går ikke videre til spillet før alle tre («Desk?», LANTERN, «get out») er spurt.
+- ch5_marjorie: «Lock your door tonight» kan først sendes etter begge spørsmålene.
+- ch5_chart: «What do the files say» krever at Lindqvist er spurt først.
+- ch5_lantern_hub: ingen tidlig utgang; Dana går videre av seg selv etter alle tre.
+- tom_lost-stien får navneregelen (regel 3) av Dana dag 3 i ch4_desk_name, siden den ellers bare fortelles i ch3_name_rule.
+- Reyes/Li-forklaringen ligger i ch5_kevin_tell (alle ser den), ikke bare i «mom»-valget.
+- ch5_walter (2 av 3 spørsmål) er bevisst kostbart valg – venter på Rubens avgjørelse.
 
 ## 9. Flagg som bærer fakta (må være satt der faktumet oppstår)
 

@@ -1012,7 +1012,7 @@ window.NIGHTDESK_STORY = {
         { text: "This wasn't an apartment building, Desk. Not up here.", delay: "8s" }
       ],
       choices: [
-        { text: "Desk?", goto: "ch2_desk_name" },
+        { text: "Desk?", goto: "ch2_desk_name", set: { wq_desk: 1 } },
         { text: "What is LANTERN?", goto: "ch2_lantern", set: { curiosity: 1, wq_lantern: 1 } },
         { text: "Dana, get out of that room.", goto: "ch2_getout", set: { trust: 1, wq_out: 1 } }
       ]
@@ -1021,7 +1021,7 @@ window.NIGHTDESK_STORY = {
     ch2_wristband_hub: {
       messages: [],
       choices: [
-        { text: "Desk?", goto: "ch2_desk_name" },
+        { text: "Desk?", goto: "ch2_desk_name", set: { wq_desk: 1 }, if: { flag: "wq_desk", max: 0 } },
         { text: "What is LANTERN?", goto: "ch2_lantern", set: { curiosity: 1, wq_lantern: 1 }, if: { flag: "wq_lantern", max: 0 } },
         { text: "Dana, get out of that room.", goto: "ch2_getout", set: { trust: 1, wq_out: 1 }, if: { flag: "wq_out", max: 0 } }
       ]
@@ -1033,7 +1033,7 @@ window.NIGHTDESK_STORY = {
         { text: "Don't tell me your name. I'm serious. It reads over my shoulder, and it collects names.", delay: "10s" },
         { text: "Desk is fine. Desk is safe. I kind of like it.", delay: "6s" }
       ],
-      goto: "ch2_game"
+      goto: [{ if: [{ flag: "wq_desk", min: 1 }, { flag: "wq_lantern", min: 1 }, { flag: "wq_out", min: 1 }], goto: "ch2_game" }, { goto: "ch2_wristband_hub" }]
     },
 
     ch2_lantern: {
@@ -1041,7 +1041,7 @@ window.NIGHTDESK_STORY = {
         { text: "I don't know yet. It's on the wristband and it's stenciled on a door I can't open.", delay: "9s" },
         { text: "Whatever it was, they did it to people with numbers instead of names.", delay: "8s" }
       ],
-      goto: "ch2_wristband_hub"
+      goto: [{ if: [{ flag: "wq_desk", min: 1 }, { flag: "wq_lantern", min: 1 }, { flag: "wq_out", min: 1 }], goto: "ch2_game" }, { goto: "ch2_wristband_hub" }]
     },
 
     ch2_getout: {
@@ -1049,7 +1049,7 @@ window.NIGHTDESK_STORY = {
         { text: "Moving.", delay: "5s" },
         { text: "Hallway. Better. You worry like a person with a name.", delay: "8s" }
       ],
-      goto: "ch2_wristband_hub"
+      goto: [{ if: [{ flag: "wq_desk", min: 1 }, { flag: "wq_lantern", min: 1 }, { flag: "wq_out", min: 1 }], goto: "ch2_game" }, { goto: "ch2_wristband_hub" }]
     },
 
     ch2_game: {
@@ -1233,7 +1233,7 @@ window.NIGHTDESK_STORY = {
       messages: [
         { to: "tom", text: "ok. quick please. it's humming", delay: "6s" },
         { text: "the lights just went. all of them, down the hall. it only does that when it's got someone in the car.", delay: "6s" },
-        { text: "check what? you're typing to someone else, I can tell, the phone does a thing up here when you type.", delay: "7s" },
+        { text: "and you've gone quiet. you're typing to someone else, I can tell, the phone does a thing up here when you type.", delay: "7s" },
         { text: "Who's texting you.", delay: "4s" },
         { text: "Desk. Who.", delay: "3s" }
       ],
@@ -1504,6 +1504,8 @@ window.NIGHTDESK_STORY = {
         { text: "It's a joke I made. On this phone. Which is how it knows the word.", delay: "9s" },
         { text: "It can only write down what it's been given. That's the rule I keep finding. It doesn't invent. It copies.", delay: "11s" },
         { text: "So as long as all it has is Desk, all it can call is Desk. You understand why I never asked.", delay: "10s" },
+        { text: "The chart in room 4 says one more thing, and I wish I'd read it before Tom went up. 'Subject reoriented by vocal self-identification.' You say your own full name out loud and it has to let go. It's how they brought people back when the machine went too far.", delay: "16s", if: { flag: "tom_lost", min: 1 } },
+        { text: "It works on the building too. It hates being told who someone is. Which is why you never tell it yours.", delay: "9s", if: { flag: "tom_lost", min: 1 } },
         { text: "And when Marjorie in 4B gets to you, and she will, she gets to everyone: talk to her. She was here when they poured the floors.", delay: "12s" },
         { status: "offline" },
         { to: "marjorie", text: "Dear, this is Marjorie in 4B. I saw you carry a cat carrier up the stairs yesterday, which means two things. The elevator is misbehaving again, and you have a cat.", delay: "40m", notify: true, if: { flag: "toto_home", min: 1 } },
@@ -1621,7 +1623,6 @@ window.NIGHTDESK_STORY = {
       thread: "marjorie",
       choices: [
         { text: "What did they hear?", goto: "ch5_marjorie_hear", set: { curiosity: 1, mq_hear: 1 } },
-        { text: "Thank you, Marjorie. Lock your door tonight.", goto: "ch5_marjorie_lock", set: { trust: 1 } },
         { text: "Did anyone ever come back down from up there?", goto: "ch5_marjorie_back", set: { curiosity: 1, mq_back: 1 } }
       ]
     },
@@ -1632,7 +1633,7 @@ window.NIGHTDESK_STORY = {
       choices: [
         { text: "What did they hear?", goto: "ch5_marjorie_hear", set: { curiosity: 1, mq_hear: 1 }, if: { flag: "mq_hear", max: 0 } },
         { text: "Did anyone ever come back down from up there?", goto: "ch5_marjorie_back", set: { curiosity: 1, mq_back: 1 }, if: { flag: "mq_back", max: 0 } },
-        { text: "Thank you, Marjorie. Lock your door tonight.", goto: "ch5_marjorie_lock", set: { trust: 1 } }
+        { text: "Thank you, Marjorie. Lock your door tonight.", goto: "ch5_marjorie_lock", set: { trust: 1 }, if: [{ flag: "mq_hear", min: 1 }, { flag: "mq_back", min: 1 }] }
       ]
     },
 
@@ -1707,7 +1708,7 @@ window.NIGHTDESK_STORY = {
       ],
       choices: [
         { text: "Who's Lindqvist?", goto: "ch5_lindqvist", set: { curiosity: 1, cq_lind: 1 } },
-        { text: "What do the files say about the patients?", goto: "ch5_lantern", set: { curiosity: 1 } },
+        { text: "What do the files say about the patients?", goto: "ch5_lantern", set: { curiosity: 1 }, if: { flag: "cq_lind", min: 1 } },
         { text: "Dana. Come down. Right now.", goto: "ch5_come_down", set: { trust: 1, cq_down: 1 } }
       ]
     },
@@ -1716,7 +1717,7 @@ window.NIGHTDESK_STORY = {
       messages: [],
       choices: [
         { text: "Who's Lindqvist?", goto: "ch5_lindqvist", set: { curiosity: 1, cq_lind: 1 }, if: { flag: "cq_lind", max: 0 } },
-        { text: "What do the files say about the patients?", goto: "ch5_lantern", set: { curiosity: 1 } },
+        { text: "What do the files say about the patients?", goto: "ch5_lantern", set: { curiosity: 1 }, if: { flag: "cq_lind", min: 1 } },
         { text: "Dana. Come down. Right now.", goto: "ch5_come_down", set: { trust: 1, cq_down: 1 }, if: { flag: "cq_down", max: 0 } }
       ]
     },
@@ -1764,8 +1765,7 @@ window.NIGHTDESK_STORY = {
       choices: [
         { text: "So what does it want with you?", goto: "ch5_want", set: { lq: 1, lq_want: 1 }, if: { flag: "lq_want", max: 0 } },
         { text: "How do we turn the machine off?", goto: "ch5_machine", set: { curiosity: 1, lq: 1, lq_machine: 1 }, if: { flag: "lq_machine", max: 0 } },
-        { text: "Dana. Breathe. You're still you. Tell me something only you would say.", goto: "ch5_breathe", set: { trust: 1, spark: 1, lq: 1, lq_breathe: 1 }, if: { flag: "lq_breathe", max: 0 } },
-        { text: "Okay. Keep reading. I'm here.", goto: "ch5_kevin_ask" }
+        { text: "Dana. Breathe. You're still you. Tell me something only you would say.", goto: "ch5_breathe", set: { trust: 1, spark: 1, lq: 1, lq_breathe: 1 }, if: { flag: "lq_breathe", max: 0 } }
       ]
     },
 
@@ -1826,7 +1826,7 @@ window.NIGHTDESK_STORY = {
     ch5_kevin_tell: {
       messages: [
         { system: "The last page isn't music. A letter in blue ballpoint, the handwriting slanting hard to the right: 'Dan. Don't come get me this time. It's dangerous to go alone, take this. K.'", delay: "4s" },
-        { text: "K.L. is Kevin Li. My brother. The notebook was his. The songs are his, mostly bad, one good.", delay: "12s" },
+        { text: "K.L. is Kevin Li. My brother. Li was Dad's name. I took Reyes when Mom remarried, Kevin wouldn't. The notebook was his. The songs are his, mostly bad, one good.", delay: "12s" },
         { text: "He died when he was 19. Overdose, in a bathroom in Gresham, with his phone in his hand. The last thing on it was a text to me. 'dangerous to go alone'. It's from Zelda. We said it instead of goodbye.", delay: "16s" },
         { text: "The tattoo is that. Not a nerd thing. Well. Also a nerd thing.", delay: "8s" },
         { text: "I went and got him every time before that one. Every single time.", delay: "9s" },
@@ -1860,7 +1860,7 @@ window.NIGHTDESK_STORY = {
     ch5_after_kevin_mom: {
       messages: [
         { text: "Mom knows he died. She doesn't know about the text. She thinks he went quiet on us. She'll have said the same about me by now. 'She does this.' I can hear her saying it to some cop.", delay: "13s" },
-        { text: "Sacramento, if you ever need a number. Hector Reyes, her husband. I took his name when she married him. Kevin kept Li. Not for this. For after.", delay: "9s", set: { knows_mom: 1 } }
+        { text: "Sacramento, if you ever need a number. Hector Reyes, her husband. Not for this. For after.", delay: "9s", set: { knows_mom: 1 } }
       ],
       choices: [
         { text: "I'm sorry about Kevin.", goto: "ch5_after_kevin" },
