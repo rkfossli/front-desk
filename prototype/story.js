@@ -383,7 +383,7 @@ window.NIGHTDESK_STORY = {
         { text: "oh", delay: "25s", notify: true },
         { text: "oh he's fat. Grace has been feeding him like a grandmother.", delay: "6s" },
         { text: "He's looking at the ceiling. He knows where I am.", delay: "8s" },
-        { text: "Thank you, Desk. I mean it.", delay: "5s" },
+        { text: "Thank you. I mean it.", delay: "5s" },
         { text: "🐈", delay: "3s" }
       ],
       goto: "ch2_perk"
@@ -759,7 +759,7 @@ window.NIGHTDESK_STORY = {
       ],
       thread: "tom",
       choices: [
-        { text: "Tom, stay in the car. Don't get out when the doors open.", goto: "ch3_tom_stay", set: { trust: 1 } },
+        { text: "Tom, stay in the elevator. Don't get out when the doors open.", goto: "ch3_tom_stay", set: { trust: 1 } },
         { text: "What does the indicator say?", goto: "ch3_tom_indicator", set: { curiosity: 1 } },
         { text: "Hang on. Let me check something.", goto: "ch3_tom_hangon" }
       ]

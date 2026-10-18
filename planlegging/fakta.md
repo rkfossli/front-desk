@@ -52,7 +52,8 @@ Sist oppdatert: 2026-10-18 (etter full logikkrevisjon, manus v21).
 - **Danas nummer i spillet**: «+1 (503) 555-0147», ikke lagret. Politiet ville se «a number that was disconnected three weeks ago». De fire siste sifrene speiler 1974-nummeret; det forklares aldri.
 - **Danas ekte, nye nummer** etter redningen: egen tråd `dana_real` («+1 (971) 555-0362»). «This is Dana. My number. The real one.»
 - **Falsk Dana** skriver i **samme tråd** som ekte Dana (det bruker hennes linje), med perfekt tegnsetting og 🙂. Det tekster også Priyas private mobil fra «a different number».
-- **Tom, Priya, Marjorie, Grace, Doug** tekster desk-mobilen fra sine egne mobiler. Priyas private nummer har Det fått fordi Priya svarte fra desk-mobilen dag 2 (hennes navn) – og Det leser alt på linjen.
+- **Tom, Priya, Marjorie, Grace, Doug** tekster desk-mobilen fra sine egne mobiler. Grace har bare byggets nummer (Dana ga henne det som jobbnummer); hun sier det selv i ch2_toto_yes.
+- **Bilder**: tre kilder med hvert sitt utseende (spillerens mobil = skarpt; Danas mobil = blits/nattmodus + kompresjon fra én strek; overvåking/dokumenter = egen stil). Se bilder.md. Aldri filmkorn på et mobilfoto. Priyas private nummer har Det fått fordi Priya svarte fra desk-mobilen dag 2 (hennes navn) – og Det leser alt på linjen.
 - Dana kan **ikke** ringe eller sende bilder stabilt: «one bar», kameraet sier «storage full», bilder går gjennom bare når Det vil (falsk Dana sender bilder fint: «It works for me»).
 
 ## 4. Hvem vet hva (og hvordan)
