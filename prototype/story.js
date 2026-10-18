@@ -227,7 +227,7 @@ window.NIGHTDESK_STORY = {
 
     ch1_end_card: {
       messages: [
-        { system: "You drop the key card on the floor of the car and step back. The doors close on their own." },
+        { system: "You drop the key card on the floor of the elevator and step back. The doors close on their own." },
         { system: "The indicator climbs. 9. 10. 11." },
         { system: "12. The indicator stays there." },
         { text: "Tell me what it says.", delay: "6s" }
@@ -245,7 +245,7 @@ window.NIGHTDESK_STORY = {
         { text: "I'll write when it's safe. It might be a while. Keep that phone on you. Don't let Doug shut it off.", delay: "9s" },
         { status: "offline" }
       ],
-      endOfChapter: { title: "End of Chapter 1", subtitle: "Dana has her key card. The car hasn't come back down.", next: "ch2_start" }
+      endOfChapter: { title: "End of Chapter 1", subtitle: "Dana has her key card. The elevator hasn't come back down.", next: "ch2_start" }
     },
 
     ch1_end_police: {
@@ -281,12 +281,12 @@ window.NIGHTDESK_STORY = {
         { text: "then i'll be here", delay: "6s" },
         { status: "offline" }
       ],
-      endOfChapter: { title: "Night 1, again", subtitle: "The doors closed on an empty car. Dana didn't say goodnight.", next: "ch1b_retry" }
+      endOfChapter: { title: "Night 1, again", subtitle: "The doors closed on an empty elevator. Dana didn't say goodnight.", next: "ch1b_retry" }
     },
 
     ch1b_card: {
       messages: [
-        { system: "You drop the key card on the floor of the car and step back. The doors close on their own." },
+        { system: "You drop the key card on the floor of the elevator and step back. The doors close on their own." },
         { system: "The indicator climbs. 9. 10. 11." },
         { system: "12." },
         { text: "Then it reached me.", delay: "35s", notify: true },
@@ -922,7 +922,7 @@ window.NIGHTDESK_STORY = {
         { text: "🐈", delay: "3s", if: { flag: "fed_toto", min: 1 } },
         { status: "offline" }
       ],
-      endOfChapter: { title: "End of Night 2", subtitle: "Tom Okafor took the stairs. Dana found a chart in room 4. The lights in 11C flickered once when the car came down.", next: "ch4_start" }
+      endOfChapter: { title: "End of Night 2", subtitle: "Tom Okafor took the stairs. Dana found a chart in room 4. The lights in 11C flickered once when the elevator came down.", next: "ch4_start" }
     },
 
     ch3_tom_stairs: {
@@ -1995,7 +1995,7 @@ window.NIGHTDESK_STORY = {
       messages: [
         { system: "{time}. The sign is face down behind the desk. Priya is in the lobby in her coat with two coffees, pretending this is normal.", delay: "10s", if: { flag: "priya_risk", min: 1 } , set: { priya_here: 1 } },
         { system: "{time}. The sign is face down behind the desk. You stand on the terrazzo where the camera can see you.", delay: "10s", if: { flag: "priya_risk", max: 0 } },
-        { system: "Her 3:12. The hum. The indicator above the doors counts down from a number that isn't on the panel. The car arrives. The doors open on nothing: brass rail, mirror, the smell of a hospital. The mirror doesn't show you.", delay: "12s" },
+        { system: "Her 3:12. The hum. The indicator above the doors counts down from a number that isn't on the panel. The elevator arrives. The doors open on nothing: brass rail, mirror, the smell of a hospital. The mirror doesn't show you.", delay: "12s" },
         { text: "Step in. Hold the doors. Count to ten. I'm right behind you. 🙂", delay: "4s", notify: true },
         { text: "desk dont", delay: "5s" }
       ],
@@ -2019,7 +2019,7 @@ window.NIGHTDESK_STORY = {
 
     ch7_swap: {
       messages: [
-        { system: "You put the phone down on the counter and step in. The doors close on ten. The car goes up past 11. The hum stops being a sound and becomes the place you are.", delay: "6s" },
+        { system: "You put the phone down on the counter and step in. The doors close on ten. The elevator goes up past 11. The hum stops being a sound and becomes the place you are.", delay: "6s" },
         { system: "Downstairs, the desk phone buzzes once on the counter where you left it. Nobody is there to read it.", delay: "8s" },
         { to: "carl", text: "I quit. Sorry for the short notice.", delay: "3s", me: true },
         { system: "Priya will see it at 8. Doug will forward it to the police. Your mother will say you do this.", delay: "6s" },
@@ -2033,7 +2033,7 @@ window.NIGHTDESK_STORY = {
         { system: "The doors close on nothing. The indicator goes up, past 11, and stops where there is no number. The lights in the lobby flicker in a rhythm like someone hitting the same key.", delay: "6s" },
         { text: "You were told what to do.", delay: "5s" },
         { text: "desk. desk the panel. 11c. run", delay: "4s" },
-        { system: "The car comes back down, empty, and opens. Priya steps in to look at the panel, because somebody should. She is still in it when the doors close. Up there it is still 3:12.", delay: "6s", if: { flag: "priya_here", min: 1 }, set: { priya_lost: 1 } },
+        { system: "The elevator comes back down, empty, and opens. Priya steps in to look at the panel, because somebody should. She is still in it when the doors close. Up there it is still 3:12.", delay: "6s", if: { flag: "priya_here", min: 1 }, set: { priya_lost: 1 } },
         { system: "Eleven floors of stairs. Seven minutes. The closet panel is open on the coats, and Dana Reyes is sitting against the dresser holding her left arm and a 1974 cardigan, and swearing at you in two languages.", delay: "20s", set: { dana_hurt: 1 } },
         { text: "you took your time desk", delay: "6s" },
         { text: "it followed me to the panel. i said my own name at it. all of it. li dan reyes. it let go", delay: "8s" },
@@ -2053,7 +2053,7 @@ window.NIGHTDESK_STORY = {
         { to: "dana_real", text: "tom came down the stairs behind me. he doesnt remember any of it. lucky him", delay: "8s", if: { flag: "tom_lost", min: 1 } },
         { system: "Priya's thread says Delivered. It will keep saying it.", delay: "4s", if: { flag: "priya_lost", min: 1 } }
       ],
-      endOfChapter: { title: "The doors closed", subtitle: "Dana came down the hard way. Whatever came down with the car went back up, and it did not go up alone if someone was standing in the lobby." }
+      endOfChapter: { title: "The doors closed", subtitle: "Dana came down the hard way. Whatever came down with the elevator went back up, and it did not go up alone if someone was standing in the lobby." }
     },
 
     ch7_desk: {

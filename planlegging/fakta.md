@@ -65,7 +65,7 @@ Sist oppdatert: 2026-10-18 (etter full logikkrevisjon, manus v21).
 - Vet at Marjorie finnes og prater med alle; vet **ikke** på forhånd når Marjorie tekster.
 - Har aldri fortalt noen i bygget om Kevin før spilleren (dag 4).
 - Skriver små bokstaver uten punktum når hun er redd/nær maskinen; normal tegnsetting når hun er rolig. **Aldri** smilefjes (bare 🐈).
-- Sier «the car» om heiskupeen (vaktsjargong fra 1974-håndboka). Alle andre sier «elevator».
+- Sier «elevator» om heisen generelt og «the car» om selve kupeen når den kommer, åpner eller går (vaktsjargong fra 1974-håndboka). Walter sier bare «the car». **Alle andre sier «elevator»**, også spillerens svar, systemlinjene og kapittelundertitlene (bestemt av Ruben 18.10): systemlinjene er spillerens egne øyne.
 
 ### Det (the Composite)
 - Hører alt på telefonlinjen («it hears the phone», «it reads over my shoulder»). Kan bare gjenta det det har fått: navn, fraser, bilder som finnes på telefonen.
