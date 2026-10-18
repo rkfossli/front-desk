@@ -1,0 +1,1093 @@
+<title>Front Desk</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Roboto+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a dev toolbar above a phone frame; inside the frame, the messaging app (inbox or one conversation). Skin tokens switch between Android Messages and iMessage. */
+:root {
+  --page-bg: #1b1d22; --page-fg: #d6d8de; --page-muted: #8b8f99; --page-accent: #8ab4f8;
+  --font-ui: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Roboto Mono", ui-monospace, Menlo, monospace;
+  /* Android Messages, light */
+  --bg: #ffffff; --fg: #1f1f1f; --muted: #444746; --faint: #747775;
+  --bar-bg: #f3f6fc; --in-bg: #f0f4f9; --in-fg: #1f1f1f; --out-bg: #d3e3fd; --out-fg: #041e49;
+  --accent: #0b57d0; --chip-bg: #ffffff; --chip-border: #c4c7c5; --chip-fg: #0b57d0; --field-bg: #f0f4f9;
+  --avatar: #c2e7ff; --avatar-fg: #001d35; --unread: #0b57d0; --sys-fg: #5e5e5e; --divider: #e3e3e3;
+  --radius: 20px; --tail: 4px; --list-radius: 0px;
+  --sheet-bg: #202124; --sheet-fg: #e8eaed;
+}
+:root[data-skin="ios"] {
+  --font-ui: -apple-system, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --bg: #ffffff; --fg: #000000; --muted: #3c3c43; --faint: #8e8e93;
+  --bar-bg: rgba(249,249,249,.94); --in-bg: #e9e9eb; --in-fg: #000000; --out-bg: #007aff; --out-fg: #ffffff;
+  --accent: #007aff; --chip-bg: #ffffff; --chip-border: #d1d1d6; --chip-fg: #007aff; --field-bg: #ffffff;
+  --avatar: #a8aeb8; --avatar-fg: #ffffff; --unread: #007aff; --sys-fg: #8e8e93; --divider: #e5e5ea;
+  --radius: 18px; --tail: 4px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e0e10; --fg: #e3e3e3; --muted: #c4c7c5; --faint: #8e918f;
+    --bar-bg: #1b1b1f; --in-bg: #1e1f22; --in-fg: #e3e3e3; --out-bg: #0842a0; --out-fg: #d3e3fd;
+    --accent: #a8c7fa; --chip-bg: #1e1f22; --chip-border: #444746; --chip-fg: #a8c7fa; --field-bg: #1e1f22;
+    --avatar: #004a77; --avatar-fg: #c2e7ff; --unread: #a8c7fa; --sys-fg: #9aa0a6; --divider: #2b2c30; color-scheme: dark;
+  }
+  :root:not([data-theme="light"])[data-skin="ios"] {
+    --bg: #000000; --fg: #ffffff; --muted: #ebebf5; --faint: #8d8d93;
+    --bar-bg: rgba(29,29,31,.94); --in-bg: #26252a; --in-fg: #ffffff; --out-bg: #0a84ff; --out-fg: #ffffff;
+    --accent: #0a84ff; --chip-bg: #1c1c1e; --chip-border: #3a3a3c; --chip-fg: #0a84ff; --field-bg: #1c1c1e;
+    --avatar: #6c6c70; --avatar-fg: #ffffff; --unread: #0a84ff; --sys-fg: #8d8d93; --divider: #2c2c2e;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e0e10; --fg: #e3e3e3; --muted: #c4c7c5; --faint: #8e918f;
+  --bar-bg: #1b1b1f; --in-bg: #1e1f22; --in-fg: #e3e3e3; --out-bg: #0842a0; --out-fg: #d3e3fd;
+  --accent: #a8c7fa; --chip-bg: #1e1f22; --chip-border: #444746; --chip-fg: #a8c7fa; --field-bg: #1e1f22;
+  --avatar: #004a77; --avatar-fg: #c2e7ff; --unread: #a8c7fa; --sys-fg: #9aa0a6; --divider: #2b2c30; color-scheme: dark;
+}
+:root[data-theme="dark"][data-skin="ios"] {
+  --bg: #000000; --fg: #ffffff; --muted: #ebebf5; --faint: #8d8d93;
+  --bar-bg: rgba(29,29,31,.94); --in-bg: #26252a; --in-fg: #ffffff; --out-bg: #0a84ff; --out-fg: #ffffff;
+  --accent: #0a84ff; --chip-bg: #1c1c1e; --chip-border: #3a3a3c; --chip-fg: #0a84ff; --field-bg: #1c1c1e;
+  --avatar: #6c6c70; --avatar-fg: #ffffff; --unread: #0a84ff; --sys-fg: #8d8d93; --divider: #2c2c2e;
+}
+
+html, body { height: 100%; }
+body {
+  margin: 0; background: var(--page-bg); color: var(--page-fg); font-family: var(--font-ui);
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  padding-block: 14px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  box-sizing: border-box; overflow: hidden;
+}
+* { box-sizing: border-box; }
+button { font: inherit; cursor: pointer; }
+button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Dev toolbar (not part of the game) */
+/* Dev settings: hidden by default so the phone looks like the finished game. Long-press the clock (or press D) to open. */
+.tools { position: absolute; left: 0; right: 0; bottom: 0; z-index: 7; display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; justify-content: center; font-size: 12.5px; color: var(--page-muted); background: var(--sheet-bg); border-radius: 24px 24px 0 0; padding: 16px 16px 22px; box-shadow: 0 -10px 30px rgba(0,0,0,.4); }
+.tools .close { position: absolute; top: 8px; right: 10px; background: transparent; border: 0; color: var(--page-muted); font-size: 18px; width: 32px; height: 32px; border-radius: 50%; }
+.tools .hint { width: 100%; text-align: center; font-size: 11px; color: var(--page-muted); }
+.tools .grp { display: flex; align-items: center; gap: 6px; }
+.tools label { letter-spacing: .04em; text-transform: uppercase; font-size: 10.5px; }
+.seg { display: inline-flex; border: 1px solid #3a3d45; border-radius: 8px; overflow: hidden; }
+.seg button { background: transparent; color: var(--page-fg); border: 0; padding: 5px 10px; font-size: 12.5px; }
+.seg button + button { border-left: 1px solid #3a3d45; }
+.seg button[aria-pressed="true"] { background: #2f3340; color: #fff; }
+.tools .flags { font-family: var(--font-mono); font-size: 11px; color: var(--page-muted); }
+.tools select { background: #1e2127; color: #e6e6e6; border: 1px solid #3a3d45; border-radius: 8px; padding: 5px 8px; font-size: 12.5px; }
+.tools .reset { background: transparent; color: var(--page-accent); border: 1px solid #3a3d45; border-radius: 8px; padding: 5px 10px; font-size: 12.5px; }
+
+/* Phone frame */
+.phone {
+  position: relative; width: 390px; max-width: 100%; height: 800px; max-height: calc(100% - 60px);
+  background: var(--bg); color: var(--fg); border-radius: 36px; overflow: hidden;
+  box-shadow: 0 0 0 10px #0c0d10, 0 0 0 12px #2a2d35, 0 30px 60px rgba(0,0,0,.6);
+  display: flex; flex-direction: column; font-family: var(--font-ui);
+}
+@media (max-width: 480px) {
+  body { padding: 0; gap: 0; }
+  .tools .flags { display: none; }
+  .phone { width: 100%; height: 100%; max-height: none; border-radius: 0; box-shadow: none; }
+}
+/* Status bar: Android = clock left, wifi/signal/battery right; iPhone = bold clock, Dynamic Island, signal bars/wifi/battery. Neither shows AM/PM. */
+.statusbar { position: relative; height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; font-size: 14px; font-weight: 500; background: var(--bar-bg); color: var(--fg); flex: none; }
+:root[data-skin="ios"] .statusbar { height: 50px; font-size: 16px; font-weight: 600; padding: 0 30px 0 36px; }
+.statusbar .right { display: flex; gap: 5px; align-items: center; font-size: 12px; }
+.statusbar .right svg { width: 16px; height: 16px; fill: currentColor; display: block; }
+.statusbar .island { display: none; }
+:root[data-skin="ios"] .statusbar .island { display: block; position: absolute; left: 50%; top: 11px; transform: translateX(-50%); width: 112px; height: 32px; border-radius: 18px; background: #000; }
+.statusbar .bars { display: none; align-items: flex-end; gap: 1.5px; height: 11px; }
+.statusbar .bars i { width: 3px; background: currentColor; border-radius: 1px; }
+:root[data-skin="ios"] .statusbar .bars { display: flex; }
+:root[data-skin="ios"] .statusbar .sig { display: none; }
+.statusbar .batt { width: 22px; height: 11px; border: 1.5px solid currentColor; border-radius: 3px; position: relative; opacity: .85; }
+.statusbar .batt::after { content: ""; position: absolute; inset: 1.5px; right: 5px; background: currentColor; border-radius: 1px; }
+:root[data-skin="ios"] .statusbar .batt { width: 25px; height: 12px; border-radius: 4px; opacity: .9; }
+
+.screen { position: relative; flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.view { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--bg); }
+.view[hidden], .sheet[hidden], .waiting[hidden], .tools[hidden] { display: none !important; }
+
+/* Inbox */
+.inbox-head { padding: 10px 16px 6px; background: var(--bar-bg); flex: none; }
+.inbox-head .top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.inbox-head h1 { margin: 0; font-size: 22px; font-weight: 500; }
+:root[data-skin="ios"] .inbox-head h1 { font-size: 34px; font-weight: 700; letter-spacing: -.01em; }
+.inbox-head .me { width: 32px; height: 32px; border-radius: 50%; background: #5f6368; color: #fff; display: grid; place-items: center; font-size: 14px; font-weight: 500; flex: none; }
+.glassbtn { width: 36px; height: 36px; border-radius: 50%; border: 0; display: none; place-items: center; flex: none; color: var(--fg); background: color-mix(in srgb, var(--fg) 6%, var(--bg)); box-shadow: 0 1px 3px rgba(0,0,0,.12), inset 0 0 0 .5px color-mix(in srgb, var(--fg) 10%, transparent); }
+.glassbtn svg { width: 20px; height: 20px; fill: currentColor; }
+:root[data-skin="ios"] .glassbtn { display: grid; }
+:root[data-skin="ios"] .inbox-head .me { display: none; }
+.search { margin-top: 10px; background: var(--field-bg); border-radius: 24px; height: 44px; display: flex; align-items: center; padding: 0 16px; color: var(--faint); font-size: 15px; gap: 10px; }
+/* iOS 26 moved search and the compose button to the bottom of the list. */
+:root[data-skin="ios"] .inbox-head .search { display: none; }
+.iosbottom { display: none; position: absolute; left: 14px; right: 14px; bottom: 16px; gap: 10px; align-items: center; }
+:root[data-skin="ios"] .iosbottom { display: flex; }
+.iosbottom .search { margin: 0; flex: 1; height: 44px; border-radius: 22px; background: color-mix(in srgb, var(--fg) 6%, var(--bg)); box-shadow: 0 2px 10px rgba(0,0,0,.12); }
+.iosbottom .glassbtn { width: 44px; height: 44px; box-shadow: 0 2px 10px rgba(0,0,0,.12); }
+.threads { flex: 1; overflow-y: auto; margin: 0; padding: 4px 0 90px; list-style: none; }
+.thread { display: flex; gap: 14px; align-items: center; padding: 12px 16px; width: 100%; border: 0; background: transparent; color: var(--fg); text-align: left; }
+:root[data-skin="ios"] .thread { padding: 0 16px 0 6px; gap: 10px; }
+:root[data-skin="ios"] .thread .body { padding: 10px 0; border-bottom: 1px solid var(--divider); align-self: stretch; }
+.thread:hover { background: var(--field-bg); }
+.avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--avatar); color: var(--avatar-fg); display: grid; place-items: center; font-size: 18px; font-weight: 500; flex: none; }
+.avatar.num { background: var(--in-bg); color: var(--faint); }
+:root[data-skin="ios"] .avatar:not(.num) { background: linear-gradient(#a5abb8, #858994); color: #fff; }
+:root[data-skin="ios"] .avatar.num { background: linear-gradient(#c9ced8, #aab0bb); color: #fff; }
+/* Google Messages gives each contact its own tonal colour. */
+:root:not([data-skin="ios"]) .avatar.c1 { background: #c4eed0; color: #072711; }
+:root:not([data-skin="ios"]) .avatar.c2 { background: #ffdad6; color: #410002; }
+:root:not([data-skin="ios"]) .avatar.c3 { background: #e8def8; color: #1d192b; }
+:root:not([data-skin="ios"]) .avatar.c4 { background: #ffdea3; color: #261900; }
+:root:not([data-skin="ios"]) .avatar.c5 { background: #c3e8ec; color: #002023; }
+:root[data-theme="dark"]:not([data-skin="ios"]) .avatar.c1 { background: #1e4d2b; color: #c4eed0; }
+:root[data-theme="dark"]:not([data-skin="ios"]) .avatar.c2 { background: #73332c; color: #ffdad6; }
+:root[data-theme="dark"]:not([data-skin="ios"]) .avatar.c3 { background: #4a4458; color: #e8def8; }
+:root[data-theme="dark"]:not([data-skin="ios"]) .avatar.c4 { background: #5c4300; color: #ffdea3; }
+:root[data-theme="dark"]:not([data-skin="ios"]) .avatar.c5 { background: #1f4d52; color: #c3e8ec; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-skin="ios"]) .avatar.c1 { background: #1e4d2b; color: #c4eed0; }
+  :root:not([data-theme="light"]):not([data-skin="ios"]) .avatar.c2 { background: #73332c; color: #ffdad6; }
+  :root:not([data-theme="light"]):not([data-skin="ios"]) .avatar.c3 { background: #4a4458; color: #e8def8; }
+  :root:not([data-theme="light"]):not([data-skin="ios"]) .avatar.c4 { background: #5c4300; color: #ffdea3; }
+  :root:not([data-theme="light"]):not([data-skin="ios"]) .avatar.c5 { background: #1f4d52; color: #c3e8ec; }
+}
+.avatar svg { width: 24px; height: 24px; fill: currentColor; }
+.thread .body { flex: 1; min-width: 0; display: block; }
+.thread .row { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.thread .name { display: block; min-width: 0; font-size: 16px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+:root[data-skin="ios"] .thread .name { font-weight: 600; }
+.thread .when { font-size: 12px; color: var(--faint); flex: none; font-variant-numeric: tabular-nums; }
+:root[data-skin="ios"] .thread .when { font-size: 14px; }
+:root[data-skin="ios"] .thread .when::after { content: " \203A"; font-size: 17px; color: var(--faint); opacity: .7; }
+.thread .preview { display: block; font-size: 14px; color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+:root[data-skin="ios"] .thread .preview { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.3; font-size: 15px; }
+/* Android marks unread in bold; iPhone with a blue dot left of the avatar. */
+.thread.unread .name, .thread.unread .preview, .thread.unread .when { color: var(--fg); font-weight: 700; }
+:root[data-skin="ios"] .thread.unread .preview, :root[data-skin="ios"] .thread.unread .when { font-weight: 400; color: var(--faint); }
+.thread .dot { display: none; width: 10px; height: 10px; border-radius: 50%; background: var(--unread); flex: none; visibility: hidden; }
+:root[data-skin="ios"] .thread .dot { display: block; order: -1; }
+.thread.unread .dot { visibility: visible; }
+.fab { position: absolute; right: 16px; bottom: 20px; height: 56px; padding: 0 20px; border-radius: 16px; border: 0; background: var(--out-bg); color: var(--out-fg); font-weight: 500; font-size: 15px; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 12px rgba(0,0,0,.25); }
+:root[data-skin="ios"] .fab { display: none; }
+
+/* Conversation */
+.convo-head { display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: var(--bar-bg); flex: none; min-height: 60px; border-bottom: 1px solid transparent; }
+:root[data-skin="ios"] .convo-head { flex-direction: column; justify-content: center; gap: 4px; padding: 4px 8px 8px; min-height: 92px; position: relative; }
+.back { width: 44px; height: 44px; border-radius: 50%; border: 0; background: transparent; color: var(--fg); display: grid; place-items: center; flex: none; }
+.back svg { width: 24px; height: 24px; fill: currentColor; }
+/* iOS 26: round glass back button, name in a glass pill under the avatar, video button on the right. */
+:root[data-skin="ios"] .back { position: absolute; left: 12px; top: 12px; width: 38px; height: 38px; background: color-mix(in srgb, var(--fg) 6%, var(--bg)); box-shadow: 0 1px 3px rgba(0,0,0,.12), inset 0 0 0 .5px color-mix(in srgb, var(--fg) 10%, transparent); }
+:root[data-skin="ios"] .back svg { width: 24px; height: 24px; }
+.convo-head .avatar { width: 36px; height: 36px; font-size: 15px; }
+:root[data-skin="ios"] .convo-head .avatar { width: 50px; height: 50px; font-size: 20px; }
+.convo-head .who { min-width: 0; flex: 1; }
+:root[data-skin="ios"] .convo-head .who { flex: none; max-width: 70%; }
+.convo-head .title { font-size: 17px; font-weight: 500; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+:root[data-skin="ios"] .convo-head .title { font-size: 13px; font-weight: 500; padding: 3px 11px; border-radius: 99px; background: color-mix(in srgb, var(--fg) 6%, var(--bg)); box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+:root[data-skin="ios"] .convo-head .title::after { content: " \203A"; color: var(--faint); }
+.convo-head .acts { display: flex; gap: 2px; color: var(--muted); }
+.convo-head .acts .ic { width: 40px; height: 40px; display: grid; place-items: center; }
+.convo-head .acts svg { width: 22px; height: 22px; fill: currentColor; }
+:root[data-skin="ios"] .convo-head .acts { display: none; }
+.convo-head .glassbtn.video { position: absolute; right: 12px; top: 12px; width: 38px; height: 38px; }
+
+.log { flex: 1; overflow-y: auto; padding: 12px 12px 8px; display: flex; flex-direction: column; gap: 3px; }
+:root[data-skin="ios"] .log { padding: 12px 16px 8px; gap: 2px; }
+.sep { text-align: center; font-size: 11.5px; color: var(--faint); margin: 14px 0 8px; font-weight: 500; }
+:root[data-skin="ios"] .sep { font-weight: 400; font-size: 12px; }
+:root[data-skin="ios"] .sep b { font-weight: 600; }
+/* Delivered / Read under your last message while it is the last thing in the thread. */
+.rcpt { align-self: flex-end; font-size: 11.5px; color: var(--faint); margin: 2px 4px 0 0; display: flex; align-items: center; gap: 4px; animation: pop .18s ease-out; }
+.rcpt b { font-weight: 600; }
+.rcpt svg { width: 14px; height: 14px; fill: currentColor; }
+:root[data-skin="ios"] .rcpt svg { display: none; }
+/* Unknown sender notice */
+.junk { align-self: center; text-align: center; font-size: 12px; color: var(--faint); margin: 8px 0 4px; line-height: 1.4; }
+.junk span { display: block; color: var(--accent); font-size: 14px; }
+.spam { align-self: stretch; margin: 4px 0 10px; padding: 12px 14px; border-radius: 16px; background: var(--in-bg); color: var(--fg); font-size: 13.5px; display: flex; flex-direction: column; gap: 10px; }
+.spam .btns { display: flex; gap: 8px; }
+.spam .btns span { border: 1px solid var(--chip-border); border-radius: 18px; padding: 6px 14px; color: var(--accent); font-weight: 500; font-size: 13.5px; }
+:root[data-skin="ios"] .spam, :root:not([data-skin="ios"]) .junk { display: none; }
+.msg { max-width: 76%; display: flex; flex-direction: column; animation: pop .18s ease-out; }
+.msg.in { align-self: flex-start; align-items: flex-start; }
+.msg.out { align-self: flex-end; align-items: flex-end; }
+.msg + .msg.in, .msg + .msg.out { margin-top: 0; }
+.msg.in + .msg.out, .msg.out + .msg.in { margin-top: 10px; }
+.bubble { padding: 9px 13px; border-radius: var(--radius); font-size: 15.5px; line-height: 1.3; word-wrap: break-word; overflow-wrap: anywhere; }
+.in .bubble { background: var(--in-bg); color: var(--in-fg); border-bottom-left-radius: var(--tail); }
+.out .bubble { background: var(--out-bg); color: var(--out-fg); border-bottom-right-radius: var(--tail); }
+.msg.in + .msg.in .bubble { border-top-left-radius: var(--tail); }
+.msg.out + .msg.out .bubble { border-top-right-radius: var(--tail); }
+/* iMessage: fully round bubbles; only the last bubble of a group gets the curled tail. */
+:root[data-skin="ios"] .bubble { font-size: 17px; line-height: 1.29; padding: 7px 13px 8px; position: relative; }
+:root[data-skin="ios"] .in .bubble, :root[data-skin="ios"] .out .bubble, :root[data-skin="ios"] .msg.in + .msg.in .bubble, :root[data-skin="ios"] .msg.out + .msg.out .bubble { border-radius: var(--radius); }
+:root[data-skin="ios"] .msg.tail .bubble:not(.media)::before { content: ""; position: absolute; bottom: 0; width: 20px; height: 20px; background: inherit; clip-path: path("M0 0 L12 0 Q12 15 20 20 Q9 20 3 15 Z"); }
+:root[data-skin="ios"] .msg.out.tail .bubble::before { right: -6px; }
+:root[data-skin="ios"] .msg.in.tail .bubble::before { left: -6px; transform: scaleX(-1); }
+:root[data-skin="ios"] .msg.tail { margin-bottom: 4px; }
+/* Green bubbles for SMS/RCS threads on iPhone */
+:root[data-skin="ios"] .sms .out .bubble { background: #34c759; }
+:root[data-theme="dark"][data-skin="ios"] .sms .out .bubble { background: #30d158; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"])[data-skin="ios"] .sms .out .bubble { background: #30d158; } }
+.msg .stamp { font-size: 11px; color: var(--faint); margin: 3px 6px 0; }
+.msg.system { align-self: center; max-width: 86%; text-align: center; font-size: 13px; color: var(--sys-fg); font-style: italic; margin: 10px 0; }
+/* Photos stand on their own: rounded image, no bubble fill, no caption. */
+.bubble.media { padding: 0; overflow: hidden; background: transparent !important; border-radius: 18px !important; }
+.bubble.media img, .bubble.media svg { display: block; width: 240px; max-width: 100%; height: auto; }
+.bubble.audio { display: flex; align-items: center; gap: 10px; padding: 8px 12px; min-width: 210px; }
+.play { width: 34px; height: 34px; border-radius: 50%; border: 0; background: var(--accent); color: var(--bg); display: grid; place-items: center; flex: none; }
+.play svg { width: 18px; height: 18px; fill: currentColor; }
+.wave { display: flex; align-items: center; gap: 2px; height: 26px; flex: 1; }
+.wave i { display: block; width: 3px; border-radius: 2px; background: currentColor; opacity: .45; }
+.wave i.on { opacity: 1; }
+.audio .dur { font-size: 12px; font-variant-numeric: tabular-nums; opacity: .8; }
+.typing { align-self: flex-start; background: var(--in-bg); border-radius: var(--radius); border-bottom-left-radius: var(--tail); padding: 12px 14px; display: flex; gap: 4px; }
+.typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--faint); animation: blink 1.2s infinite; }
+.typing i:nth-child(2) { animation-delay: .2s; } .typing i:nth-child(3) { animation-delay: .4s; }
+:root[data-skin="ios"] .typing { position: relative; border-radius: 20px; padding: 13px 15px; margin: 4px 0 8px 4px; }
+:root[data-skin="ios"] .typing::before, :root[data-skin="ios"] .typing::after { content: ""; position: absolute; border-radius: 50%; background: var(--in-bg); }
+:root[data-skin="ios"] .typing::before { width: 12px; height: 12px; left: -3px; bottom: -2px; }
+:root[data-skin="ios"] .typing::after { width: 6px; height: 6px; left: -8px; bottom: -7px; }
+@keyframes blink { 0%,80%,100% { opacity: .3 } 40% { opacity: 1 } }
+@keyframes pop { from { transform: translateY(6px); opacity: 0 } }
+
+.composer { flex: none; padding: 8px 10px 14px; background: var(--bg); display: flex; flex-direction: column; gap: 8px; }
+.choices { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+.choice { border: 1px solid var(--chip-border); background: var(--chip-bg); color: var(--chip-fg); border-radius: 18px; padding: 9px 14px; font-size: 14.5px; text-align: right; max-width: 92%; line-height: 1.25; animation: pop .25s ease-out; }
+.choice:hover { background: var(--field-bg); }
+/* Reply mode "drafts": the choices sit in the log as dashed ghost bubbles where the player's next message would land. */
+.draft { align-self: flex-end; max-width: 76%; padding: 9px 13px; border-radius: var(--radius); border-bottom-right-radius: var(--tail); border: 1.5px dashed var(--accent); color: var(--accent); background: transparent; opacity: .78; text-align: right; line-height: 1.3; font-size: 15px; animation: pop .25s ease-out; }
+.draft:hover { opacity: 1; background: color-mix(in srgb, var(--accent) 10%, transparent); }
+/* iPhone drafts: iMessage shape, a faint fill of your own bubble colour */
+:root[data-skin="ios"] .draft { --d: var(--out-bg); border-radius: var(--radius); border: 1px solid color-mix(in srgb, var(--d) 45%, transparent); background: color-mix(in srgb, var(--d) 13%, transparent); color: color-mix(in srgb, var(--d) 80%, var(--fg)); opacity: 1; font-size: 16px; text-align: left; }
+:root[data-skin="ios"] .sms .draft { --d: #34c759; }
+:root[data-skin="ios"] .draft:hover { background: color-mix(in srgb, var(--d) 22%, transparent); }
+.draft + .draft { margin-top: 2px; }
+.msg + .draft { margin-top: 10px; }
+.draft.photo { padding: 4px; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.draft.photo svg { display: block; width: 140px; max-width: 100%; height: auto; border-radius: 12px; opacity: .85; }
+.draft.photo small { font-size: 11.5px; padding: 0 6px 2px; }
+.choice.photo { display: flex; align-items: center; gap: 8px; padding: 5px 12px 5px 5px; }
+.choice.photo svg { width: 36px; height: 27px; border-radius: 6px; display: block; }
+.field .box .thumb { display: inline-flex; align-items: center; gap: 8px; }
+.field .box .thumb svg { width: 36px; height: 27px; border-radius: 6px; display: block; }
+/* Reply mode "type": the chosen line is typed into the field, then the player presses send. */
+.field .typing-into { color: var(--fg); text-overflow: clip; }
+.field .box .caret { display: inline-block; width: 1.5px; height: 1.1em; background: var(--accent); vertical-align: -3px; margin-left: 1px; animation: blink 1s steps(1) infinite; }
+.field { display: flex; align-items: center; gap: 8px; }
+.field .box { flex: 1; min-width: 0; height: 44px; border-radius: 22px; background: var(--field-bg); display: flex; align-items: center; gap: 4px; padding: 0 6px 0 16px; color: var(--faint); font-size: 15px; }
+.field .hint { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.field .inner { width: 34px; height: 34px; display: grid; place-items: center; color: var(--muted); flex: none; }
+.field .inner svg { width: 22px; height: 22px; fill: currentColor; }
+.field .icon { width: 44px; height: 44px; border: 0; padding: 0; border-radius: 50%; display: grid; place-items: center; color: var(--muted); background: transparent; flex: none; }
+.field .icon svg { width: 22px; height: 22px; fill: currentColor; }
+/* Android: mic and send sit in a tonal circle outside the field. */
+.field #sendBtn { background: var(--out-bg); color: var(--out-fg); }
+.field #sendBtn.send { background: var(--accent); color: var(--bg); }
+.field #sendBtn.send[disabled] { opacity: .35; cursor: default; }
+/* iPhone (iOS 26): grey glass plus, rounded field, mic (or blue send arrow) inside the field. */
+:root[data-skin="ios"] .field .inner { display: none; }
+:root[data-skin="ios"] .field .icon.plus { width: 36px; height: 36px; color: var(--fg); background: color-mix(in srgb, var(--fg) 6%, var(--bg)); box-shadow: 0 1px 3px rgba(0,0,0,.12), inset 0 0 0 .5px color-mix(in srgb, var(--fg) 10%, transparent); }
+:root[data-skin="ios"] .field .box { height: 36px; border-radius: 18px; padding: 0 44px 0 14px; border: 1px solid var(--divider); background: var(--field-bg); font-size: 17px; }
+:root[data-skin="ios"] .field #sendBtn { width: 30px; height: 30px; margin-left: -48px; position: relative; background: transparent; color: var(--faint); }
+:root[data-skin="ios"] .field #sendBtn svg { width: 20px; height: 20px; }
+:root[data-skin="ios"] .field #sendBtn.send { background: var(--accent); color: #fff; }
+:root[data-skin="ios"] .sms .field #sendBtn.send { background: #34c759; }
+.waiting { font-size: 12.5px; color: var(--page-muted); display: flex; justify-content: space-between; align-items: center; gap: 10px; width: 100%; }
+.waiting button { border: 1px solid #3a3d45; border-radius: 8px; background: transparent; color: var(--page-accent); padding: 5px 10px; font-size: 12.5px; }
+/* On-screen keyboard while a reply is typed ("type to send"). iPhone puts the reply options in the QuickType bar. */
+.kbd { display: none; flex-direction: column; gap: 7px; padding: 6px 4px 8px; margin: 0 -10px -14px; background: #d1d3d9; }
+.composer.kb .kbd { display: flex; }
+:root:not([data-skin="ios"]) .kbd { background: #e8eaf0; }
+:root[data-theme="dark"] .kbd { background: #2b2b2e; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .kbd { background: #2b2b2e; } }
+.kbd .qt { display: flex; min-height: 34px; align-items: stretch; overflow-x: auto; scrollbar-width: none; }
+.kbd .qt button { flex: 1 0 33%; max-width: 50%; min-width: 0; border: 0; background: transparent; color: var(--fg); font-size: 15px; padding: 6px 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kbd .qt button + button { border-left: 1px solid color-mix(in srgb, var(--fg) 20%, transparent); }
+.kbd .qt button:hover { background: color-mix(in srgb, var(--fg) 8%, transparent); border-radius: 8px; }
+:root:not([data-skin="ios"]) .kbd .qt { display: none; }
+.kbd .row { display: flex; justify-content: center; gap: 5px; padding: 0 2px; }
+.kbd .row i { flex: 0 1 34px; height: 40px; border-radius: 6px; background: #fff; color: #000; box-shadow: 0 1px 0 rgba(0,0,0,.3); display: grid; place-items: center; font-style: normal; font-size: 19px; text-transform: lowercase; transition: background .08s; }
+:root:not([data-skin="ios"]) .kbd .row i { border-radius: 8px; box-shadow: none; font-size: 18px; }
+:root[data-theme="dark"] .kbd .row i { background: #6b6b6e; color: #fff; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .kbd .row i { background: #6b6b6e; color: #fff; } }
+.kbd .row i.wide { flex: 0 1 50px; font-size: 13px; background: #adb1ba; }
+.kbd .row i.space { flex: 1 1 auto; }
+.kbd .row i.hit { background: #9aa0aa; }
+
+/* Notification banner inside the phone */
+.banner { position: absolute; left: 10px; right: 10px; top: 8px; z-index: 5; background: var(--sheet-bg); color: var(--sheet-fg); border-radius: 18px; padding: 10px 14px; display: flex; gap: 12px; align-items: center; box-shadow: 0 8px 24px rgba(0,0,0,.4); transform: translateY(-200%); visibility: hidden; opacity: 0; pointer-events: none; transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .25s, visibility 0s linear .35s; cursor: pointer; border: 0; text-align: left; width: auto; font-family: var(--font-ui); }
+.banner.show { transform: translateY(0); visibility: visible; opacity: 1; pointer-events: auto; transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .25s, visibility 0s; }
+.banner .avatar { width: 40px; height: 40px; font-size: 16px; position: relative; overflow: visible; }
+.banner .badge { display: none; }
+.banner .t { font-size: 14px; font-weight: 500; }
+.banner .b { display: block; font-size: 14px; opacity: .85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.banner .txt { min-width: 0; flex: 1; }
+.banner .trow { display: flex; justify-content: space-between; gap: 8px; }
+.banner .now { font-size: 12.5px; opacity: .6; font-weight: 400; }
+/* Android heads-up: follows the theme, app row on top, Reply / Mark as read actions. */
+:root:not([data-skin="ios"]) .banner { flex-direction: column; align-items: stretch; gap: 8px; background: var(--bar-bg); color: var(--fg); border-radius: 26px; padding: 12px 16px 12px; box-shadow: 0 6px 20px rgba(0,0,0,.25); }
+.banner .approw { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.banner .approw i { width: 16px; height: 16px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; }
+.banner .approw svg { width: 10px; height: 10px; fill: var(--bg); }
+.banner .main { flex: 1; display: flex; gap: 12px; align-items: center; min-width: 0; }
+.banner .acts { display: flex; gap: 20px; color: var(--accent); font-size: 13.5px; font-weight: 500; padding-left: 52px; }
+:root:not([data-skin="ios"]) .banner .now { display: none; }
+/* iPhone: light/dark glass card, contact picture with a small green Messages badge, "now" on the right. */
+:root[data-skin="ios"] .banner { background: var(--bar-bg); color: var(--fg); -webkit-backdrop-filter: blur(20px) saturate(1.6); backdrop-filter: blur(20px) saturate(1.6); border-radius: 24px; padding: 12px 14px; box-shadow: 0 8px 30px rgba(0,0,0,.22); }
+:root[data-skin="ios"] .banner .approw, :root[data-skin="ios"] .banner .acts { display: none; }
+:root[data-skin="ios"] .banner .t { font-weight: 600; font-size: 15px; }
+:root[data-skin="ios"] .banner .b { font-size: 15px; opacity: 1; }
+:root[data-skin="ios"] .banner .badge { display: grid; position: absolute; right: -4px; bottom: -4px; width: 18px; height: 18px; border-radius: 5px; background: #34c759; place-items: center; border: 1.5px solid var(--bg); }
+:root[data-skin="ios"] .banner .badge svg { width: 12px; height: 12px; fill: #fff; }
+
+/* End-of-chapter sheet */
+.sheet { position: absolute; inset: 0; z-index: 6; background: rgba(0,0,0,.72); display: flex; align-items: flex-end; }
+.sheet .card { width: 100%; background: var(--sheet-bg); color: var(--sheet-fg); border-radius: 24px 24px 0 0; padding: 26px 22px 34px; text-align: center; }
+.sheet h2 { margin: 0 0 6px; font-size: 22px; font-weight: 500; }
+.sheet p { margin: 0 0 18px; color: #b4b8c2; font-size: 14.5px; line-height: 1.4; }
+.sheet .flagline { font-family: var(--font-mono); font-size: 11.5px; color: #8b8f99; margin-bottom: 18px; }
+.sheet button { border: 0; border-radius: 22px; padding: 12px 22px; font-size: 15px; font-weight: 500; background: var(--accent); color: #fff; }
+.sheet button.ghost { background: transparent; color: var(--page-accent); margin-left: 6px; }
+
+@media (prefers-reduced-motion: reduce) { .msg, .choice, .banner, .rcpt { animation: none; transition: none; } .typing i { animation: none; } }
+</style>
+
+
+<div class="phone" id="phone">
+  <div class="statusbar"><span id="clock">3:04</span><span class="island" aria-hidden="true"></span><span class="right" aria-hidden="true"><span class="bars"><i style="height:4px"></i><i style="height:6px"></i><i style="height:8px"></i><i style="height:11px"></i></span><svg viewBox="0 0 24 24"><path d="M12 19.5l3-3a4.2 4.2 0 0 0-6 0l3 3zM6.4 13.9a7.9 7.9 0 0 1 11.2 0l2-2a10.7 10.7 0 0 0-15.2 0l2 2zM1.8 9.3l2 2a14.4 14.4 0 0 1 20.4 0l2-2A17.2 17.2 0 0 0 1.8 9.3z" transform="translate(-1.5 -1) scale(1.05)"/></svg><svg class="sig" viewBox="0 0 24 24"><path d="M2 22h20V2L2 22z"/></svg><span class="batt"></span></span></div>
+  <div class="screen">
+    <button class="banner" id="banner" aria-live="polite">
+      <span class="approw"><i><svg viewBox="0 0 24 24"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg></i>Messages · now</span>
+      <span class="main">
+        <span class="avatar" id="bannerAvatar"></span>
+        <span class="txt"><span class="trow"><span class="t" id="bannerTitle"></span><span class="now">now</span></span><span class="b" id="bannerBody"></span></span>
+      </span>
+      <span class="acts"><span>Reply</span><span>Mark as read</span></span>
+    </button>
+
+    <section class="view" id="inboxView">
+      <div class="inbox-head"><div class="top"><h1>Messages</h1><span class="me" aria-hidden="true">FD</span><span class="glassbtn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6h18v2H3zm3 5h12v2H6zm4 5h4v2h-4z"/></svg></span></div><div class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.8l-.3-.3A6.5 6.5 0 1 0 9.5 16a6.5 6.5 0 0 0 4.2-1.6l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>Search conversations</div></div>
+      <ul class="threads" id="threads"></ul>
+      <button class="fab" type="button" aria-label="Start chat"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg>Start chat</button>
+      <div class="iosbottom" aria-hidden="true"><div class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.8l-.3-.3A6.5 6.5 0 1 0 9.5 16a6.5 6.5 0 0 0 4.2-1.6l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>Search</div><span class="glassbtn"><svg viewBox="0 0 24 24"><path d="M3 17.3V21h3.7l11-11-3.7-3.7-11 11zM20.7 7a1 1 0 0 0 0-1.4l-2.3-2.3a1 1 0 0 0-1.4 0l-1.8 1.8 3.7 3.7L20.7 7z"/></svg></span></div>
+    </section>
+
+    <section class="view" id="convoView" hidden>
+      <header class="convo-head">
+        <button class="back" id="back" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4L10.8 12z"/></svg></button>
+        <span class="avatar" id="cAvatar"></span>
+        <div class="who"><div class="title" id="cTitle"></div></div>
+        <span class="acts" aria-hidden="true"><span class="ic"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8z"/></svg></span><span class="ic"><svg viewBox="0 0 24 24"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4z"/></svg></span><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0 6a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg></span></span>
+        <span class="glassbtn video" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4z"/></svg></span>
+      </header>
+      <div class="log" id="log"></div>
+      <div class="composer" id="composer">
+        <div class="choices" id="choices"></div>
+        <div class="field">
+          <span class="icon plus"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg></span>
+          <div class="box"><span class="hint" id="fieldHint">Text message</span><span class="inner"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-3.5-9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm7 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM12 17.5c2.3 0 4.3-1.5 5.1-3.5H6.9c.8 2 2.8 3.5 5.1 3.5z"/></svg></span><span class="inner"><svg viewBox="0 0 24 24"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5l3.5-4.5z"/></svg></span></div>
+          <button type="button" class="icon" id="sendBtn" aria-label="Voice message"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-3.1A7 7 0 0 0 19 11z"/></svg></button>
+        </div>
+        <div class="kbd" id="kbd" aria-hidden="true"><div class="qt" id="qt"></div></div>
+      </div>
+    </section>
+
+<div class="tools" id="tools" role="dialog" aria-label="Test settings" hidden>
+  <button type="button" class="close" id="toolsClose" aria-label="Close">×</button>
+  <span class="hint">Test settings. Long-press the clock to open or close.</span>
+  <div class="grp"><label for="skinAuto">Skin</label>
+    <div class="seg" id="skinSeg">
+      <button id="skinAuto" data-skin="auto" aria-pressed="true">Auto</button>
+      <button data-skin="android" aria-pressed="false">Android</button>
+      <button data-skin="ios" aria-pressed="false">iPhone</button>
+    </div>
+  </div>
+  <div class="grp"><label for="speedTest">Delays</label>
+    <div class="seg" id="speedSeg">
+      <button id="speedTest" data-speed="test" aria-pressed="true">Test (fast)</button>
+      <button data-speed="real" aria-pressed="false">Real time</button>
+    </div>
+  </div>
+  <div class="grp"><label for="jump">Chapter</label>
+    <select id="jump" aria-label="Jump to chapter"><option value="">Jump to…</option></select>
+  </div>
+  <div class="grp"><label for="replyDraft">Reply</label>
+    <div class="seg" id="replySeg">
+      <button id="replyDraft" data-reply="draft" aria-pressed="true">Drafts in chat</button>
+      <button data-reply="type" aria-pressed="false">Type to send</button>
+    </div>
+  </div>
+  <div class="waiting" id="waiting" hidden><span id="waitText"></span><button type="button" id="skipWait">Skip wait</button></div>
+  <span class="flags" id="flags" aria-live="polite"></span>
+  <button class="reset" id="reset">Reset game</button>
+</div>
+    <div class="sheet" id="sheet" hidden><div class="card"><h2 id="sheetTitle"></h2><p id="sheetSub"></p><div class="flagline" id="sheetFlags"></div><button type="button" id="sheetPrimary"></button><button type="button" class="ghost" id="sheetClose">Back to messages</button></div></div>
+  </div>
+</div>
+
+<script src="story.js"></script>
+<script>
+(function () {
+  const S = window.NIGHTDESK_STORY;
+  const KEY = "frontdesk.v2";
+  const $ = id => document.getElementById(id);
+
+  // ---------- helpers ----------
+  const UNITS = { s: 1, m: 60, h: 3600, d: 86400 };
+  function parseDur(str) { // "1d 2h 30m" -> seconds
+    let total = 0; String(str).replace(/(\d+(?:\.\d+)?)\s*([smhd])/g, (_, n, u) => { total += parseFloat(n) * UNITS[u]; });
+    return total;
+  }
+  // "3:12" is Ward 12 time and drifts against ours, so night beats land in the player's evening window instead of at 3 a.m.
+  const WINDOW = { start: 20, late: 21.5 }; // local hours: beats open at 20:00; if it's already evening, come in 45 min
+  const QUIET = { from: 23, to: 8 }; // nothing lands while the player sleeps; it waits for 08:00
+  function nextNight() {
+    const now = new Date(), h = now.getHours() + now.getMinutes() / 60;
+    const d = new Date(now.getFullYear(), now.getMonth(), now.getDate(), WINDOW.start, 0, 0);
+    if (h >= WINDOW.start && h < WINDOW.late) return now.getTime() + 45 * 60000;
+    if (h >= WINDOW.late && h < QUIET.from) return now.getTime() + 15 * 60000; // late evening: still tonight
+    if (h >= QUIET.from) d.setDate(d.getDate() + 1);
+    return d.getTime();
+  }
+  function nextDay() { // "you sleep": 14:00 local, at least six hours away, never more than a day
+    const now = new Date(), d = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 14, 0, 0);
+    if (now.getHours() >= 14) d.setDate(d.getDate() + 1);
+    const soonest = now.getTime() + 6 * 3600000;
+    return d.getTime() < soonest ? soonest : d.getTime(); // e.g. a chapter ending at 12:30 resumes at 18:30, not tomorrow
+  }
+  function avoidQuiet(ts) { // a beat that would land between 23:00 and 08:00 waits until 08:00
+    const d = new Date(ts), h = d.getHours();
+    if (h >= QUIET.from) { d.setDate(d.getDate() + 1); d.setHours(QUIET.to, 0, 0, 0); return d.getTime(); }
+    if (h < QUIET.to) { d.setHours(QUIET.to, 0, 0, 0); return d.getTime(); }
+    return ts;
+  }
+  function delayMs(str) {
+    if (state.speed !== "real") return (str === "night" || str === "day") ? 6000 : scaledDelay(parseDur(str || "0s"));
+    const target = str === "night" ? nextNight() : str === "day" ? nextDay() : Date.now() + parseDur(str || "0s") * 1000;
+    return Math.max(0, avoidQuiet(target) - Date.now());
+  }
+  function scaledDelay(sec) {
+    if (state.speed === "real") return sec * 1000;
+    // Test mode: short pauses are kept (capped at 4s), anything from a minute up becomes 6s.
+    return (sec < 60 ? Math.min(sec, 4) : 6) * 1000;
+  }
+  function fmtTime(d) { return d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }); }
+  // Story text placeholders. {time} = now; {date:-21d} = a date relative to today ("September 25th");
+  // {weekday:+2d} = a weekday name relative to today ("Thursday"). The story never hardcodes dates.
+  function ordinal(n) { const s = ["th", "st", "nd", "rd"], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); }
+  function fill(text) {
+    if (!text) return text;
+    return String(text).replace("{time}", fmtTime(new Date())).replace("{window}", fmtTime(new Date(nextNight()))).replace(/\{(date|weekday):([+-]?\d+)d\}/g, (_, kind, days) => {
+      const d = new Date(); d.setDate(d.getDate() + parseInt(days, 10));
+      return kind === "date" ? d.toLocaleDateString("en-US", { month: "long" }) + " " + ordinal(d.getDate()) : d.toLocaleDateString("en-US", { weekday: "long" });
+    });
+  }
+  function fmtDayLabel(d) {
+    const now = new Date(), t0 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const diff = Math.round((t0 - new Date(d.getFullYear(), d.getMonth(), d.getDate())) / 86400000);
+    if (diff === 0) return "Today"; if (diff === 1) return "Yesterday";
+    if (diff < 7) return d.toLocaleDateString([], { weekday: "long" });
+    return d.toLocaleDateString([], { month: "short", day: "numeric" });
+  }
+  function fmtListTime(d) {
+    const now = new Date(); const sameDay = d.toDateString() === now.toDateString();
+    if (sameDay) return fmtTime(d);
+    const diff = (now - d) / 86400000;
+    if (diff < 7) return d.toLocaleDateString([], { weekday: "short" });
+    return d.toLocaleDateString([], { month: "numeric", day: "numeric" });
+  }
+  function fmtWait(ms) {
+    const s = Math.max(0, Math.round(ms / 1000));
+    if (s < 60) return s + "s"; if (s < 3600) return Math.round(s / 60) + " min";
+    if (s < 86400) return (s / 3600).toFixed(1).replace(".0", "") + " h"; return (s / 86400).toFixed(1).replace(".0", "") + " d";
+  }
+  function initials(name) { return name.replace(/\s*·.*$/, "").split(/\s+/).map(w => w[0]).filter(Boolean).slice(0, 2).join("").toUpperCase(); }
+  const PERSON = '<svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 2c-3.3 0-8 1.7-8 5v2h16v-2c0-3.3-4.7-5-8-5z"/></svg>';
+
+  // ---------- persistent state ----------
+  const defaults = () => ({
+    speed: "test", skin: "auto", reply: "draft", opened: [], started: false,
+    node: null, idx: 0, dueAt: null, flags: {}, log: [], extra: {}, unreadBy: {}, awaiting: null, awaitingThread: null, status: "online", ended: null, unread: 0, lastChoiceAt: null
+  });
+  let state = defaults();
+  function load() { try { const raw = localStorage.getItem(KEY); if (raw) state = Object.assign(defaults(), JSON.parse(raw)); } catch (e) {} }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+  // ---------- skin ----------
+  function applySkin() {
+    let skin = state.skin;
+    if (skin === "auto") skin = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent) ? "ios" : "android";
+    document.documentElement.setAttribute("data-skin", skin);
+    if (!$("fieldHint").classList.contains("typing-into")) $("fieldHint").textContent = hintText();
+    if (currentThread) updateNotices();
+    document.querySelectorAll("#skinSeg button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.skin === state.skin)));
+    document.querySelectorAll("#speedSeg button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.speed === state.speed)));
+    document.querySelectorAll("#replySeg button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.reply === state.reply)));
+  }
+  $("skinSeg").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; state.skin = b.dataset.skin; save(); applySkin(); if (currentThread) openThread(currentThread); else showInbox(); });
+  $("speedSeg").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; state.speed = b.dataset.speed; save(); applySkin(); });
+  $("replySeg").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; state.reply = b.dataset.reply; save(); applySkin(); resetField(); renderChoices(); });
+  // Chapter jump (test settings): starts a fresh game at the chosen chapter with plausible flags.
+  const CHAPTERS = [["Night 1 · Contact", S.start], ["Day 2 · Toto", "ch2_start"], ["Night 2 · Tom", "ch3_start"], ["Day 3 · Priya", "ch4_start"], ["Day 4 · The archive", "ch5_start"], ["Day 5 · The other voice", "ch6_start"], ["Night 6 · 3:12", "ch7_start"]];
+  CHAPTERS.forEach(([label, node]) => { if (S.nodes[node]) { const o = document.createElement("option"); o.value = node; o.textContent = label; $("jump").appendChild(o); } });
+  $("jump").addEventListener("change", e => {
+    const node = e.target.value; if (!node) return; e.target.value = "";
+    const keep = { speed: state.speed, skin: state.skin, reply: state.reply };
+    state = Object.assign(defaults(), keep, { started: true, opened: archive.map(a => a.id), node, idx: 0, flags: node === S.start ? {} : { fed_toto: 1, found_notebook: 1, saved_tom: 1, knows_1979: 1, sign_up: 1 } });
+    save(); clearTimers(); clearTimeout(bannerTimer); hideBanner(); currentThread = null; toggleTools(); showInbox(); schedule();
+  });
+  $("reset").addEventListener("click", () => { const keep = { speed: state.speed, skin: state.skin, reply: state.reply }; state = Object.assign(defaults(), keep); save(); clearTimers(); clearTimeout(bannerTimer); hideBanner(); currentThread = null; showInbox(); });
+
+  // ---------- dev settings sheet ----------
+  const toggleTools = () => { $("tools").hidden = !$("tools").hidden; };
+  $("toolsClose").addEventListener("click", toggleTools);
+  let pressTimer = null;
+  const bar = document.querySelector(".statusbar");
+  bar.addEventListener("pointerdown", () => { clearTimeout(pressTimer); pressTimer = setTimeout(toggleTools, 700); });
+  ["pointerup", "pointerleave", "pointercancel"].forEach(ev => bar.addEventListener(ev, () => clearTimeout(pressTimer)));
+  bar.addEventListener("contextmenu", e => e.preventDefault());
+  document.addEventListener("keydown", e => { if ((e.key === "d" || e.key === "D") && !e.metaKey && !e.ctrlKey) toggleTools(); });
+
+  // ---------- clock ----------
+  // Phones never print AM/PM in the status bar.
+  function tickClock() { $("clock").textContent = fmtTime(new Date()).replace(/\s*[AaPp]\.?\s?[Mm]\.?$/, ""); }
+  setInterval(tickClock, 15000); tickClock();
+
+  // ---------- data: threads ----------
+  const now = Date.now();
+  const archive = S.archive.map(t => ({
+    id: t.id, name: t.name, saved: t.saved, service: t.service, story: false,
+    messages: t.messages.map(m => ({ from: m.from, text: fill(m.text), at: now - parseDur(m.ago) * 1000 }))
+  }));
+  const STORY_ID = "__story";
+  function storyThread() {
+    return { id: STORY_ID, name: S.contact.name, saved: S.contact.saved, service: S.contact.service, story: true, messages: state.log };
+  }
+  // Which service a thread runs on: "imessage" (blue on iPhone, RCS on Android) or "rcs"/"sms" (green on iPhone).
+  // Saved contacts default to iMessage, unknown numbers to RCS. A thread can set service in story.js.
+  const isIOS = () => document.documentElement.getAttribute("data-skin") === "ios";
+  function serviceOf(t) { return (t && t.service) || (t && t.saved ? "imessage" : "rcs"); }
+  function hintText() {
+    const svc = serviceOf(currentThread ? threadById(currentThread) : null);
+    if (isIOS()) return svc === "imessage" ? "iMessage" : svc === "sms" ? "Text Message • SMS" : "Text Message • RCS";
+    return svc === "sms" ? "Text message" : "RCS message";
+  }
+  // Google Messages colours each contact's initials circle differently; pick one from the name.
+  function tone(name) { let h = 0; for (const ch of name) h = (h * 31 + ch.charCodeAt(0)) >>> 0; return "c" + (h % 6); }
+  function avatarHTML(t) { return t.saved ? initials(t.name) : PERSON; }
+  function avatarClass(t) { return "avatar" + (t.saved ? " " + tone(t.name) : " num"); }
+  function threadById(id) {
+    if (id === STORY_ID) return storyThread();
+    const a = archive.find(t => t.id === id); if (!a) return null;
+    return Object.assign({}, a, { messages: a.messages.concat(state.extra[id] || []) });
+  }
+  function allThreads() {
+    const list = archive.map(a => threadById(a.id));
+    if (state.started) list.push(storyThread());
+    return list.filter(t => t.messages.length).sort((a, b) => lastAt(b) - lastAt(a));
+  }
+  function lastAt(t) { return t.messages.length ? t.messages[t.messages.length - 1].at : 0; }
+  function preview(m) { return m.system ? m.system : m.image ? (isIOS() ? "Attachment: 1 Image" : "Photo") : m.audio ? (isIOS() ? "Audio Message" : "Voice message") : m.text; }
+
+  // ---------- inbox ----------
+  let currentThread = null;
+  function showInbox() {
+    currentThread = null;
+    $("convoView").hidden = true; $("inboxView").hidden = false;
+    const ul = $("threads"); ul.innerHTML = "";
+    for (const t of allThreads()) {
+      const li = document.createElement("li");
+      const b = document.createElement("button"); b.type = "button"; b.dataset.id = t.id; b.className = "thread" + ((t.story ? state.unread : state.unreadBy[t.id]) ? " unread" : "");
+      const last = t.messages[t.messages.length - 1];
+      b.innerHTML = `<span class="${avatarClass(t)}">${avatarHTML(t)}</span>
+        <span class="body"><span class="row"><span class="name"></span><span class="when">${fmtListTime(new Date(last.at))}</span></span><span class="preview"></span></span><span class="dot"></span>`;
+      b.querySelector(".name").textContent = t.name;
+      b.querySelector(".preview").textContent = (last.from === "me" ? "You: " : "") + preview(last);
+      b.addEventListener("click", () => openThread(t.id));
+      li.appendChild(b); ul.appendChild(li);
+    }
+    updateFlags();
+  }
+
+  // ---------- conversation ----------
+  function openThread(id) {
+    const t = threadById(id); if (!t) return;
+    currentThread = id;
+    $("inboxView").hidden = true; $("convoView").hidden = false;
+    $("cTitle").textContent = t.name;
+    const av = $("cAvatar"); av.className = avatarClass(t); av.innerHTML = avatarHTML(t);
+    $("convoView").classList.toggle("sms", serviceOf(t) !== "imessage");
+    $("log").innerHTML = ""; lastDay = null; lastRendered = 0;
+    for (const m of t.messages) renderMsg(m);
+    updateNotices();
+    scrollLog(true);
+    $("choices").innerHTML = ""; $("waiting").hidden = true;
+    if (t.story) { state.unread = 0; save(); renderChoices(); renderWaiting(); }
+    else {
+      state.unreadBy[id] = 0; renderChoices();
+      if (!state.opened.includes(id)) { state.opened.push(id); maybeStartStory(); }
+      save();
+    }
+    hideBanner();
+  }
+  $("back").addEventListener("click", showInbox);
+
+  let lastDay = null, lastRendered = 0;
+  function renderMsg(m) {
+    const log = $("log");
+    log.querySelectorAll(".rcpt, .junk").forEach(n => n.remove());
+    const d = new Date(m.at); const day = fmtDayLabel(d);
+    if (day !== lastDay || m.at - lastRendered > 3600000) {
+      const s = document.createElement("div"); s.className = "sep";
+      // iMessage: "**Today** 11:24 PM", "**Fri, Sep 26** at 11:24 PM". Google Messages: "Today · 11:24 PM".
+      if (isIOS()) {
+        const old = (Date.now() - m.at) / 86400000 >= 7, b = document.createElement("b");
+        b.textContent = old ? d.toLocaleDateString([], { weekday: "short", month: "short", day: "numeric" }) : day;
+        s.append(b, (old ? " at " : " ") + fmtTime(d));
+      } else s.textContent = day + " · " + fmtTime(d);
+      log.appendChild(s); lastDay = day;
+    }
+    lastRendered = m.at;
+    const el = document.createElement("div");
+    if (m.system) { el.className = "msg system"; el.textContent = m.system; log.appendChild(el); return; }
+    const dir = m.from === "me" ? "out" : "in";
+    el.className = "msg tail " + dir;
+    // Only the last bubble of a run from the same side keeps the iMessage tail.
+    const prev = log.lastElementChild;
+    if (prev && prev.classList.contains("msg") && prev.classList.contains(dir)) prev.classList.remove("tail");
+    let inner;
+    if (m.image) { inner = `<div class="bubble media">${IMAGES[m.image] ? IMAGES[m.image]() : ""}</div>`; }
+    else if (m.audio) { inner = `<div class="bubble audio"><button class="play" type="button" aria-label="Play audio message" data-audio="${m.audio}" data-dur="${m.duration || 8}"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button><span class="wave">${Array.from({ length: 22 }, (_, i) => `<i style="height:${6 + Math.round(10 * Math.abs(Math.sin(i * 1.7)) + 6 * Math.abs(Math.cos(i * .9)))}px"></i>`).join("")}</span><span class="dur">0:${String(m.duration || 8).padStart(2, "0")}</span></div>`; }
+    else { inner = `<div class="bubble"></div>`; }
+    el.innerHTML = inner;
+    if (m.text) el.querySelector(".bubble").textContent = m.text;
+    log.appendChild(el);
+  }
+
+  // Receipts and the unknown-sender notice. "Delivered" / "Read <time>" sits under your last message while
+  // it is the newest thing in the thread; "Report Junk" (iPhone) or a spam card (Android) shows until you reply.
+  const CHECKS = '<svg viewBox="0 0 24 24"><path d="M18 7l-1.4-1.4-6.3 6.3 1.4 1.4L18 7zm4.2-1.4L11.7 16.2 7.5 12l-1.4 1.4 5.6 5.6 12-12-1.5-1.4zM.4 13.4 6 19l1.4-1.4L1.8 12 .4 13.4z"/></svg>';
+  const CHECK = '<svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>';
+  function readLabel(at) {
+    const d = new Date(at), today = new Date().toDateString() === d.toDateString();
+    return today ? fmtTime(d) : fmtDayLabel(d);
+  }
+  function updateNotices() {
+    const log = $("log"), t = currentThread && threadById(currentThread); if (!t) return;
+    log.querySelectorAll(".rcpt, .junk, .spam").forEach(n => n.remove());
+    const msgs = t.messages.filter(m => !m.system), last = msgs[msgs.length - 1];
+    const before = log.querySelector(".draft, .typing");
+    const put = n => before ? log.insertBefore(n, before) : log.appendChild(n);
+    if (last && last.from === "me") {
+      const r = document.createElement("div"); r.className = "rcpt";
+      if (last.readAt) { const b = document.createElement("b"); b.textContent = "Read"; r.append(b, " " + readLabel(last.readAt)); r.insertAdjacentHTML("beforeend", CHECKS); }
+      else { r.textContent = "Delivered"; r.insertAdjacentHTML("beforeend", CHECK); }
+      put(r);
+    } else if (!t.saved && msgs.length && !msgs.some(m => m.from === "me")) {
+      const j = document.createElement("div"); j.className = "junk";
+      j.innerHTML = "This sender is not in your contact list.<span>Report Junk</span>"; put(j);
+      const s = document.createElement("div"); s.className = "spam";
+      s.innerHTML = '<div>Not in your contacts. Is this spam?</div><div class="btns"><span>Block &amp; report spam</span><span>Not spam</span></div>';
+      log.insertBefore(s, log.firstChild && log.firstChild.classList.contains("sep") ? log.firstChild.nextSibling : log.firstChild);
+    }
+  }
+  // Marks your newest message in a thread as read (when they start answering, or on a { read: true } beat).
+  function markRead(dest) {
+    const list = dest === STORY_ID ? state.log : (state.extra[dest] || []);
+    for (let i = list.length - 1; i >= 0; i--) { if (list[i].system) continue; if (list[i].from === "me" && !list[i].readAt) list[i].readAt = Date.now(); break; }
+    if (currentThread === dest) updateNotices();
+  }
+  function scrollLog(instant) { const log = $("log"); log.scrollTo({ top: log.scrollHeight, behavior: instant ? "auto" : "smooth" }); }
+  $("log").addEventListener("click", e => { const b = e.target.closest(".play"); if (b) playAudio(b); });
+
+  // ---------- story engine ----------
+  let timer = null, typingEl = null, waitTicker = null;
+  function clearTimers() { clearTimeout(timer); timer = null; clearInterval(waitTicker); waitTicker = null; if (typingEl) { typingEl.remove(); typingEl = null; } }
+
+  function maybeStartStory() {
+    if (state.started || state.opened.length < S.meta.threadsToReadBeforeStart) return;
+    state.started = true; state.node = S.start; state.idx = 0;
+    state.dueAt = Date.now() + scaledDelay(parseDur(S.meta.startDelayAfterReading)); save(); schedule();
+  }
+
+  function node() { return S.nodes[state.node]; }
+
+  // Advances the story: delivers every message that is due, schedules the next one.
+  function schedule() {
+    clearTimeout(timer); timer = null;
+    if (!state.started || state.awaiting || state.ended) { renderWaiting(); return; }
+    const n = node(); if (!n) return;
+    if (state.idx >= n.messages.length) { finishNode(n); return; }
+    const m = n.messages[state.idx];
+    if (m.if && !passes(m.if)) { state.idx++; state.dueAt = null; save(); schedule(); return; }
+    if (state.dueAt == null) { state.dueAt = Date.now() + delayMs(m.delay); save(); }
+    const wait = state.dueAt - Date.now();
+    if (wait <= 0) { deliver(m); return; }
+    timer = setTimeout(schedule, Math.min(wait, 60000));
+    renderWaiting();
+  }
+
+  function deliver(m) {
+    const n = node();
+    // They have opened your last message before they start typing.
+    if (!m.me && !m.system && (m.text || m.image || m.audio)) markRead(m.to || STORY_ID);
+    const finish = () => {
+      if (m.set) applySet(m.set);
+      if (m.read) { markRead(m.to || STORY_ID); } // { read: true }: "Read" appears under your message, no reply
+      else if (m.status) { state.status = m.status; }
+      else {
+        const entry = { from: m.me ? "me" : "them", at: Date.now() };
+        if (m.text) entry.text = fill(m.text); if (m.image) { entry.image = m.image; entry.caption = m.caption; }
+        if (m.audio) { entry.audio = m.audio; entry.duration = m.duration; } if (m.system) entry.system = m.system;
+        const dest = m.to || STORY_ID;
+        if (dest === STORY_ID) state.log.push(entry); else (state.extra[dest] = state.extra[dest] || []).push(entry);
+        if (currentThread === dest) { renderMsg(entry); updateNotices(); scrollLog(false); }
+        else {
+          if (dest === STORY_ID) state.unread++; else state.unreadBy[dest] = (state.unreadBy[dest] || 0) + 1;
+          if (!m.system && !m.me) notify(entry, dest); if (!$("inboxView").hidden) showInbox();
+        }
+      }
+      state.idx++; state.dueAt = null; save(); schedule();
+    };
+    // Typing indicator only for text that lands while the player watches, and only if it isn't a catch-up after reopening.
+    const live = currentThread === (m.to || STORY_ID) && Date.now() - state.dueAt < 5000 && (m.text || m.image || m.audio);
+    if (live) {
+      typingEl = document.createElement("div"); typingEl.className = "typing"; typingEl.innerHTML = "<i></i><i></i><i></i>";
+      $("log").appendChild(typingEl); scrollLog(false);
+      const typeMs = state.speed === "real" ? Math.min(900 + (m.text ? m.text.length * 35 : 1500), 4000) : 900;
+      timer = setTimeout(() => { typingEl.remove(); typingEl = null; finish(); }, typeMs);
+    } else finish();
+  }
+
+  function finishNode(n) {
+    if (n.choices) { state.awaiting = n.choices.filter(c => passes(c.if)); state.awaitingThread = n.thread || STORY_ID; save(); renderChoices(); if (currentThread !== state.awaitingThread) { const t = threadById(state.awaitingThread); if (t && t.messages.length) notify(t.messages[t.messages.length - 1], state.awaitingThread); if (!$("inboxView").hidden) showInbox(); } return; }
+    if (n.deadEnd) { state.ended = { dead: true, rewindTo: n.deadEnd.rewindTo, label: n.deadEnd.label }; save(); showSheet("Dead end", "That was the last thing you did.", n.deadEnd.label || "Rewind"); return; }
+    if (n.endOfChapter) { state.ended = { chapter: n.endOfChapter, next: n.endOfChapter.next || null }; save(); showSheet(n.endOfChapter.title, n.endOfChapter.subtitle, n.endOfChapter.next ? "Continue" : "Play again"); return; }
+    // goto may be a list of { if, goto }: the first whose condition passes wins (a bare { goto } is the default).
+    const g = Array.isArray(n.goto) ? (n.goto.find(x => passes(x.if)) || {}).goto : n.goto;
+    if (g) { state.node = g; state.idx = 0; state.dueAt = null; save(); schedule(); }
+  }
+
+  function applySet(set) { for (const k in set) { state.flags[k] = (state.flags[k] || 0) + set[k]; } updateFlags(); }
+  // Conditions on messages and choices: { flag: "trust", min: 1 } / { flag: "fed_toto", is: 0 } / { flag: "spark", max: 0 }.
+  function passes(cond) {
+    if (!cond) return true;
+    if (Array.isArray(cond)) return cond.every(passes);
+    const v = state.flags[cond.flag] || 0;
+    if (cond.min != null && v < cond.min) return false;
+    if (cond.max != null && v > cond.max) return false;
+    if (cond.is != null && v !== cond.is) return false;
+    return true;
+  }
+
+  function choose(c) {
+    requestNotifyPermission(); hideBanner();
+    const dest = state.awaitingThread || STORY_ID; state.awaiting = null; state.awaitingThread = null;
+    const text = fill(c.text);
+    const entry = { from: "me", text, at: Date.now() };
+    if (c.image) { entry.image = c.image; delete entry.text; }
+    if (dest === STORY_ID) state.log.push(entry); else (state.extra[dest] = state.extra[dest] || []).push(entry);
+    $("log").querySelectorAll(".draft").forEach(g => g.remove()); resetField();
+    renderMsg(entry); updateNotices(); scrollLog(false); $("choices").innerHTML = "";
+    if (c.set) applySet(c.set);
+    state.node = c.goto; state.idx = 0; state.dueAt = null; state.lastChoiceAt = Date.now(); save(); schedule();
+  }
+
+  const MIC = '<svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-3.1A7 7 0 0 0 19 11z"/></svg>';
+  const SEND = '<svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>';
+  const SEND_IOS = '<svg viewBox="0 0 24 24"><path d="M11 20V7.8l-5.6 5.6L4 12l8-8 8 8-1.4 1.4L13 7.8V20z"/></svg>';
+  let typeTimer = null;
+  // On-screen keyboard: keys light up as the reply is typed. On iPhone the QuickType bar holds the reply options.
+  const KEY_ROWS = ["qwertyuiop", "asdfghjkl", "^zxcvbnm<"];
+  const keyEls = {};
+  (function buildKeyboard() {
+    const k = $("kbd");
+    KEY_ROWS.forEach(r => {
+      const row = document.createElement("div"); row.className = "row";
+      for (const ch of r) { const i = document.createElement("i"); if (ch === "^" || ch === "<") { i.className = "wide"; i.textContent = ch === "^" ? "⇧" : "⌫"; } else { i.textContent = ch; keyEls[ch] = i; } row.appendChild(i); }
+      k.appendChild(row);
+    });
+    const row = document.createElement("div"); row.className = "row";
+    row.innerHTML = '<i class="wide">123</i><i class="space"></i><i class="wide">return</i>';
+    keyEls[" "] = row.querySelector(".space"); k.appendChild(row);
+  })();
+  function showKeyboard(on) { $("composer").classList.toggle("kb", !!on); if (!on) $("qt").innerHTML = ""; }
+  function hitKey(ch) { const el = keyEls[ch.toLowerCase()]; if (!el) return; el.classList.add("hit"); setTimeout(() => el.classList.remove("hit"), 90); }
+  function resetField() {
+    clearTimeout(typeTimer); typeTimer = null;
+    const box = $("fieldHint"), btn = $("sendBtn");
+    box.classList.remove("typing-into"); box.textContent = hintText();
+    btn.className = "icon"; btn.innerHTML = MIC; btn.disabled = false; btn.onclick = null; btn.setAttribute("aria-label", "Voice message");
+    showKeyboard(false);
+  }
+  function typeInto(c) {
+    const box = $("fieldHint"), btn = $("sendBtn"); clearTimeout(typeTimer);
+    const text = fill(c.text); box.classList.add("typing-into");
+    const send = () => { resetField(); choose(c); };
+    btn.className = "icon send"; btn.innerHTML = isIOS() ? SEND_IOS : SEND; btn.setAttribute("aria-label", "Send");
+    if (c.image && IMAGES[c.image]) { box.innerHTML = '<span class="thumb">' + IMAGES[c.image]() + '<span></span></span>'; box.querySelector(".thumb span").textContent = text; btn.disabled = false; btn.onclick = send; return; }
+    showKeyboard(true); $("choices").innerHTML = ""; scrollLog(false);
+    box.innerHTML = '<span class="caret"></span>';
+    const span = document.createTextNode(""); box.prepend(span);
+    btn.disabled = true;
+    let i = 0;
+    const tick = () => { hitKey(text[i] || ""); span.textContent = text.slice(0, ++i); box.scrollLeft = box.scrollWidth; if (i < text.length) typeTimer = setTimeout(tick, 40 + Math.random() * 50); else { btn.disabled = false; btn.onclick = send; } };
+    tick();
+  }
+  function renderChoices() {
+    const box = $("choices"); box.innerHTML = "";
+    $("log").querySelectorAll(".draft").forEach(g => g.remove());
+    if (!state.awaiting || currentThread !== (state.awaitingThread || STORY_ID)) { resetField(); return; }
+    if (state.reply === "type" && isIOS()) {
+      // iPhone: text replies become QuickType suggestions above the keyboard; photo replies stay as chips.
+      resetField(); showKeyboard(true);
+      state.awaiting.forEach((c, i) => {
+        if (c.image && IMAGES[c.image]) {
+          const b = document.createElement("button"); b.type = "button"; b.className = "choice photo"; b.innerHTML = IMAGES[c.image]() + "<span></span>"; b.querySelector("span").textContent = fill(c.text);
+          b.addEventListener("click", () => typeInto(c)); box.appendChild(b); return;
+        }
+        const q = document.createElement("button"); q.type = "button"; q.textContent = c.short || fill(c.text); q.title = fill(c.text);
+        q.addEventListener("click", () => typeInto(c)); $("qt").appendChild(q);
+      });
+    } else if (state.reply === "type") {
+      resetField();
+      state.awaiting.forEach((c, i) => {
+        const b = document.createElement("button"); b.type = "button"; b.className = "choice"; b.style.animationDelay = (i * 80) + "ms";
+        if (c.image && IMAGES[c.image]) { b.classList.add("photo"); b.innerHTML = IMAGES[c.image]() + "<span></span>"; b.querySelector("span").textContent = fill(c.text); }
+        else b.textContent = fill(c.text);
+        b.addEventListener("click", () => typeInto(c)); box.appendChild(b);
+      });
+    } else {
+      state.awaiting.forEach((c, i) => {
+        const g = document.createElement("button"); g.type = "button"; g.className = "draft"; g.style.animationDelay = (i * 80) + "ms";
+        if (c.image && IMAGES[c.image]) { g.classList.add("photo"); g.innerHTML = IMAGES[c.image]() + "<small></small>"; g.querySelector("small").textContent = fill(c.text); }
+        else g.textContent = fill(c.text);
+        g.addEventListener("click", () => choose(c)); $("log").appendChild(g);
+      });
+    }
+    scrollLog(false);
+  }
+
+  function renderWaiting() {
+    clearInterval(waitTicker); waitTicker = null;
+    const w = $("waiting");
+    // Lives in the test settings sheet; the finished game shows no wait line.
+    const showIt = state.started && !state.awaiting && !state.ended && state.dueAt && state.dueAt - Date.now() > 20000;
+    w.hidden = !showIt; if (!showIt) return;
+    const upd = () => { const ms = state.dueAt - Date.now(); if (ms <= 0) { w.hidden = true; clearInterval(waitTicker); return; } $("waitText").textContent = (state.status === "offline" ? "Offline · " : "") + "next reply in about " + fmtWait(ms); };
+    upd(); waitTicker = setInterval(upd, 1000);
+  }
+  $("skipWait").addEventListener("click", () => { state.dueAt = Date.now(); save(); schedule(); });
+
+  // ---------- end sheet ----------
+  function showSheet(title, sub, primary) {
+    $("sheetTitle").textContent = title; $("sheetSub").textContent = sub; $("sheetPrimary").textContent = primary;
+    $("sheetFlags").textContent = flagLine(); $("sheet").hidden = false;
+  }
+  $("sheetClose").addEventListener("click", () => { $("sheet").hidden = true; });
+  $("sheetPrimary").addEventListener("click", () => {
+    $("sheet").hidden = true;
+    if (state.ended && state.ended.dead) {
+      // Rewind: drop log entries written since the last choice and go back to the hub node.
+      const cut = state.lastChoiceAt || 0; state.log = state.log.filter(m => m.at < cut); for (const k in state.extra) state.extra[k] = state.extra[k].filter(m => m.at < cut);
+      state.node = state.ended.rewindTo; state.idx = S.nodes[state.ended.rewindTo].messages.length; state.ended = null; state.status = "online"; state.dueAt = null; save();
+      openThread(STORY_ID); schedule();
+    } else if (state.ended && state.ended.next) {
+      state.node = state.ended.next; state.idx = 0; state.ended = null; state.status = "online"; state.dueAt = null; save();
+      openThread(STORY_ID); schedule();
+    } else { $("reset").click(); }
+  });
+
+  // ---------- notifications ----------
+  let bannerTimer = null;
+  let bannerThread = STORY_ID;
+  function notify(entry, dest) {
+    bannerThread = dest || STORY_ID; const t = threadById(bannerThread) || { name: "", saved: false }; const who = t.name;
+    $("bannerTitle").textContent = who; $("bannerBody").textContent = preview(entry);
+    const av = $("bannerAvatar"); av.className = avatarClass(t); av.innerHTML = avatarHTML(t) + '<span class="badge"><svg viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.4 1.3 4.6 3.4 6L4 21l4.4-2.3c1.1.3 2.4.5 3.6.5 5.5 0 10-3.6 10-8s-4.5-8-10-8z"/></svg></span>';
+    const b = $("banner"); b.classList.add("show"); clearTimeout(bannerTimer); bannerTimer = setTimeout(hideBanner, 5000);
+    if (navigator.vibrate) { try { navigator.vibrate(60); } catch (e) {} }
+    try { if ("Notification" in window && Notification.permission === "granted" && document.hidden) new Notification(who, { body: preview(entry) }); } catch (e) {}
+  }
+  function hideBanner() { $("banner").classList.remove("show"); $("bannerTitle").textContent = ""; $("bannerBody").textContent = ""; }
+  $("banner").addEventListener("click", () => openThread(bannerThread));
+  function requestNotifyPermission() { try { if ("Notification" in window && Notification.permission === "default") Notification.requestPermission(); } catch (e) {} }
+
+  // ---------- flags display ----------
+  function flagLine() { const f = state.flags; const keys = Object.keys(f); return keys.length ? keys.map(k => k + "=" + f[k]).join("  ") : "no flags yet"; }
+  function updateFlags() { $("flags").textContent = state.started ? (state.node + "  ·  " + flagLine()) : "read " + state.opened.length + "/" + S.meta.threadsToReadBeforeStart + " old threads to begin"; }
+
+  // ---------- media: generated in code so the prototype needs no asset files ----------
+  const IMAGES = {
+    camera6() {
+      return `<svg viewBox="0 0 240 180" role="img" aria-label="Security camera still of an empty elevator lobby, the indicator reads 12">
+        <defs><filter id="g"><feTurbulence baseFrequency=".9" numOctaves="2" seed="3"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".18"/></feComponentTransfer></filter>
+        <linearGradient id="fl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b2b2b"/><stop offset="1" stop-color="#0d0d0d"/></linearGradient></defs>
+        <rect width="240" height="180" fill="#151515"/>
+        <rect x="0" y="120" width="240" height="60" fill="url(#fl)"/>
+        <rect x="80" y="30" width="80" height="92" fill="#3a3a3a"/><rect x="84" y="34" width="35" height="88" fill="#1a1a1a"/><rect x="121" y="34" width="35" height="88" fill="#1a1a1a"/>
+        <rect x="118" y="34" width="4" height="88" fill="#5a5a5a"/>
+        <rect x="104" y="14" width="32" height="12" rx="2" fill="#0b0b0b" stroke="#444"/><text x="120" y="24" text-anchor="middle" font-family="Roboto Mono, monospace" font-size="10" fill="#ff5a3c">12</text>
+        <rect x="30" y="60" width="18" height="60" fill="#262626"/><rect x="190" y="60" width="18" height="60" fill="#262626"/>
+        <rect width="240" height="180" filter="url(#g)" opacity=".9"/>
+        <text x="6" y="12" font-family="Roboto Mono, monospace" font-size="8" fill="#e8e8e8">CAM 06  ELEVATOR LOBBY L</text>
+        <text x="234" y="172" text-anchor="end" font-family="Roboto Mono, monospace" font-size="8" fill="#e8e8e8">03:0${new Date().getMinutes() % 10}:41  REC</text>
+        <circle cx="226" cy="10" r="3" fill="#ff3b30"/></svg>`;
+    },
+    ward12() {
+      return `<svg viewBox="0 0 240 180" role="img" aria-label="Dark hospital corridor lit by a phone flash, a sign reads WARD 12">
+        <defs><filter id="g2"><feTurbulence baseFrequency=".8" numOctaves="2" seed="7"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".22"/></feComponentTransfer></filter>
+        <radialGradient id="fl2" cx=".5" cy=".55" r=".6"><stop offset="0" stop-color="#6b665a"/><stop offset=".6" stop-color="#1c1b18"/><stop offset="1" stop-color="#050505"/></radialGradient></defs>
+        <rect width="240" height="180" fill="url(#fl2)"/>
+        <polygon points="0,180 240,180 150,110 90,110" fill="#2a2823"/><polygon points="0,0 240,0 150,60 90,60" fill="#15140f"/>
+        <polygon points="0,0 90,60 90,110 0,180" fill="#1f1d18"/><polygon points="240,0 150,60 150,110 240,180" fill="#1a1813"/>
+        <rect x="30" y="70" width="26" height="60" fill="#0b0b0a"/><rect x="184" y="70" width="26" height="60" fill="#0b0b0a"/>
+        <rect x="96" y="66" width="48" height="12" fill="#c9c2a8"/><text x="120" y="75" text-anchor="middle" font-family="Roboto Mono, monospace" font-size="7" fill="#2a2520">WARD 12</text>
+        <rect x="104" y="82" width="32" height="28" fill="#0a0a0a"/>
+        <rect width="240" height="180" filter="url(#g2)" opacity=".9"/></svg>`;
+    },
+    toto() {
+      return `<svg viewBox="0 0 240 180" role="img" aria-label="An orange cat with one ear sitting on a bare mattress in a small room">
+        <defs><filter id="g4"><feTurbulence baseFrequency=".6" numOctaves="2" seed="5"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".12"/></feComponentTransfer></filter></defs>
+        <rect width="240" height="180" fill="#5a5247"/><rect x="0" y="0" width="240" height="95" fill="#6b655b"/>
+        <rect x="20" y="95" width="200" height="60" rx="6" fill="#b8b2a3"/><rect x="20" y="150" width="200" height="30" fill="#2e2a25"/>
+        <ellipse cx="128" cy="118" rx="38" ry="24" fill="#d98c3f"/><circle cx="105" cy="98" r="18" fill="#d98c3f"/>
+        <polygon points="92,86 96,66 106,82" fill="#d98c3f"/>
+        <circle cx="99" cy="96" r="2.5" fill="#1e1a14"/><circle cx="110" cy="96" r="2.5" fill="#1e1a14"/>
+        <path d="M100 103 q5 4 10 0" stroke="#1e1a14" stroke-width="1.2" fill="none"/>
+        <path d="M164 120 q20 -10 12 -30" stroke="#d98c3f" stroke-width="7" fill="none" stroke-linecap="round"/>
+        ${Array.from({ length: 5 }, (_, i) => `<path d="M${112 + i * 10} 100 l0 -6" stroke="#b56f2a" stroke-width="2"/>`).join("")}
+        <rect width="240" height="180" filter="url(#g4)" opacity=".9"/></svg>`;
+    },
+    chart_room4() {
+      const names = ["W. PRUITT", "E. MARSH RN", "J. OYELARAN RN", "DR. T. HALLORAN", "G. SANDOVAL", "R. LINDQVIST", "M. OKEKE", "B. TRAN", "A. FERREIRA", "D. REYES"];
+      const years = ["74", "74", "74", "74", "87", "03", "", "", "", ""];
+      return `<svg viewBox="0 0 240 180" role="img" aria-label="The back of a yellowed patient chart with thirteen numbered lines, eleven filled in, the last one reads Desk">
+        <defs><filter id="g5"><feTurbulence baseFrequency=".7" numOctaves="2" seed="13"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".16"/></feComponentTransfer></filter></defs>
+        <rect width="240" height="180" fill="#2a2620"/>
+        <rect x="28" y="6" width="184" height="170" fill="#d9cfae" transform="rotate(-2 120 90)"/>
+        <rect x="28" y="6" width="184" height="170" fill="none" stroke="#b7ac88" transform="rotate(-2 120 90)"/>
+        ${names.map((n, i) => `<text x="44" y="${22 + i * 12}" font-family="Caveat, 'Segoe Script', cursive" font-size="9" fill="${i < 6 ? "#3a3326" : "#1e2a5a"}" transform="rotate(-2 120 90)">${i + 1}. ${n}</text><text x="190" y="${22 + i * 12}" text-anchor="end" font-family="Roboto Mono, monospace" font-size="7" fill="#5a5040" transform="rotate(-2 120 90)">${years[i]}</text>`).join("")}
+        <text x="44" y="${22 + 10 * 12}" font-family="Roboto Mono, monospace" font-size="9" fill="#111" transform="rotate(-2 120 90)">11. DESK</text>
+        <text x="44" y="${22 + 11 * 12}" font-family="Caveat, cursive" font-size="9" fill="#8a7f60" transform="rotate(-2 120 90)">12.</text>
+        <text x="44" y="${22 + 12 * 12}" font-family="Caveat, cursive" font-size="9" fill="#8a7f60" transform="rotate(-2 120 90)">13.</text>
+        <line x1="44" y1="${25 + 11 * 12}" x2="190" y2="${25 + 11 * 12}" stroke="#b7ac88" transform="rotate(-2 120 90)"/>
+        <line x1="44" y1="${25 + 12 * 12}" x2="190" y2="${25 + 12 * 12}" stroke="#b7ac88" transform="rotate(-2 120 90)"/>
+        <rect width="240" height="180" filter="url(#g5)" opacity=".9"/></svg>`;
+    },
+    piano() {
+      return `<svg viewBox="0 0 240 180" role="img" aria-label="An old upright piano in a dim day room, lid open, a handwritten sheet of music on the stand">
+        <defs><filter id="g7"><feTurbulence baseFrequency=".7" numOctaves="2" seed="19"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".18"/></feComponentTransfer></filter>
+        <radialGradient id="fl7" cx=".5" cy=".5" r=".7"><stop offset="0" stop-color="#4a4234"/><stop offset="1" stop-color="#070605"/></radialGradient></defs>
+        <rect width="240" height="180" fill="url(#fl7)"/>
+        <rect x="40" y="40" width="160" height="110" fill="#2a1d12"/><rect x="40" y="40" width="160" height="14" fill="#3a2a1a"/>
+        <rect x="52" y="104" width="136" height="16" fill="#e8e2cf"/>
+        ${Array.from({ length: 22 }, (_, i) => `<rect x="${53 + i * 6.2}" y="104" width="5.6" height="16" fill="#ece6d4" stroke="#b8b09a" stroke-width=".4"/>`).join("")}
+        ${[0, 1, 3, 4, 5, 7, 8, 10, 11, 12, 14, 15, 17, 18, 19].map(i => `<rect x="${57 + i * 6.2}" y="104" width="3.6" height="10" fill="#1a1612"/>`).join("")}
+        <rect x="98" y="66" width="44" height="30" fill="#e3dbc3" transform="rotate(-3 120 81)"/>
+        ${Array.from({ length: 5 }, (_, i) => `<line x1="102" y1="${72 + i * 4}" x2="138" y2="${72 + i * 4}" stroke="#6a6252" stroke-width=".6" transform="rotate(-3 120 81)"/>`).join("")}
+        <text x="120" y="93" text-anchor="middle" font-family="Georgia, serif" font-size="4" fill="#3a3a3a" transform="rotate(-3 120 81)">ASHGROVE · DAY ROOM · 1974</text>
+        <rect x="40" y="150" width="160" height="30" fill="#141008"/>
+        <rect width="240" height="180" filter="url(#g7)" opacity=".9"/></svg>`;
+    },
+    lobby_dana() {
+      return `<svg viewBox="0 0 240 180" role="img" aria-label="Colour security camera still: a woman in the elevator lobby looking up into the camera and waving">
+        <defs><filter id="g8"><feTurbulence baseFrequency=".9" numOctaves="2" seed="23"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".14"/></feComponentTransfer></filter>
+        <linearGradient id="fl8" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a5650"/><stop offset="1" stop-color="#2a2825"/></linearGradient></defs>
+        <rect width="240" height="180" fill="#3a3834"/>
+        <rect x="0" y="120" width="240" height="60" fill="url(#fl8)"/>
+        <rect x="80" y="30" width="80" height="92" fill="#6a6258"/><rect x="84" y="34" width="35" height="88" fill="#44403a"/><rect x="121" y="34" width="35" height="88" fill="#44403a"/>
+        <rect x="104" y="14" width="32" height="12" rx="2" fill="#0b0b0b" stroke="#444"/><text x="120" y="24" text-anchor="middle" font-family="Roboto Mono, monospace" font-size="10" fill="#7cff9a">L</text>
+        <ellipse cx="150" cy="150" rx="22" ry="6" fill="#1e1c19" opacity=".5"/>
+        <path d="M150 100 q-10 0 -10 12 l0 30 l20 0 l0 -30 q0 -12 -10 -12z" fill="#6b3f2a"/>
+        <circle cx="150" cy="92" r="10" fill="#d9a57a"/><path d="M139 90 q11 -16 22 0 q-3 -8 -11 -9 q-8 1 -11 9z" fill="#3a2418"/>
+        <path d="M160 112 l12 -22" stroke="#d9a57a" stroke-width="5" stroke-linecap="round"/><circle cx="173" cy="88" r="4" fill="#d9a57a"/>
+        <rect x="30" y="60" width="18" height="60" fill="#4a463f"/><rect x="190" y="60" width="18" height="60" fill="#4a463f"/>
+        <rect width="240" height="180" filter="url(#g8)" opacity=".9"/>
+        <text x="6" y="12" font-family="Roboto Mono, monospace" font-size="8" fill="#e8e8e8">CAM 06  ELEVATOR LOBBY L</text>
+        <text x="234" y="172" text-anchor="end" font-family="Roboto Mono, monospace" font-size="8" fill="#e8e8e8">03:41:07  REC</text>
+        <circle cx="226" cy="10" r="3" fill="#ff3b30"/></svg>`;
+    },
+    lindqvist_badge() {
+      return `<svg viewBox="0 0 240 180" role="img" aria-label="A faded business card on a desk: R. Lindqvist, Investigations, 2003">
+        <defs><filter id="g6"><feTurbulence baseFrequency=".7" numOctaves="2" seed="17"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".16"/></feComponentTransfer></filter></defs>
+        <rect width="240" height="180" fill="#4a3a2a"/><rect x="0" y="0" width="240" height="40" fill="#3a2d20"/>
+        <rect x="40" y="52" width="160" height="92" rx="3" fill="#e9e2cc" transform="rotate(4 120 98)"/>
+        <text x="120" y="82" text-anchor="middle" font-family="Georgia, serif" font-size="12" fill="#2a2420" transform="rotate(4 120 98)">R. LINDQVIST</text>
+        <text x="120" y="98" text-anchor="middle" font-family="Georgia, serif" font-size="8" fill="#5a5048" transform="rotate(4 120 98)">INVESTIGATIONS · PORTLAND</text>
+        <text x="120" y="114" text-anchor="middle" font-family="Roboto Mono, monospace" font-size="7" fill="#5a5048" transform="rotate(4 120 98)">(503) 555-0199 · RET. PPB</text>
+        <text x="186" y="134" text-anchor="end" font-family="Caveat, cursive" font-size="9" fill="#1e2a5a" transform="rotate(4 120 98)">3:12  ·  Oct 2003</text>
+        <rect width="240" height="180" filter="url(#g6)" opacity=".9"/></svg>`;
+    },
+    wristband() {
+      return `<svg viewBox="0 0 240 180" role="img" aria-label="A yellowed plastic patient wristband on a tiled floor">
+        <defs><filter id="g3"><feTurbulence baseFrequency=".7" numOctaves="2" seed="11"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".18"/></feComponentTransfer></filter></defs>
+        <rect width="240" height="180" fill="#3b3a33"/>
+        ${Array.from({ length: 6 }, (_, r) => Array.from({ length: 8 }, (_, c) => `<rect x="${c * 30 + 1}" y="${r * 30 + 1}" width="28" height="28" fill="${(r + c) % 2 ? "#4a483f" : "#44423a"}"/>`).join("")).join("")}
+        <path d="M60 110 C 90 60, 160 60, 190 100 C 200 115, 190 125, 175 118 C 150 90, 100 90, 75 120 C 65 130, 55 122, 60 110 Z" fill="#e6dcb8" stroke="#b9ae8a"/>
+        <text x="122" y="86" text-anchor="middle" font-family="Roboto Mono, monospace" font-size="7" fill="#3a2f20" transform="rotate(-8 122 86)">PT-09  LANTERN  ASHGROVE</text>
+        <rect width="240" height="180" filter="url(#g3)" opacity=".9"/></svg>`;
+    }
+  };
+
+  let audioCtx = null;
+  // One voice note plays at a time. Tapping the playing one stops it; tapping another stops the first and starts that one.
+  let audioNow = null;
+  const PLAY_ICON = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>', STOP_ICON = '<svg viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/></svg>';
+  function stopAudio() {
+    if (!audioNow) return;
+    try { audioNow.master.gain.cancelScheduledValues(audioCtx.currentTime); audioNow.master.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.03); setTimeout(m => { try { m.disconnect(); } catch (e) {} }, 200, audioNow.master); } catch (e) {}
+    audioNow.timeouts.forEach(clearTimeout);
+    audioNow.btn.innerHTML = PLAY_ICON; audioNow.btn.classList.remove("playing");
+    audioNow.btn.parentElement.querySelectorAll(".wave i").forEach(b => b.classList.remove("on"));
+    audioNow = null;
+  }
+  function animateBars(btn, dur) {
+    const bars = btn.parentElement.querySelectorAll(".wave i"); bars.forEach(b => b.classList.remove("on"));
+    return Array.from(bars, (b, i) => setTimeout(() => b.classList.add("on"), (dur * 1000 / bars.length) * i));
+  }
+  // A thin, distant upright piano: a slow melody recorded through a phone. On Dana's recording the F sticks; "right" plays it clean.
+  function playPiano(dur, t, right) {
+    const master = audioCtx.createGain(); master.gain.value = 0.35; const lp = audioCtx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 1800; master.connect(lp).connect(audioCtx.destination);
+    const notes = [392, 440, 494, 587, 494, 440, 392, 330, 392, 440, right ? 494 : 466, 392];
+    const step = (dur - 1) / notes.length;
+    notes.forEach((f, i) => { const o = audioCtx.createOscillator(); o.type = "triangle"; o.frequency.value = f; const g = audioCtx.createGain(); const s0 = t + 0.3 + i * step; g.gain.setValueAtTime(0.0001, s0); g.gain.exponentialRampToValueAtTime(0.5, s0 + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, s0 + step * 1.6); o.connect(g).connect(master); o.start(s0); o.stop(s0 + step * 1.7); });
+    const buf = audioCtx.createBuffer(1, audioCtx.sampleRate * dur, audioCtx.sampleRate); const d = buf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * 0.03;
+    const src = audioCtx.createBufferSource(); src.buffer = buf; src.connect(master); src.start(t); src.stop(t + dur);
+    return master;
+  }
+  // The Resonator through two floors of concrete: a deep pulsing drone, a thin whine on top, and one knock halfway.
+  function playHum(dur, t) {
+    const master = audioCtx.createGain(); master.gain.setValueAtTime(0.0001, t); master.gain.exponentialRampToValueAtTime(0.6, t + 1.2); master.gain.setValueAtTime(0.6, t + dur - 1); master.gain.exponentialRampToValueAtTime(0.0001, t + dur); master.connect(audioCtx.destination);
+    const pulse = audioCtx.createGain(); pulse.gain.value = 0.7; pulse.connect(master);
+    const lfo = audioCtx.createOscillator(); lfo.frequency.value = 2.3; const lg = audioCtx.createGain(); lg.gain.value = 0.3; lfo.connect(lg).connect(pulse.gain); lfo.start(t); lfo.stop(t + dur);
+    [55, 55.6, 82.4, 110.3].forEach((f, i) => { const o = audioCtx.createOscillator(); o.type = i === 0 ? "sawtooth" : "sine"; o.frequency.value = f; const g = audioCtx.createGain(); g.gain.value = i === 0 ? 0.18 : 0.12; o.connect(g).connect(pulse); o.start(t); o.stop(t + dur); });
+    const whine = audioCtx.createOscillator(); whine.type = "sine"; whine.frequency.setValueAtTime(1180, t); whine.frequency.linearRampToValueAtTime(1240, t + dur); const wg = audioCtx.createGain(); wg.gain.value = 0.035; whine.connect(wg).connect(master); whine.start(t); whine.stop(t + dur);
+    const buf = audioCtx.createBuffer(1, audioCtx.sampleRate * dur, audioCtx.sampleRate); const data = buf.getChannelData(0); for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * 0.05;
+    const src = audioCtx.createBufferSource(); src.buffer = buf; const lp = audioCtx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 500; src.connect(lp).connect(master); src.start(t); src.stop(t + dur);
+    const k = audioCtx.createOscillator(); k.frequency.setValueAtTime(180, t + dur / 2); k.frequency.exponentialRampToValueAtTime(40, t + dur / 2 + .25); const kg = audioCtx.createGain(); kg.gain.setValueAtTime(.6, t + dur / 2); kg.gain.exponentialRampToValueAtTime(.001, t + dur / 2 + .3); k.connect(kg).connect(master); k.start(t + dur / 2); k.stop(t + dur / 2 + .35);
+    return master;
+  }
+  function playAudio(btn) {
+    try {
+      if (audioNow && audioNow.btn === btn) { stopAudio(); return; }
+      stopAudio();
+      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      const dur = parseFloat(btn.dataset.dur) || 8, t = audioCtx.currentTime, kind = btn.dataset.audio;
+      const master = kind === "piano" || kind === "piano_right" ? playPiano(dur, t, kind === "piano_right") : playHum(dur, t);
+      const timeouts = animateBars(btn, dur);
+      btn.innerHTML = STOP_ICON; btn.classList.add("playing");
+      timeouts.push(setTimeout(() => { if (audioNow && audioNow.btn === btn) { audioNow.btn.innerHTML = PLAY_ICON; audioNow.btn.classList.remove("playing"); audioNow = null; } }, dur * 1000 + 50));
+      audioNow = { btn, master, timeouts };
+    } catch (e) {}
+  }
+
+  // ---------- boot ----------
+  load(); applySkin();
+  if (state.ended && !state.ended.dead) { /* chapter finished; show inbox with sheet available */ }
+  showInbox();
+  if (state.started) { schedule(); if (state.unread) { /* keep the badge */ } }
+  document.addEventListener("visibilitychange", () => { if (!document.hidden && state.started) schedule(); });
+})();
+</script>
