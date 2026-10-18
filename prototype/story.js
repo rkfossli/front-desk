@@ -358,7 +358,7 @@ window.NIGHTDESK_STORY = {
         { text: "I'm going to look at the rest of this floor while you're gone.", delay: "6s" },
         { status: "offline" },
         { system: "Bus 17 to SE Holgate. Unit 3 has a dead fern, a key under it, and a very loud cat behind the door.", delay: "1h 30m" },
-        { to: "okonkwo", text: "Are you the one from the building? I saw you go in. He's in the carrier by the door, I packed his food. Tell Dana he missed her.", delay: "20s", notify: true }
+        { to: "okonkwo", text: "Are you the one from the building? I saw you go in. This is the only number I have for you people, the one Dana gave me. He's in the carrier by the door, I packed his food. Tell Dana he missed her.", delay: "20s", notify: true }
       ],
       thread: "okonkwo",
       choices: [
