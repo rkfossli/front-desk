@@ -472,7 +472,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent
     // Test mode: short pauses are kept (capped at 4s), anything from a minute up becomes 6s.
     return (sec < 60 ? Math.min(sec, 4) : 6) * 1000;
   }
-  function fmtTime(d) { return d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }); }
+  function fmtTime(d) { return d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" }); }
   // Story text placeholders. {time} = now; {date:-21d} = a date relative to today ("September 25th");
   // {weekday:+2d} = a weekday name relative to today ("Thursday"). The story never hardcodes dates.
   function ordinal(n) { const s = ["th", "st", "nd", "rd"], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); }
@@ -487,15 +487,15 @@ button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent
     const now = new Date(), t0 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const diff = Math.round((t0 - new Date(d.getFullYear(), d.getMonth(), d.getDate())) / 86400000);
     if (diff === 0) return "Today"; if (diff === 1) return "Yesterday";
-    if (diff < 7) return d.toLocaleDateString([], { weekday: "long" });
-    return d.toLocaleDateString([], { month: "short", day: "numeric" });
+    if (diff < 7) return d.toLocaleDateString("en-US", { weekday: "long" });
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
   }
   function fmtListTime(d) {
     const now = new Date(); const sameDay = d.toDateString() === now.toDateString();
     if (sameDay) return fmtTime(d);
     const diff = (now - d) / 86400000;
-    if (diff < 7) return d.toLocaleDateString([], { weekday: "short" });
-    return d.toLocaleDateString([], { month: "numeric", day: "numeric" });
+    if (diff < 7) return d.toLocaleDateString("en-US", { weekday: "short" });
+    return d.toLocaleDateString("en-US", { month: "numeric", day: "numeric" });
   }
   function fmtWait(ms) {
     const s = Math.max(0, Math.round(ms / 1000));
@@ -643,7 +643,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent
       // iMessage: "**Today** 11:24 PM", "**Fri, Sep 26** at 11:24 PM". Google Messages: "Today · 11:24 PM".
       if (isIOS()) {
         const old = (Date.now() - m.at) / 86400000 >= 7, b = document.createElement("b");
-        b.textContent = old ? d.toLocaleDateString([], { weekday: "short", month: "short", day: "numeric" }) : day;
+        b.textContent = old ? d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }) : day;
         s.append(b, (old ? " at " : " ") + fmtTime(d));
       } else s.textContent = day + " · " + fmtTime(d);
       log.appendChild(s); lastDay = day;
