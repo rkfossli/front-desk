@@ -531,9 +531,9 @@ window.NIGHTDESK_STORY = {
     ch2_piano_hub: {
       messages: [],
       choices: [
-        { text: "That was beautiful.", goto: "ch2_piano_warm", set: { spark: 1, piano_q: 1, pq_warm: 1 }, if: { flag: "pq_warm", max: 0 } },
-        { text: "You play? I didn't expect that.", goto: "ch2_piano_curious", set: { curiosity: 1, piano_q: 1, pq_curious: 1 }, if: { flag: "pq_curious", max: 0 } },
-        { text: "Should you be making noise up there?", goto: "ch2_piano_careful", set: { trust: 1, piano_q: 1, pq_careful: 1 }, if: { flag: "pq_careful", max: 0 } },
+        { text: "Still. That was beautiful.", goto: "ch2_piano_warm", set: { spark: 1, piano_q: 1, pq_warm: 1 }, if: { flag: "pq_warm", max: 0 } },
+        { text: "Where did you learn?", goto: "ch2_piano_curious", set: { curiosity: 1, piano_q: 1, pq_curious: 1 }, if: { flag: "pq_curious", max: 0 } },
+        { text: "And the noise? Should you be playing up there at all?", goto: "ch2_piano_careful", set: { trust: 1, piano_q: 1, pq_careful: 1 }, if: { flag: "pq_careful", max: 0 } },
         { text: "What else is up there?", goto: "ch2_wristband" }
       ]
     },
