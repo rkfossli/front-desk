@@ -59,7 +59,7 @@ Sist oppdatert: 2026-10-18 (etter full logikkrevisjon, manus v21).
 ## 4. Hvem vet hva (og hvordan)
 
 ### Dana (ekte)
-- Ser lobbyen via en **gammel kameramonitor** på 12 (lampen på desken, lysene). Kan ikke se spilleren i 11C.
+- Ser lobbyen via en **gammel kameramonitor** på 12 (lampen på desken, lysene). Kan ikke se spilleren i 11C. Når hun ber spilleren sjekke noe hun selv kan se på monitoren (f.eks. etasjeindikatoren i ch1_proof), må teksten si hvorfor: hun vil vite om spillerens side viser det samme som hennes.
 - Merker når spilleren skriver til andre: «the phone does a thing up here when you type». Lysene i korridoren dimmer mot heisen når heisen har noen i seg. Hun merker **bare at** spilleren skriver, aldri **hva** – hun kan ikke sitere ord fra Tom-tråden eller andre tråder (rettet 18.10: «check what?» fjernet).
 - Leser journaler på Hallorans kontor fra dag 3. Vet om LANTERN, Resonatoren, Composite fra **dag 4** (ch5_lantern). Vet om «name rule» fra natt 2 (journal i rom 4). Vet at Det kopierer og ikke finner på (dag 3). Vet at Det skrev til Lindqvists kone som ham (dag 4, knows_copy).
 - Vet at Marjorie finnes og prater med alle; vet **ikke** på forhånd når Marjorie tekster.

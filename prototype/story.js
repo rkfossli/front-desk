@@ -144,6 +144,7 @@ window.NIGHTDESK_STORY = {
       messages: [
         { text: "I need you to do something and I need you to not ask why yet.", delay: "8s" },
         { text: "Look at camera 6. The elevator lobby. What floor is the elevator on?", delay: "6s" },
+        { text: "I've got an old monitor up here that shows me the same lobby. Mine has said 12 for three weeks. I need to know what yours says.", delay: "9s" },
         { system: "The desk monitor cycles through the cameras to your left. It stops on 6. The lobby is empty. Above the elevator doors, the floor indicator reads 12.", delay: "5s" }
       ],
       choices: [
