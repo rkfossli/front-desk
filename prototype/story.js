@@ -163,7 +163,7 @@ window.NIGHTDESK_STORY = {
       messages: [
         { text: "Okay. Okay.", delay: "4s" },
         { text: "Then yours sees it too. It isn't just me up here.", delay: "5s" },
-        { image: "camera6", caption: "CAM 06 · ELEVATOR LOBBY", delay: "9s" },
+        { image: "camera6", caption: "CAM 06 · ELEVATOR LOBBY", delay: "9s", set: { k_monitor_date: 1 } },
         { text: "That's my screen. Same camera, same 12.", delay: "5s" },
         { text: "There is no 12. The panel inside goes 11, 14. Look next time you're in there.", delay: "6s" }
       ],
@@ -175,7 +175,7 @@ window.NIGHTDESK_STORY = {
         { text: "Fair.", delay: "5s" },
         { text: "Three weeks ago I took the elevator up at 3:12. It didn't stop at 11. It didn't stop at 14.", delay: "9s" },
         { text: "I'm still up here.", delay: "6s" },
-        { image: "camera6", caption: "CAM 06 · ELEVATOR LOBBY", delay: "7s" },
+        { image: "camera6", caption: "CAM 06 · ELEVATOR LOBBY", delay: "7s", set: { k_monitor_date: 1 } },
         { text: "That's mine. Up here.", delay: "4s" }
       ],
       goto: "ch1_ask"
@@ -459,11 +459,11 @@ window.NIGHTDESK_STORY = {
         { text: "I have a cat. Toto. Orange, one ear, judgmental.", delay: "6s" },
         { text: "My neighbor Mrs. Okonkwo will have been feeding him since I didn't come home. She'll have texted the desk by now too, she's that kind. Check the phone.", delay: "13s" },
         { text: "Her lease doesn't allow pets and her landlord is the kind who counts. She can't keep doing it.", delay: "9s" },
-        { text: "I need him somewhere I know. 4017 SE Holgate, unit 3. Key's under the dead fern. Don't judge the fern.", delay: "10s" },
+        { text: "I need him somewhere I know. 4017 SE Holgate, unit 3. Key's under the dead fern. Don't judge the fern.", delay: "10s", set: { k_dana_home: 1 } },
         { text: "Take him to your place.", delay: "5s" }
       ],
       choices: [
-        { text: "I'll go get him today.", goto: "ch2_toto_yes", set: { fed_toto: 1, trust: 2 } },
+        { text: "I'll go get him today.", goto: "ch2_toto_yes", set: { fed_toto: 1, trust: 2, toto_trip: 1 } },
         { text: "I'll ask Mrs. Okonkwo to hang on a few more days.", goto: "ch2_toto_later", set: { fed_toto: 1 } },
         { text: "Dana, I'm not crossing town for a cat right now.", goto: "ch2_toto_no", set: { trust: -2 } }
       ]
@@ -474,23 +474,133 @@ window.NIGHTDESK_STORY = {
         { text: "Okay.", delay: "6s" },
         { text: "Okay. Thank you.", delay: "4s" },
         { text: "He bites when he's happy. Don't take it personally. Text me when you've got him.", delay: "7s" },
+        { text: "And while you're there. Behind my bedroom door there's a wall of paper. Everything I found out about the three before me, before I went up.", delay: "12s", set: { k_wall_told: 1 } },
+        { text: "Photograph it and send it to me, one piece at a time. I'll tell you what each one means. Then it's on two phones and not just one wall somebody can tidy away.", delay: "11s" },
         { text: "I'm going to look at the rest of this floor while you're gone.", delay: "6s" },
         { status: "offline" },
-        { system: "Bus 17 to SE Holgate. Unit 3 has a dead fern, a key under it, and a very loud cat behind the door.", delay: "1h 30m" },
-        { to: "okonkwo", text: "Are you the one from the building? I saw you go in. This is the only number I have for you people, the one Dana gave me. He's in the carrier by the door, I packed his food. Tell Dana he missed her.", delay: "20s", notify: true }
+        { system: "Bus 17 to SE Holgate. Unit 3 has a dead fern, a key under it, and a very loud cat behind the door.", delay: "50m" },
+        { to: "okonkwo", text: "Are you the one from the building? I saw you go in. This is the only number I have for you people, the one Dana gave me. If you're here for Toto, his carrier's in the hall closet and his food's under the sink.", delay: "20s", notify: true }
       ],
       thread: "okonkwo",
       choices: [
         { text: "Yes, that's me. Thank you for looking after him, Grace.", goto: "ch2_toto_home", set: { trust: 1 } },
-        { text: "Got him. I'll let her know.", goto: "ch2_toto_home" }
+        { text: "That's me. Thank you.", goto: "ch2_toto_home" }
       ]
     },
 
     ch2_toto_home: {
       messages: [
-        { to: "okonkwo", text: "Good. She's a good girl, that one. Tell her to call her mother.", delay: "9s" },
-        { system: "Back in 11C. Toto walks the whole room once, then sits on the bed and stares at the ceiling.", delay: "40m" }
+        { to: "okonkwo", text: "Have you heard from her? Anything?", delay: "9s", if: { flag: "grace_texted", max: 0 } },
+        { to: "okonkwo", text: "All right. Be quick, he gets ideas about the door.", delay: "9s", if: { flag: "grace_texted", min: 1 } }
       ],
+      thread: "okonkwo",
+      choices: [
+        { text: "I'm trying to find out.", goto: "ch2_grace_man", set: { trust: 1 }, if: { flag: "grace_texted", max: 0 } },
+        { text: "Nothing I can explain yet.", goto: "ch2_grace_man", if: { flag: "grace_texted", max: 0 } },
+        { text: "I will.", goto: "ch2_grace_man", if: { flag: "grace_texted", min: 1 } }
+      ]
+    },
+
+    ch2_grace_man: {
+      messages: [
+        { to: "okonkwo", text: "If you do hear from her, tell her to call her mother.", delay: "8s", if: { flag: "grace_away", max: 0 } },
+        { to: "okonkwo", text: "If she's just away, tell her to call her mother.", delay: "8s", if: { flag: "grace_away", min: 1 } },
+        { to: "okonkwo", text: "A man came on {weekday:-3d} asking for her things. Said he was from the building. I didn't let him in. Was that right?", delay: "12s" }
+      ],
+      thread: "okonkwo",
+      choices: [
+        { text: "That was right. Please don't let anyone in.", goto: "ch2_wall", set: { grace_man: 1, trust: 1 } },
+        { text: "Probably my manager. You did the right thing.", goto: "ch2_wall", set: { grace_man: 1 } }
+      ]
+    },
+
+    // Dana's own investigation. The player sees it before she explains it, and sends it to her photo by photo.
+    ch2_wall: {
+      messages: [
+        { to: "okonkwo", text: "Good. Lock the door behind you, dear.", delay: "8s" },
+        { system: "Dana's bedroom door. Behind it the whole wall is paper: a handwritten list of names and dates, a photocopied newspaper clipping, and a floor plan of the Calloway with two floors crossed out. A yellow sticky note on the plan.", delay: "1m", set: { k_wall: 1 } }
+      ],
+      choices: [
+        { text: "The list", goto: "ch2_w_list", image: "wall_list", caption: "You sent a photo", set: { w_list: 1 }, knows: ["k_wall"] },
+        { text: "The clipping", goto: "ch2_w_clip", image: "wall_clipping", caption: "You sent a photo", set: { w_clip: 1 }, knows: ["k_wall"] },
+        { text: "The floor plan", goto: "ch2_w_plan", image: "wall_plan", caption: "You sent a photo", set: { w_plan: 1 }, knows: ["k_wall"] }
+      ]
+    },
+
+    ch2_wall_hub: {
+      messages: [],
+      choices: [
+        { text: "The list", goto: "ch2_w_list", image: "wall_list", caption: "You sent a photo", set: { w_list: 1 }, if: { flag: "w_list", max: 0 } },
+        { text: "The clipping", goto: "ch2_w_clip", image: "wall_clipping", caption: "You sent a photo", set: { w_clip: 1 }, if: { flag: "w_clip", max: 0 } },
+        { text: "The floor plan", goto: "ch2_w_plan", image: "wall_plan", caption: "You sent a photo", set: { w_plan: 1 }, if: { flag: "w_plan", max: 0 } },
+        { text: "Dana, why didn't you tell anyone about this?", goto: "ch2_w_why", set: { w_why: 1 }, if: { flag: "w_why", max: 0 } },
+        { text: "A man from the building came for your things on {weekday:-3d}. Grace didn't let him in.", goto: "ch2_w_man", set: { w_man: 1 }, if: [{ flag: "w_man", max: 0 }, { flag: "grace_man", min: 1 }] }
+      ]
+    },
+
+    ch2_w_list: {
+      messages: [
+        { text: "You're in. Good.", delay: "40s", notify: true, if: { flag: "w_first", max: 0 }, set: { w_first: 1 } },
+        { text: "Those are the three texts you counted. With names. M. Okeke, B. Tran, A. Ferreira. On nights, all three.", delay: "10s", knows: ["k_quits_seen"] },
+        { text: "Nobody overlapped. Each one started a few days after the last one quit. Doug hires fast.", delay: "8s" },
+        { text: "I started a few days after Ferreira. Marjorie in 4B counted them before I did. She keeps track of the night clerks like other people watch birds.", delay: "10s", set: { k_marjorie_counts: 1 } },
+        { text: "The question mark at the bottom was going to be me. I just didn't know it yet.", delay: "8s" }
+      ],
+      goto: [{ if: [{ flag: "w_list", min: 1 }, { flag: "w_clip", min: 1 }, { flag: "w_plan", min: 1 }], goto: "ch2_wall_done" }, { goto: "ch2_wall_hub" }]
+    },
+
+    ch2_w_clip: {
+      messages: [
+        { text: "You're in. Good.", delay: "40s", notify: true, if: { flag: "w_first", max: 0 }, set: { w_first: 1 } },
+        { text: "The Oregonian, November 15, 1974. A power failure on the upper floors. Fire crews in the lobby for an hour, nobody hurt.", delay: "11s" },
+        { text: "Read the last line. 'The building's owner, the Ashgrove Institute, declined to comment.'", delay: "7s", set: { k_ashgrove: 1 } },
+        { text: "An institute. It wasn't apartments then. Not the top of it.", delay: "7s" },
+        { text: "And the date on my monitor up here says 11-14-74. The night that paper is about.", delay: "9s", knows: ["k_monitor_date"] }
+      ],
+      goto: [{ if: [{ flag: "w_list", min: 1 }, { flag: "w_clip", min: 1 }, { flag: "w_plan", min: 1 }], goto: "ch2_wall_done" }, { goto: "ch2_wall_hub" }]
+    },
+
+    ch2_w_plan: {
+      messages: [
+        { text: "You're in. Good.", delay: "40s", notify: true, if: { flag: "w_first", max: 0 }, set: { w_first: 1 } },
+        { text: "1979 renovation drawings. The city keeps them on microfiche. Three dollars a page.", delay: "8s" },
+        { text: "Look at 12 and 13. 'Infill, solid.' They didn't take two floors out. They filled them with concrete and took two buttons off the panel.", delay: "10s", set: { k_infill: 1 } },
+        { text: "So yes, I know. I'm standing in concrete. Don't ask me how that works, I'm in a hallway with carpet.", delay: "9s" },
+        { text: "The sticky note says ASHGROVE?? ask Marjorie. I did ask her. She said come up for tea that weekend and she'd tell me everything. I went up before the weekend came.", delay: "10s", set: { k_marjorie_tea: 1 } }
+      ],
+      goto: [{ if: [{ flag: "w_list", min: 1 }, { flag: "w_clip", min: 1 }, { flag: "w_plan", min: 1 }], goto: "ch2_wall_done" }, { goto: "ch2_wall_hub" }]
+    },
+
+    ch2_w_why: {
+      messages: [
+        { text: "I did. I told Doug about the three. He said turnover is the nature of nights.", delay: "9s" },
+        { text: "Then I told the police. They read the three texts and said people quit.", delay: "8s" },
+        { text: "So I stopped telling and started looking.", delay: "5s" }
+      ],
+      goto: [{ if: [{ flag: "w_list", min: 1 }, { flag: "w_clip", min: 1 }, { flag: "w_plan", min: 1 }], goto: "ch2_wall_done" }, { goto: "ch2_wall_hub" }]
+    },
+
+    ch2_w_man: {
+      messages: [
+        { text: "Doug doesn't do house calls.", delay: "8s" },
+        { text: "So somebody sent him. Somebody who thinks there's something here worth taking. Good for Grace.", delay: "9s" }
+      ],
+      goto: [{ if: [{ flag: "w_list", min: 1 }, { flag: "w_clip", min: 1 }, { flag: "w_plan", min: 1 }], goto: "ch2_wall_done" }, { goto: "ch2_wall_hub" }]
+    },
+
+    ch2_wall_done: {
+      messages: [
+        { text: "So now you know what I knew when I went up. It's not much. It was enough to get me here.", delay: "10s" },
+        { text: "Take the sticky note. Leave the rest. If he comes back for it, let him think I never got past three names, a newspaper and a drawing.", delay: "9s", set: { has_note: 1 }, if: { flag: "w_man", min: 1 } },
+        { text: "Take the sticky note. Leave the rest. If somebody comes for it, let them think I never got past three names, a newspaper and a drawing.", delay: "9s", set: { has_note: 1 }, if: { flag: "w_man", max: 0 } },
+        { system: "Back in 11C. Toto walks the whole room once, then sits on the bed and stares at the ceiling.", delay: "40m", if: { flag: "toto_trip", min: 1 } },
+        { system: "Bus 17 back to the Calloway and up to 11C, the yellow note in your pocket. Toto stays behind with Grace.", delay: "40m", if: { flag: "toto_trip", max: 0 } }
+      ],
+      goto: [{ if: { flag: "toto_trip", min: 1 }, goto: "ch2_toto_back" }, { goto: "ch2_perk" }]
+    },
+
+    ch2_toto_back: {
+      messages: [],
       choices: [
         { text: "Send photo", goto: "ch2_toto_photo", image: "toto", caption: "You sent a photo", set: { fed_toto: 1, toto_home: 1 } },
         { text: "Got him. He's in 11C.", goto: "ch2_toto_text", set: { fed_toto: 1, toto_home: 1 } }
@@ -524,7 +634,7 @@ window.NIGHTDESK_STORY = {
       ],
       thread: "okonkwo",
       choices: [
-        { text: "Hi Grace, it's the front desk at the Calloway. Could you keep Dana's cat a few more days? I'll come get him.", goto: "ch2_toto_later_2" }
+        { text: "Hi Grace, it's the front desk at the Calloway. Could you keep Dana's cat a few more days? I'll come get him.", goto: "ch2_toto_later_2", set: { grace_texted: 1 } }
       ]
     },
 
@@ -534,8 +644,8 @@ window.NIGHTDESK_STORY = {
       ],
       thread: "okonkwo",
       choices: [
-        { text: "She's alright. She's just away.", goto: "ch2_perk", set: { told_okonkwo: 0 } },
-        { text: "I honestly don't know yet.", goto: "ch2_perk", set: { trust: 1 } }
+        { text: "She's alright. She's just away.", goto: "ch2_wall_ask", set: { told_okonkwo: 0, grace_away: 1 } },
+        { text: "I honestly don't know yet.", goto: "ch2_wall_ask", set: { trust: 1 } }
       ]
     },
 
@@ -543,14 +653,41 @@ window.NIGHTDESK_STORY = {
       messages: [
         { text: "ok", delay: "30s" },
         { text: "No, you're right. You don't know me. I asked a stranger to adopt my cat from a haunted hallway.", delay: "2m" },
-        { text: "Forget it. Mrs. O will manage.", delay: "8s" },
-        { text: "Different question, then. The room they gave you. That one's about you, not the cat.", delay: "15s" }
+        { text: "Forget it. Mrs. O will manage.", delay: "8s" }
       ],
-      goto: "ch2_perk"
+      goto: "ch2_wall_ask"
+    },
+
+    // Players who don't fetch the cat still go for the wall: it's the investigation, not a favor.
+    ch2_wall_ask: {
+      messages: [
+        { text: "One thing I do need, and it isn't the cat. Behind my bedroom door at home there's a wall of paper. Everything I found out about the three before me, before I went up.", delay: "12s", set: { k_wall_told: 1 } },
+        { text: "Photograph it and send it to me, one piece at a time. I'll tell you what each one means. Then it's on two phones and not just one wall somebody can tidy away.", delay: "11s" },
+        { text: "Key's under the fern. I'll be walking the floor. Text me from my bedroom.", delay: "8s" }
+      ],
+      choices: [
+        { text: "Okay. I'll go now.", goto: "ch2_wall_trip", set: { trust: 1 } },
+        { text: "Not for the cat. For the wall. Fine.", goto: "ch2_wall_trip" }
+      ]
+    },
+
+    ch2_wall_trip: {
+      messages: [
+        { status: "offline" },
+        { system: "Bus 17 to SE Holgate. Unit 3 has a dead fern and a key under it. Toto shouts at you from the kitchen.", delay: "50m" },
+        { to: "okonkwo", text: "I saw you go in. You came sooner than you said. He's fed, I was just there. Don't let him out.", delay: "20s", notify: true, if: { flag: "grace_texted", min: 1 } },
+        { to: "okonkwo", text: "Are you the one from the building? I saw you go in. This is the only number I have for you people, the one Dana gave me. I'm still feeding him in there. Don't let him out.", delay: "20s", notify: true, if: { flag: "grace_texted", max: 0 } }
+      ],
+      thread: "okonkwo",
+      choices: [
+        { text: "It's me. I won't. Thank you, Grace.", goto: "ch2_toto_home", set: { trust: 1 } },
+        { text: "I'll only be a few minutes.", goto: "ch2_toto_home" }
+      ]
     },
 
     ch2_perk: {
       messages: [
+        { text: "Different question. The room they gave you. That one's about you.", delay: "15s", if: { flag: "toto_trip", max: 0 } },
         { text: "The free room is the one real perk of the job. 'Staff residence, utilities included.' I never used it.", delay: "9s" },
         { text: "Toto doesn't do elevators, and I don't do no-pets clauses. I kept a box of stuff in the closet and that was it.", delay: "10s" },
         { text: "Which unit did they give you?", delay: "5s" }
@@ -609,7 +746,7 @@ window.NIGHTDESK_STORY = {
         { text: "I'll tell you later. Not because it's a secret. Because I can't type it in a hallway like this.", delay: "9s" },
         { text: "Don't read the last page. Please.", delay: "6s" }
       ],
-      goto: "ch2_piano"
+      goto: "ch2_evening"
     },
 
     ch2_notebook_safe: {
@@ -617,7 +754,7 @@ window.NIGHTDESK_STORY = {
         { text: "Thank you.", delay: "6s" },
         { text: "Don't read the last page. Not yet.", delay: "5s" }
       ],
-      goto: "ch2_piano"
+      goto: "ch2_evening"
     },
 
     ch2_notebook_joke: {
@@ -627,12 +764,31 @@ window.NIGHTDESK_STORY = {
         { text: "It's not hidden. It fell. I didn't go back for it because I didn't want to be in that room longer than I had to.", delay: "10s" },
         { text: "Don't read the last page.", delay: "5s" }
       ],
+      goto: "ch2_evening"
+    },
+
+    // Evening desk. The player finds something on their own before Dana's next message.
+    ch2_evening: {
+      messages: [
+        { system: "Evening desk, four to eight. Between a parcel and a lost key you wind camera 6 back to when the car came. Empty lobby, 12 above the doors the way you saw it, and then a hole: the timestamp jumps a quarter of an hour, right before the doors opened. No open car, no you walking over.", delay: "1h 30m", set: { k_tape: 1 } }
+      ],
+      choices: [
+        { text: "Dana. The camera 6 recording has a hole in it. Right when the car came.", goto: "ch2_evening_dana", set: { knows_tape: 1, k_tape_told: 1 }, knows: ["k_tape"] },
+        { text: "Say nothing. Keep watching the lobby.", goto: "ch2_piano" }
+      ]
+    },
+
+    ch2_evening_dana: {
+      messages: [
+        { text: "It always has a hole. Every time it comes. I used to rewind it in the mornings.", delay: "20s", notify: true, knows: ["k_tape_told"] },
+        { text: "I showed Doug once. He said the recorder's old. That was the whole conversation.", delay: "8s" }
+      ],
       goto: "ch2_piano"
     },
 
     ch2_piano: {
       messages: [
-        { text: "You know the piano in the lounge off the lobby? The brown upright nobody tunes, behind the plant.", delay: "2h", notify: true },
+        { text: "You know the piano in the lounge off the lobby? The brown upright nobody tunes, behind the plant.", delay: "20m", notify: true },
         { text: "It's up here too. Same piano, in a day room at the end of the hall. Couches, a TV with a dial. Fifty years younger and still out of tune.", delay: "12s" },
         { text: "Long nights down there. It was nice to have something to do on the rounds besides check doors. I used to play it at four when the building was asleep. Marjorie in 4B heard me once, God knows how, and sent down cake.", delay: "14s" },
         { text: "Here. Don't laugh.", delay: "6s" },
@@ -668,7 +824,7 @@ window.NIGHTDESK_STORY = {
     ch2_piano_curious: {
       messages: [
         { text: "Six years of lessons from my mom, who learned from a record. We did Clementi and Teresa Teng. In that order, every night.", delay: "10s" },
-        { text: "I quit when the laundromat went under. Hands were needed elsewhere.", delay: "8s" }
+        { text: "I quit when Dad died. Hands were needed elsewhere.", delay: "8s" }
       ],
       goto: [{ if: { flag: "piano_q", min: 3 }, goto: "ch2_wristband" }, { goto: "ch2_piano_hub" }]
     },
@@ -685,9 +841,9 @@ window.NIGHTDESK_STORY = {
     ch2_wristband: {
       messages: [
         { text: "Found this under the couch.", delay: "25s" },
-        { image: "wristband", caption: "Sent 1 photo", delay: "6s" },
+        { image: "wristband", caption: "Sent 1 photo", delay: "6s", set: { k_wristband: 1 } },
         { text: "PT-09. There are rooms down the hall with numbers on the doors. 1 to 13. Beds with straps.", delay: "11s" },
-        { text: "This wasn't an apartment building, Desk. Not up here.", delay: "8s" }
+        { text: "Ashgrove again. Your clipping was right, Desk.", delay: "8s" }
       ],
       choices: [
         { text: "Desk?", goto: "ch2_desk_name", set: { wq_desk: 1 } },
@@ -709,6 +865,7 @@ window.NIGHTDESK_STORY = {
       messages: [
         { text: "That's you. Desk. You're the desk now.", delay: "6s" },
         { text: "Don't tell me your name. I'm serious. It reads over my shoulder, and it collects names.", delay: "10s" },
+        { text: "It's read everything we've sent today. The wall too. That's fine. It already knows what's on that wall. Doug's people don't.", delay: "9s" },
         { text: "Desk is fine. Desk is safe. I kind of like it.", delay: "6s" }
       ],
       goto: [{ if: [{ flag: "wq_desk", min: 1 }, { flag: "wq_lantern", min: 1 }, { flag: "wq_out", min: 1 }], goto: "ch2_game" }, { goto: "ch2_wristband_hub" }]
@@ -716,7 +873,7 @@ window.NIGHTDESK_STORY = {
 
     ch2_lantern: {
       messages: [
-        { text: "I don't know yet. It's on the wristband and it's stenciled on a door I can't open.", delay: "9s" },
+        { text: "I don't know yet. It's on the wristband, and it's stenciled on a door my card doesn't work on. That one and the one at the top of the stairs. No reader. Just a keyhole.", delay: "9s" },
         { text: "Whatever it was, they did it to people with numbers instead of names.", delay: "8s" }
       ],
       goto: [{ if: [{ flag: "wq_desk", min: 1 }, { flag: "wq_lantern", min: 1 }, { flag: "wq_out", min: 1 }], goto: "ch2_game" }, { goto: "ch2_wristband_hub" }]
@@ -804,51 +961,53 @@ window.NIGHTDESK_STORY = {
       messages: [
         { text: "it's getting quiet", delay: "90s" },
         { text: "that's the bad kind", delay: "4s" },
-        { text: "One practical thing. My 3:12 isn't your 3:12. The clocks drift. Right now mine is running about seven hours ahead of yours, which puts the next one around {window} your time.", delay: "16s" },
-        { text: "When do you sleep down there?", delay: "6s" }
+        { text: "One practical thing. My clock doesn't keep yours. Right now mine says about one. If it keeps running like this, the next 3:12 lands around {window} your time.", delay: "16s" },
+        { text: "When are you off the desk?", delay: "6s" }
       ],
       choices: [
-        { text: "Midnight to eight. Unless the phone goes.", goto: "ch2_sleep_normal", set: { sleep_normal: 1 } },
-        { text: "I'm up late anyway.", goto: "ch2_sleep_late" },
-        { text: "Wake me if it matters.", goto: "ch2_sleep_wake", set: { trust: 1 } }
+        { text: "Eight. I lock up at eight.", goto: "ch2_sleep_normal", set: { sleep_normal: 1 } },
+        { text: "Whenever I want. Nobody checks.", goto: "ch2_sleep_late" },
+        { text: "Tell me when to be done.", goto: "ch2_sleep_wake", set: { trust: 1 } }
       ]
     },
 
     ch2_sleep_normal: {
       messages: [
-        { text: "Sleep-in. Lucky. I had to sit in that chair till seven.", delay: "6s" },
-        { text: "I'll keep it short when it comes, and tell you the rest when you're up. Nothing you miss while you sleep is your fault. Remember I said that.", delay: "12s" }
+        { text: "Lock up early tonight. Then it's sleep-in after. Lucky. I had to sit in that chair till seven.", delay: "8s" },
+        { text: "If anything happens while you're asleep later, I'll keep it short and tell you the rest when you're up. Nothing you miss while you sleep is your fault. Remember I said that.", delay: "12s" }
       ],
       goto: "ch2_rule"
     },
 
     ch2_sleep_late: {
       messages: [
-        { text: "Of course you are. You're on nights.", delay: "5s" },
-        { text: "Still. If it comes while you're out, I'll tell you what happened. Nothing you miss is on you.", delay: "10s" }
+        { text: "Doug checks. He watches camera 6 like it's cable. Lock up a little early tonight. He won't notice fifteen minutes.", delay: "7s" },
+        { text: "And if it comes while you're not looking, I'll tell you what happened. Nothing you miss is on you.", delay: "10s" }
       ],
       goto: "ch2_rule"
     },
 
     ch2_sleep_wake: {
       messages: [
-        { text: "It all matters. That's the problem.", delay: "6s" },
-        { text: "I'll wake you for people. Not for noises. Deal?", delay: "7s" }
+        { text: "Before {window}. Lock up, go up, lock your door.", delay: "6s" },
+        { text: "After that I'll wake you for people. Not for noises. Deal?", delay: "7s" }
       ],
       goto: "ch2_rule"
     },
 
     ch2_rule: {
       messages: [
-        { text: "Rule for tonight. Whatever you hear through the ceiling, you stay in 11C. You do not go to the lobby. You do not help anyone into the elevator.", delay: "8s" },
-        { set: { k_stay_rule: 1 }, text: "And if someone's already in it at my 3:12, they stay in it. The doors open on a floor that looks like home. It isn't. I stepped out. That's the whole story of how I got here.", delay: "13s" },
+        { text: "Rule for tonight. Lock up as soon as we're done here. Be in 11C by {window} with the door locked. Whatever you hear through the ceiling, you stay there. You don't come back down to the lobby. You don't help anyone into the elevator.", delay: "10s" },
+        { set: { k_stay_rule: 1 }, text: "And if someone's already in it at my 3:12, they stay in it. The doors open on a floor that looks like yours. Same carpet, same light. It isn't. I stepped out. That's the whole story of how I got here.", delay: "13s" },
         { text: "Stay in the car, keep pressing L. That's all I know so far. It's more than I knew.", delay: "8s" },
         { text: "Phone on you around {window}. If anyone else texts the desk, you tell me before you answer them.", delay: "11s" },
+        { text: "One more thing. That LANTERN door. I knocked on it.", delay: "10s", knows: ["k_wristband"] },
+        { text: "Something knocked back. Twice. Like it was counting.", delay: "7s" },
         { text: "I have to go dark.", delay: "8s" },
         { text: "🐈", delay: "3s", if: { flag: "fed_toto", min: 1 } },
         { status: "offline" }
       ],
-      endOfChapter: { title: "End of Chapter 2", subtitle: "Dana is on Ward 12. Tom in 11A hasn't texted yet.", next: "ch3_start" }
+      endOfChapter: { title: "End of Chapter 2", subtitle: "You've seen Dana's wall. Something behind the LANTERN door knocked back.", next: "ch3_start" }
     },
 
     // ---------- Night 2: Tom in 11A takes the elevator. The player talks to two people at once. ----------

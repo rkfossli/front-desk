@@ -460,11 +460,15 @@ button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent
     if (h >= QUIET.from) d.setDate(d.getDate() + 1);
     return d.getTime();
   }
-  function nextDay() { // "you sleep": 14:00 local, at least six hours away, never more than a day
+  function nextDay() { // "you sleep": the next day starts at 14:00. Before 10:00 that is today; otherwise tomorrow, so the afternoon and the 16-20 desk keep their places.
     const now = new Date(), d = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 14, 0, 0);
-    if (now.getHours() >= 14) d.setDate(d.getDate() + 1);
-    const soonest = now.getTime() + 6 * 3600000;
-    return d.getTime() < soonest ? soonest : d.getTime(); // e.g. a chapter ending at 12:30 resumes at 18:30, not tomorrow
+    if (now.getHours() >= 10) d.setDate(d.getDate() + 1);
+    return d.getTime();
+  }
+  // Once Dana names a time ({window}), the night beat keeps that promise instead of being recomputed later.
+  function promisedNight() {
+    if (state.windowAt && state.windowAt > Date.now()) return state.windowAt;
+    state.windowAt = nextNight(); return state.windowAt;
   }
   function avoidQuiet(ts) { // a beat that would land between 23:00 and 08:00 waits until 08:00
     const d = new Date(ts), h = d.getHours();
@@ -473,9 +477,11 @@ button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent
     return ts;
   }
   function delayMs(str) {
+    if (str === "night" && state.speed !== "real") state.windowAt = null;
     if (state.speed !== "real") return (str === "night" || str === "day") ? 6000 : scaledDelay(parseDur(str || "0s"));
     const sec = parseDur(str || "0s");
-    const target = str === "night" ? nextNight() : str === "day" ? nextDay() : Date.now() + sec * 1000;
+    const target = str === "night" ? promisedNight() : str === "day" ? nextDay() : Date.now() + sec * 1000;
+    if (str === "night") state.windowAt = null;
     // Quiet hours only hold back long gaps. A beat inside a running conversation (under 30 min) is never parked till 08:00.
     if (str !== "night" && str !== "day" && sec < 1800) return Math.max(0, target - Date.now());
     return Math.max(0, avoidQuiet(target) - Date.now());
@@ -491,7 +497,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent
   function ordinal(n) { const s = ["th", "st", "nd", "rd"], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); }
   function fill(text) {
     if (!text) return text;
-    const out = String(text).replace(/\{time\}/g, () => fmtTime(new Date())).replace(/\{window\}/g, () => fmtTime(new Date(nextNight()))).replace(/\{(date|weekday|month):([+-]?\d+)d\}/g, (_, kind, days) => {
+    const out = String(text).replace(/\{time\}/g, () => fmtTime(new Date())).replace(/\{window\}/g, () => fmtTime(new Date(promisedNight()))).replace(/\{(date|weekday|month):([+-]?\d+)d\}/g, (_, kind, days) => {
       const d = new Date(); d.setDate(d.getDate() + parseInt(days, 10));
       if (kind === "month") return d.toLocaleDateString("en-US", { month: "long" });
       return kind === "date" ? d.toLocaleDateString("en-US", { month: "long" }) + " " + ordinal(d.getDate()) : d.toLocaleDateString("en-US", { weekday: "long" });
@@ -1016,7 +1022,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent
         <rect x="34" y="14" width="172" height="152" fill="#fbfaf5" transform="rotate(1.5 120 90)"/>
         <rect x="104" y="8" width="34" height="12" fill="#e9e1b8" opacity=".9" transform="rotate(-4 120 14)"/>
         <g transform="rotate(1.5 120 90)" font-family="Caveat, 'Segoe Script', cursive" fill="#1f2a55">
-          <text x="48" y="38" font-size="13" font-weight="700">NIGHTS. 2026</text>
+          <text x="48" y="38" font-size="13" font-weight="700">NIGHTS</text>
           ${rows.map((r, i) => `<text x="48" y="${62 + i * 22}" font-size="11">${r[0]}</text><text x="118" y="${62 + i * 22}" font-size="11">${day(r[1])}</text><text x="160" y="${62 + i * 22}" font-size="11" fill="#b3261e">3:14</text>`).join("")}
           <text x="48" y="128" font-size="11">'I quit. Sorry for the</text><text x="48" y="141" font-size="11">short notice.' x3 SAME</text>
           <text x="48" y="158" font-size="12" fill="#b3261e">next = ?</text>

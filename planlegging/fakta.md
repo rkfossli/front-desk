@@ -10,7 +10,7 @@ Sist oppdatert: 2026-10-18 (etter full logikkrevisjon, manus v21).
 
 - **The Calloway**, boligblokk i Portland, Oregon. Lobby med resepsjonsdesk, kameramonitor til venstre for desken (sykler gjennom kameraene; kamera 6 = heislobbyen). Lounge med den brune pianoet bak planten, rett ved lobbyen.
 - Heispanelet går 11, 14. Etasje 12 og 13 ble **fylt med betong** da bygget ble kjøpt i 1979 (Marjorie så betongbilene). Dana sier «there is no 12».
-- **Etasje 12 (Danas side)** = Ashgrove Institute, Ward 12, frosset i november 1974: beige, askebegre, dagrom med piano, TV med skive, rom 1–13 med senger og stropper, Dr. Hallorans kontor med ulåste arkivskap, myntelefon ved trappesjakten (det har ikke etasje 11), gammel kameramonitor som viser lobbyen; den står i heislobbyen på 12, ved døren til hovedtrappen. Uten kort har Dana bare heislobbyen og trappen; alle avdelingsdører krever kort. Monitoren viser 1974-tid (11-14-74, 02:58 på bildet). To trapper: **hovedtrappen** ved heisen (der Dana gjemmer seg natt 1) går bare opp; hver repos er 12 igjen. **Servicetrappen** bak dagrommet, som hun finner først dag 4, går opp til 13 (døren lenket fra 12-siden) og ned forbi 12 til 11. På spillerens side er trappen **en vegg**; panelet i skapet i 11C er «der de sluttet å støpe».
+- **Etasje 12 (Danas side)** = Ashgrove Institute, Ward 12, frosset i november 1974: beige, askebegre, dagrom med piano, TV med skive, rom 1–13 med senger og stropper, Dr. Hallorans kontor med ulåste arkivskap, myntelefon ved trappesjakten (det har ikke etasje 11), gammel kameramonitor som viser lobbyen; den står i heislobbyen på 12, ved døren til hovedtrappen. Uten kort har Dana bare heislobbyen og trappen; alle avdelingsdører krever kort. Monitoren viser 1974-tid (11-14-74, 02:58 på bildet). To trapper: **hovedtrappen** ved heisen (der Dana gjemmer seg natt 1) går bare opp; hver repos er 12 igjen, og øverst er en dør med nøkkelhull og **ingen kortleser** (kortet åpner den ikke, akkurat som LANTERN-døren). Den er ikke servicetrappen. **Servicetrappen** bak dagrommet, som hun finner først dag 4, går opp til 13 (døren lenket fra 12-siden) og ned forbi 12 til 11. På spillerens side er trappen **en vegg**; panelet i skapet i 11C er «der de sluttet å støpe».
 - **Etasje 13** = Resonatoren. Kjører «hver natt 3:12». Lyden (hum) kommer opp gjennom gulvet.
 - **11C** = personalleiligheten («Staff residence, utilities included», no-pets-klausul). Alltid 11C, «top residential floor, for response time». Kommode med nederste skuff som ikke går helt inn (Kevins notatbok bak). Skap med malt servicepanel. Tom bor i 11A (taket hans brummer).
 - **4B** = Marjorie. **6A** = Delgado-paret (bodde der i 1974). **7C**, **2F** (Lena), **9F** = småfolk fra arkivet.
@@ -39,7 +39,7 @@ Sist oppdatert: 2026-10-18 (etter full logikkrevisjon, manus v21).
 | Dag | Kapittel | Hvor er spilleren | Hvor er telefonen | Hva skjer |
 |---|---|---|---|---|
 | 0, kveld/natt | ch1 Night 1 | Desken (ser monitoren), så lobbyen ved heisen | Spilleren | Dana: «Are you there?». Kortet legges i heisen ca. 10 min etter klokkespørsmålet. Indikator stopper på 12. |
-| 1 | ch2 Day 2 | 11C fra 14:00; buss 17 til Holgate (ca. 14:05–15:55) hvis katten hentes; desken 16–20 | Spilleren | Toto, 11C, notatboken, pianoet (ca. 18:00), spill, regel for natten. Dana går offline før 20. |
+| 1 | ch2 Day 2 | 11C fra 14:00; buss 17 til Holgate (ca. 14:10–15:45) på alle veier (katt og/eller veggen); desken 16–20 | Spilleren | Toto, **Danas vegg** (tre bilder), 11C, notatboken, opptaket fra kamera 6 (ca. 17:15), pianoet (ca. 17:40), spill, regel for natten, LANTERN-døren banker tilbake. Dana går offline før 20. |
 | 1, kveld | ch3 Night 2 | Låser kl. 20 / 11C | Spilleren | Danas 2:50→3:12. Tom i heisen. Reddet (saved_tom) eller mistet (tom_lost). Slutt ca. 21:00 (eller 23:40 i tom_lost). |
 | 2 | ch4 Day 3 | Sov ikke etter Tom; gir Priya mobilen kl. 08, sover til 14; desken 16–20 | **Priya 08–16**, så spilleren | Dana tekster 14:00, Priya svarer. Priya gir mobilen tilbake 16:00. Doug 16:30 (skilt). Listen: «Desk». Marjorie tekster ca. 17:15. Dana 20:00: «is the sign up?» |
 | 3 | ch5 Day 4 | Sover lenge; te hos Marjorie 14:05–15:35; desken 16–20 | Spilleren | Marjorie (nov. 1974). Doug 16:25 (bonus). Dana: Hallorans kontor, listen, Lindqvist, LANTERN, Kevin. 18:50: pianoet spiller. 19:55: stillhet. 20:00: Walter. |
@@ -172,3 +172,25 @@ En replikk eller et valg som bruker et faktum noen må ha fått vite, merkes `kn
 - Politigrenen: Doug skriver dagen etter kl. 14 om velferdssjekken (ikke dag 3), uten tidspunkt. Natt 1b legger til én dag per natt; senere ukedagsreferanser (Dougs «Seven days», {weekday:-Nd}) må sjekkes mot dette når dag 3–6 gjennomgås.
 - Motoren: stille timer (23–08) holder bare tilbake pauser på 30 min eller mer og «night»/«day». En samtale midt på natta går i ett.
 - Arkivtrådene har faste klokkeslett (`Nd@H:MM`). Doug: «Dana's last shift was {date:-22d}» (skiftet begynte kvelden før oppsigelsen kl. 03:14).
+
+## Dag 2 etter omarbeidingen (01.11, før gjennomlesing)
+- Alle veier går hjem til Dana (4017 SE Holgate, unit 3, nøkkel under den døde bregnen). Henter man katten, spør Dana om veggen i samme melding; ellers ber hun om veggen etterpå («it isn't the cat»). Toto blir hos Grace hvis man ikke hentet ham.
+- Hvorfor bilder: Dana vil at spilleren skal se det, og at det skal ligge på to telefoner i stedet for én vegg noen kan rydde bort. Hun forklarer hvert bilde.
+- Grace: en mann «fra bygget» kom {weekday:-3d} og spurte etter Danas ting; hun slapp ham ikke inn (grace_man). Hvem det var, er ikke sagt (Doug sine folk ryddet også boksen i 11C).
+- Veggen: listen (M. Okeke, B. Tran, A. Ferreira med datoene for de tre oppsigelsene, 3:14, «next = ?»), avisklipp (The Oregonian 15.11.1974, strømbrudd i øvre etasjer i «Calloway Tower», eier Ashgrove Institute), snittegning 1979 (12 og 13 «INFILL, SOLID») med gul lapp «ASHGROVE?? ask Marjorie». Spilleren tar med lappen (has_note).
+- Dana begynte noen dager etter Ferreira (ca. en måned før hun gikk opp). Marjorie talte nattevaktene før Dana gjorde det. Marjorie inviterte Dana på te «that weekend» for å fortelle om Ashgrove; Dana gikk opp før helgen (ingen fast ukedag, datoen er relativ).
+- Dana fortalte Doug om de tre («turnover is the nature of nights») og politiet («people quit») før hun gikk opp.
+- Kamera 6-opptaket: et hull på et kvarter rett før dørene åpnet seg. Dana: alltid et hull når den kommer; Doug sa opptakeren er gammel.
+- LANTERN-døren på avdelingen: Dana banket, noe banket tilbake to ganger.
+- Kunnskapsmerker: k_wall (spilleren står foran veggen), k_tape / k_tape_told, k_wristband, k_ashgrove, k_infill, k_marjorie_tea, k_marjorie_counts. Dag 3 (Marjorie) må bygge på k_marjorie_tea/has_note når den omarbeides.
+
+### Etter gjennomlesing 1 av dag 2 (01.11)
+- Grace har ikke pakket katten; hun sier hvor bæreburet og maten er, og spør om spilleren har hørt fra Dana. Desken har ingen kontakt med Dana i Graces øyne.
+- Spilleren kan fortelle Dana om mannen (ch2_w_man): «Doug doesn't do house calls.» Hvem som sendte ham er åpent.
+- Dana vet at «it» leser telefonen; hun sier i ch2_desk_name at det er greit at veggen gikk over linja, fordi det allerede vet hva som står der, men Dougs folk vet ikke.
+- LANTERN-døren er den eneste døren på 12 uten kortleser (bare nøkkelhull), sammen med døren øverst i hovedtrappen. Servicetrappen røpes ikke før dag 4.
+- Dag 3–4: hvis Dana nevner mannen hos Grace, må det ha betingelsen w_man (valget er frivillig).
+- Tegningene fra 1979 ligger i byens arkiv (mikrofilm). Knappene 12 og 13 ble tatt av panelet.
+- Dag 2-kvelden: Dana sier «my clock doesn't keep yours», og at hennes viser ca. ett. Regelen er: lås «as soon as we're done here», vær i 11C innen {window} med døren låst.
+- Motor: dag 2 (og andre «day»-pauser) starter alltid kl. 14 (i dag hvis klokka er før 10, ellers i morgen). Klokkeslettet Dana sier som {window} holdes til natten kommer.
+- Åpent til dag 4: hvorfor Kevins notatbok (K.L.) lå i 11C, som Dana aldri brukte. Forslag: hun tålte ikke å ha den hjemme.
