@@ -1165,6 +1165,8 @@ window.NIGHTDESK_STORY = {
     ch2_rule: {
       messages: [
         { text: "Rule for tonight. Whatever you hear through the ceiling, you stay in 11C. You do not go to the lobby. You do not help anyone into the elevator.", delay: "8s" },
+        { text: "And if someone's already in it at my 3:12, they stay in it. The doors open on a floor that looks like home. It isn't. I stepped out. That's the whole story of how I got here.", delay: "13s" },
+        { text: "Stay in the car, keep pressing L. That's all I know so far. It's more than I knew.", delay: "8s" },
         { text: "Phone on you around {window}. If anyone else texts the desk, you tell me before you answer them.", delay: "11s" },
         { text: "I have to go dark.", delay: "8s" },
         { text: "🐈", delay: "3s", if: { flag: "fed_toto", min: 1 } },
@@ -1202,7 +1204,7 @@ window.NIGHTDESK_STORY = {
       ],
       thread: "tom",
       choices: [
-        { text: "Tom, don't touch anything. Give me one minute.", goto: "ch3_tom_stay", set: { trust: 1 } },
+        { text: "Tom, stay in the elevator. Don't get out when the doors open.", goto: "ch3_tom_stay", set: { trust: 1 } },
         { text: "What does the indicator say?", goto: "ch3_tom_indicator", set: { curiosity: 1 } },
         { text: "Hang on. Let me check something.", goto: "ch3_tom_hangon" }
       ]
@@ -1211,7 +1213,7 @@ window.NIGHTDESK_STORY = {
     ch3_tom_stay: {
       messages: [
         { to: "tom", text: "ok??", delay: "6s" },
-        { to: "tom", text: "not touching anything. it's humming. one minute", delay: "4s" },
+        { to: "tom", text: "why would I get out it's not my floor", delay: "4s" },
         { text: "the lights just went. all of them, down the hall. it only does that when it's got someone in the car.", delay: "8s" },
         { text: "and you've gone quiet. you're typing to someone else, I can tell, the phone does a thing up here when you type.", delay: "7s" },
         { text: "Who's texting you.", delay: "4s" },
