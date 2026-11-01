@@ -241,7 +241,17 @@ button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent
 :root[data-skin="ios"] .sms .out .bubble { background: #34c759; }
 :root[data-theme="dark"][data-skin="ios"] .sms .out .bubble { background: #30d158; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"])[data-skin="ios"] .sms .out .bubble { background: #30d158; } }
-.msg .stamp { font-size: 11px; color: var(--faint); margin: 3px 6px 0; }
+.msg .stamp { font-size: 11px; color: var(--faint); margin: 3px 6px 0; animation: pop .15s ease-out; }
+.msg.out .stamp { align-self: flex-end; }
+/* iPhone: drag the conversation left to see every message's time on the right edge. */
+.log { overflow-x: hidden; }
+.msg { position: relative; transition: transform .2s ease-out; }
+.msg[data-time]::after { content: attr(data-time); position: absolute; top: 50%; transform: translateY(-50%); font-size: 12px; color: var(--faint); white-space: nowrap; opacity: 0; transition: opacity .2s; pointer-events: none; }
+.msg.out[data-time]::after { right: -66px; }
+.msg.in[data-time]::after { left: calc(var(--logw, 100vw) - 92px); }
+.log.reveal .msg:not(.system) { transform: translateX(-60px); }
+.log.reveal .msg.in:not(.system) { transform: none; }
+.log.reveal .msg[data-time]::after { opacity: 1; }
 .msg.system { align-self: center; max-width: 86%; text-align: center; font-size: 13px; color: var(--sys-fg); font-style: italic; margin: 10px 0; }
 /* Photos stand on their own: rounded image, no bubble fill, no caption. */
 .bubble.media { padding: 0; overflow: hidden; background: transparent !important; border-radius: 18px !important; }
@@ -2731,7 +2741,7 @@ window.NIGHTDESK_STORY = {
     const log = $("log");
     log.querySelectorAll(".rcpt, .junk").forEach(n => n.remove());
     const d = new Date(m.at); const day = fmtDayLabel(d);
-    if (day !== lastDay || m.at - lastRendered > 3600000) {
+    if (day !== lastDay || m.at - lastRendered > 900000) {
       const s = document.createElement("div"); s.className = "sep";
       // iMessage: "**Today** 11:24 PM", "**Fri, Sep 26** at 11:24 PM". Google Messages: "Today · 11:24 PM".
       if (isIOS()) {
@@ -2755,8 +2765,28 @@ window.NIGHTDESK_STORY = {
     else { inner = `<div class="bubble"></div>`; }
     el.innerHTML = inner;
     if (m.text) el.querySelector(".bubble").textContent = m.text;
+    el.dataset.time = fmtTime(d);
     log.appendChild(el);
   }
+  // Google Messages: tap a bubble to show the time it arrived. iPhone: drag the thread left to see all times.
+  $("log").addEventListener("click", e => {
+    if (isIOS() || e.target.closest("button")) return;
+    const msg = e.target.closest(".msg"); if (!msg || msg.classList.contains("system") || !msg.dataset.time) return;
+    const old = msg.querySelector(".stamp");
+    $("log").querySelectorAll(".msg .stamp").forEach(n => n.remove());
+    if (!old) { const st = document.createElement("div"); st.className = "stamp"; st.textContent = msg.dataset.time; msg.appendChild(st); }
+  });
+  (() => {
+    const log = $("log"); let x0 = null, y0 = 0, on = false;
+    log.addEventListener("touchstart", e => { if (!isIOS()) return; x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; on = false; }, { passive: true });
+    log.addEventListener("touchmove", e => {
+      if (x0 === null) return;
+      const dx = e.touches[0].clientX - x0, dy = e.touches[0].clientY - y0;
+      if (!on && dx < -18 && Math.abs(dx) > Math.abs(dy)) { on = true; log.style.setProperty("--logw", log.clientWidth + "px"); log.classList.add("reveal"); }
+    }, { passive: true });
+    const end = () => { x0 = null; if (on) log.classList.remove("reveal"); on = false; };
+    log.addEventListener("touchend", end); log.addEventListener("touchcancel", end);
+  })();
 
   // Receipts and the unknown-sender notice. "Delivered" / "Read <time>" sits under your last message while
   // it is the newest thing in the thread; "Report Junk" (iPhone) or a spam card (Android) shows until you reply.
