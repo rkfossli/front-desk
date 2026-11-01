@@ -21,7 +21,9 @@ Sist oppdatert: 2026-10-18 (etter full logikkrevisjon, manus v21).
 
 ### Spillerens klokke (ekte tid)
 - Spillet starter **dag 0** med første kveld spilleren har desktelefonen. Spilleren begynte i jobben seks dager før (Doug: «new night guard starts {weekday:-6d}»; Priyas velkomst 5d 20h før).
-- Danas siste skift: **21 dager før dag 0** («three weeks ago»). «I quit» ble sendt fra desktelefonen til Doug kl. 03:14 natt til dag -21.
+- Danas siste skift: **21 dager før dag 0** («three weeks ago»). «I quit. Sorry for the short notice.» ble sendt fra desktelefonen til Doug kl. 03:14 natt til dag -21.
+- Dougs tråd på desktelefonen har **fire** like oppsigelser kl. 03:14: dag -158, -103, -49 og -21 (Dana). Doug svarer kortere for hver gang. Dana begynte rett etter nr. 3 (ca. dag -48) og etterforsket de tre første i en måned før hun gikk opp. Spilleren ser alle fire natt 1 (ch1_a_guards).
+- Natt 1 vet spilleren (etter ch1_ask): Dana er mellom 11 og 14 i et 1974-bygg, fire vakter har «sluttet» likt, Danas siste loggbok-linje («Going up to see where they went. If I'm not back by»). To minutter etter kortet skriver telefonen «I q» i Dougs tråd selv og sletter det (kan ikke sendes, Ruben 01.11).
 - **Vaktordning** (godkjent, se logikk-vakt-og-telefon.md): Priya har desken 08–16 med fasttelefonen. Spilleren har desken **16–20**, låser kl. 20, sover i 11C midnatt–08 med desk-mobilen på nattbordet. Sju dagers beredskapsuke fra dag 0. Dana hadde den gamle våkne ordningen (stol til sju, piano kl. 4, brukte aldri leiligheten). Doug gjorde posten om til sleep-in for å spare penger.
 - **Motoren**: «day»-forsinkelse = kl. 14:00 neste dag. «night»-forsinkelse = vinduet kl. 20:00 (20:00–21:30 → +45 min; 21:30–23 → +15 min; ≥23 → 20:00 neste dag). Stille timer 23–08: meldinger venter til 08:00.
 - Derfor: **Danas 3:12 treffer spillerens klokke ca. 20:00** fra natt 2 og utover. Spilleren er da nettopp ferdig på desken / låser. Natt 1 er unntaket: der kommer heisen «about forty minutes» etter spillstart (klokkene «drifter»; Dana: «yours is the one that's wrong»).
