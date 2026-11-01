@@ -474,7 +474,10 @@ button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent
   }
   function delayMs(str) {
     if (state.speed !== "real") return (str === "night" || str === "day") ? 6000 : scaledDelay(parseDur(str || "0s"));
-    const target = str === "night" ? nextNight() : str === "day" ? nextDay() : Date.now() + parseDur(str || "0s") * 1000;
+    const sec = parseDur(str || "0s");
+    const target = str === "night" ? nextNight() : str === "day" ? nextDay() : Date.now() + sec * 1000;
+    // Quiet hours only hold back long gaps. A beat inside a running conversation (under 30 min) is never parked till 08:00.
+    if (str !== "night" && str !== "day" && sec < 1800) return Math.max(0, target - Date.now());
     return Math.max(0, avoidQuiet(target) - Date.now());
   }
   function scaledDelay(sec) {
@@ -977,8 +980,7 @@ button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent
         <rect x="30" y="60" width="18" height="60" fill="#262626"/><rect x="190" y="60" width="18" height="60" fill="#262626"/>
         <rect width="240" height="180" filter="url(#g)" opacity=".9"/>
         <text x="6" y="12" font-family="Roboto Mono, monospace" font-size="8" fill="#e8e8e8">CAM 06  ELEVATOR LOBBY L</text>
-        <text x="234" y="172" text-anchor="end" font-family="Roboto Mono, monospace" font-size="8" fill="#e8e8e8">03:0${new Date().getMinutes() % 10}:41  REC</text>
-        <circle cx="226" cy="10" r="3" fill="#ff3b30"/></svg>`;
+        <text x="234" y="172" text-anchor="end" font-family="Roboto Mono, monospace" font-size="8" fill="#e8e8e8">11-14-74  03:0${new Date().getMinutes() % 10}</text></svg>`;
     },
     ward12() {
       return `<svg viewBox="0 0 240 180" role="img" aria-label="Dark hospital corridor lit by a phone flash, a sign reads WARD 12">
