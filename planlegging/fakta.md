@@ -20,13 +20,13 @@ Sist oppdatert: 2026-10-18 (etter full logikkrevisjon, manus v21).
 ## 2. Tiden
 
 ### Spillerens klokke (ekte tid)
-- Spillet starter **dag 0** med første kveld spilleren har desktelefonen. Spilleren begynte i jobben seks dager før (Doug: «new night guard starts {weekday:-6d}»; Priyas velkomst 5d 20h før).
+- Spillet starter **dag 0** med første kveld spilleren har desktelefonen. Spilleren begynte i jobben seks dager før (Doug: «new night attendant starts {weekday:-6d}»; Priyas velkomst 5d 20h før).
 - Danas siste skift: **21 dager før dag 0** («three weeks ago»). «I quit. Sorry for the short notice.» ble sendt fra desktelefonen til Doug kl. 03:14 natt til dag -21.
-- Dougs tråd på desktelefonen har **fire** like oppsigelser kl. 03:14: dag -158, -103, -49 og -21 (Dana). Doug svarer kortere for hver gang. Dana begynte rett etter nr. 3 (ca. dag -48) og etterforsket de tre første i en måned før hun gikk opp. Spilleren ser alle fire natt 1 (ch1_a_guards).
-- Natt 1 vet spilleren (etter ch1_ask): Dana er mellom 11 og 14 i et 1974-bygg, fire vakter har «sluttet» likt, Danas siste loggbok-linje («Going up to see where they went. If I'm not back by»). To minutter etter kortet skriver telefonen «I q» i Dougs tråd selv og sletter det (kan ikke sendes, Ruben 01.11).
+- Dougs tråd på desktelefonen har **fire** like oppsigelser kl. 03:14: dag -158, -103, -49 og -21 (Dana). Doug svarer kortere for hver gang. Dana begynte rett etter nr. 3 (ca. dag -48) og etterforsket de tre første i en måned før hun gikk opp. Spilleren ser alle fire natt 1 (ch1_a_guards). Dana kjenner bare de tre første (hun leste dem på telefonen). Om den fjerde vet hun ingenting før spilleren forteller datoen (ch1_a_fourth). Hun vet heller ikke hvem som sendte den; hun slutter at det ikke var Doug fordi han «bare trodde på dem».
+- Natt 1: kortet ligger teipet under loggboka med vilje, «in case I need someone to send it up» (loggboka og ch1_plan sier det samme). Trappen på Danas side går bare opp. Indikatoren faller fra 12 til L før dørene åpner. Natt 1 vet spilleren (etter ch1_ask): Dana er mellom 11 og 14 i et 1974-bygg, fire vakter har «sluttet» likt, Danas siste loggbok-linje («Going up to see where they went. If I'm not back by»). To minutter etter kortet skriver telefonen «I q» i Dougs tråd selv og sletter det (kan ikke sendes, Ruben 01.11).
 - **Vaktordning** (godkjent, se logikk-vakt-og-telefon.md): Priya har desken 08–16 med fasttelefonen. Spilleren har desken **16–20**, låser kl. 20, sover i 11C midnatt–08 med desk-mobilen på nattbordet. Sju dagers beredskapsuke fra dag 0. Dana hadde den gamle våkne ordningen (stol til sju, piano kl. 4, brukte aldri leiligheten). Doug gjorde posten om til sleep-in for å spare penger.
 - **Motoren**: «day»-forsinkelse = kl. 14:00 neste dag. «night»-forsinkelse = vinduet kl. 20:00 (20:00–21:30 → +45 min; 21:30–23 → +15 min; ≥23 → 20:00 neste dag). Stille timer 23–08: meldinger venter til 08:00.
-- Derfor: **Danas 3:12 treffer spillerens klokke ca. 20:00** fra natt 2 og utover. Spilleren er da nettopp ferdig på desken / låser. Natt 1 er unntaket: der kommer heisen «about forty minutes» etter spillstart (klokkene «drifter»; Dana: «yours is the one that's wrong»).
+- Derfor: **Danas 3:12 treffer spillerens klokke ca. 20:00** fra natt 2 og utover. Spilleren er da nettopp ferdig på desken / låser. Natt 1 er unntaket: der kommer heisen ca. ti minutter etter at Dana spør hva klokka er (motoren: 8 min; Dana: «maybe ten minutes away», «yours is the one that's wrong»). Natt 1 kan starte når som helst på døgnet: Dana ber spilleren gå ned til desken først (ch1_proof).
 - Ingen scene må si «go to sleep» kl. 20. Dana sier «lock your door» e.l.
 
 ### Danas klokke (Ward 12)
@@ -38,7 +38,7 @@ Sist oppdatert: 2026-10-18 (etter full logikkrevisjon, manus v21).
 
 | Dag | Kapittel | Hvor er spilleren | Hvor er telefonen | Hva skjer |
 |---|---|---|---|---|
-| 0, kveld/natt | ch1 Night 1 | Desken (ser monitoren), så lobbyen ved heisen | Spilleren | Dana: «Are you there?». Kortet legges i heisen ca. 40 min etter start. Indikator stopper på 12. |
+| 0, kveld/natt | ch1 Night 1 | Desken (ser monitoren), så lobbyen ved heisen | Spilleren | Dana: «Are you there?». Kortet legges i heisen ca. 10 min etter klokkespørsmålet. Indikator stopper på 12. |
 | 1 | ch2 Day 2 | 11C fra 14:00; buss 17 til Holgate (ca. 14:05–15:55) hvis katten hentes; desken 16–20 | Spilleren | Toto, 11C, notatboken, pianoet (ca. 18:00), spill, regel for natten. Dana går offline før 20. |
 | 1, kveld | ch3 Night 2 | Låser kl. 20 / 11C | Spilleren | Danas 2:50→3:12. Tom i heisen. Reddet (saved_tom) eller mistet (tom_lost). Slutt ca. 21:00 (eller 23:40 i tom_lost). |
 | 2 | ch4 Day 3 | Sov ikke etter Tom; gir Priya mobilen kl. 08, sover til 14; desken 16–20 | **Priya 08–16**, så spilleren | Dana tekster 14:00, Priya svarer. Priya gir mobilen tilbake 16:00. Doug 16:30 (skilt). Listen: «Desk». Marjorie tekster ca. 17:15. Dana 20:00: «is the sign up?» |
@@ -152,3 +152,10 @@ Regel (Ruben 18.10): informasjon historien bygger på senere skal ikke kunne hop
 ## 9. Flagg som bærer fakta (må være satt der faktumet oppstår)
 
 fed_toto, toto_home, told_okonkwo, found_notebook, saved_tom, tom_lost, knows_mimic, told_tom, told_priya (0/1/2), knows_1979, sign_up, chart_first, knows_copy, knows_truth, knows_kevin, knows_mom, knows_gerald, told_mgmt, sealed, tests, doubt, t_toto/t_piano/t_kevin/t_photo/t_rule, believes_fake, called_it, priya_warned, priya_risk, priya_home, priya_here, priya_lost, dana_hurt, told_police, card_in_elevator, heard_hum, knows_floor, trust, spark, curiosity.
+
+
+## Ordvalg for jobben (Ruben 01.11)
+Amerikanere kaller ikke resepsjonsjobben i en boligblokk «guard». Dana sier «nights», «the one on nights», «whoever had the desk», «three of us on nights». Doug og håndboka sier «front desk» eller «night attendant». Priya sier «the desk» eller «nights». Marjorie (eldre) sier «night clerks». Tom sier «the night desk». «Guard» brukes bare om vakthold generelt (security guard). Spilleren skriver «night staff».
+
+## Kunnskapssjekk i maskinen (01.11)
+En replikk eller et valg som bruker et faktum noen må ha fått vite, merkes `knows: ["k_faktum"]` i story.js. Meldingen eller valget som leverer faktumet setter flagget (`set: { k_faktum: 1 }`). Motoren skriver en feil i konsollen hvis et merket faktum brukes før det er levert på den veien, eller hvis en kode som {date} står igjen i teksten. Testkjøringene feiler på begge. Merket så langt: k_floor12, k_quits_seen, k_fourth_told (natt 1), k_stay_rule (dag 2 til natt 2).

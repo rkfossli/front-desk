@@ -91,7 +91,7 @@ window.NIGHTDESK_STORY = {
         { from: "them", text: "Ok.", ago: "49d@9:31" },
         { from: "me", text: "I quit. Sorry for the short notice.", ago: "21d@3:14" },
         { from: "them", text: "Dana? Call me in the morning please.", ago: "21d@7:40" },
-        { from: "them", text: "Reminder: new night guard starts {weekday:-6d}. Dana's last shift was {date:-21d}. Please leave the handover notes in the bottom drawer.", ago: "7d@16:05" },
+        { from: "them", text: "Reminder: new night attendant starts {weekday:-6d}. Dana's last shift was {date:-21d}. Please leave the handover notes in the bottom drawer.", ago: "7d@16:05" },
         { from: "me", text: "Will do.", ago: "7d@16:40" },
         { from: "them", text: "Also the elevator inspection got pushed again. Just put the sign back up if it does the thing.", ago: "2d@10:12" },
         { from: "me", text: "Which thing?", ago: "2d@16:20" },
@@ -109,7 +109,7 @@ window.NIGHTDESK_STORY = {
     ch1_start: {
       messages: [
         { text: "Are you there?", delay: "0s", notify: true },
-        { text: "Please. I know someone's at the desk. I can see the lamp on the monitor up here. Don't ask me how yet.", delay: "6s", notify: true }
+        { text: "Please. I know someone has the desk phone. It's the only number that reaches down there. Don't ask me how yet.", delay: "6s", notify: true }
       ],
       choices: [
         { text: "Who is this?", goto: "ch1_who" },
@@ -124,7 +124,7 @@ window.NIGHTDESK_STORY = {
         { text: "They told you I quit, right?", delay: "4s" }
       ],
       choices: [
-        { text: "They said you moved away.", goto: "ch1_proof" },
+        { text: "I heard you don't work here anymore.", goto: "ch1_proof" },
         { text: "Nobody told me anything.", goto: "ch1_proof", set: { trust: 1 } }
       ]
     },
@@ -132,7 +132,7 @@ window.NIGHTDESK_STORY = {
     ch1_desk: {
       messages: [
         { text: "Dana Reyes. I had your job until three weeks ago.", delay: "5s" },
-        { text: "Check the logbook. Bottom drawer. {date:-21d}. My handwriting stops in the middle of a sentence.", delay: "7s" }
+        { text: "There's a logbook in the bottom drawer of the desk. {date:-21d}. My handwriting stops in the middle of a sentence.", delay: "7s" }
       ],
       goto: "ch1_proof"
     },
@@ -149,12 +149,12 @@ window.NIGHTDESK_STORY = {
     ch1_proof: {
       messages: [
         { text: "I need you to do something and I need you to not ask why yet.", delay: "8s" },
-        { text: "Look at camera 6. The elevator lobby. What floor is the elevator on?", delay: "6s" },
-        { text: "I've got an old monitor up here that shows me the same lobby. Mine has said 12 for three weeks. I need to know what yours says.", delay: "9s" },
-        { system: "The desk monitor cycles through the cameras to your left. It stops on 6. The lobby is empty. Above the elevator doors, the floor indicator reads 12.", delay: "5s" }
+        { text: "Go down to the desk if you're not there. Sit where the lamp is. Then look at camera 6, the elevator lobby. What floor is the elevator on?", delay: "8s" },
+        { text: "I've got an old monitor up here that shows me the same lobby. Mine has said 12 for three weeks. I need to know if yours does too.", delay: "9s" },
+        { system: "The desk lamp is on, the way it always is. The monitor cycles through the cameras to your left and stops on 6. The lobby is empty. Above the elevator doors, the floor indicator reads 12.", delay: "1m", set: { k_floor12: 1, at_desk: 1 } }
       ],
       choices: [
-        { text: "It says 12.", goto: "ch1_floor12", set: { knows_floor: 1, curiosity: 1 } },
+        { text: "It says 12.", goto: "ch1_floor12", set: { knows_floor: 1, curiosity: 1 }, knows: ["k_floor12"] },
         { text: "I'm not looking at anything until you tell me what's going on.", goto: "ch1_stubborn", set: { trust: -1 } }
       ]
     },
@@ -162,9 +162,10 @@ window.NIGHTDESK_STORY = {
     ch1_floor12: {
       messages: [
         { text: "Okay. Okay.", delay: "4s" },
-        { text: "Then it's starting again.", delay: "3s" },
+        { text: "Then yours sees it too. It isn't just me up here.", delay: "5s" },
         { image: "camera6", caption: "CAM 06 · ELEVATOR LOBBY", delay: "9s" },
-        { text: "There is no 12. The panel goes 11, 14. You've noticed that.", delay: "6s" }
+        { text: "That's my screen. Same camera, same 12.", delay: "5s" },
+        { text: "There is no 12. The panel inside goes 11, 14. Look next time you're in there.", delay: "6s" }
       ],
       goto: "ch1_ask"
     },
@@ -186,7 +187,7 @@ window.NIGHTDESK_STORY = {
       ],
       choices: [
         { text: "Where are you, exactly?", goto: "ch1_a_where", set: { a1_where: 1 } },
-        { text: "What happened to the guards before you?", goto: "ch1_a_guards", set: { a1_guards: 1, curiosity: 1 } },
+        { text: "What happened to the night staff before you?", goto: "ch1_a_guards", set: { a1_guards: 1, curiosity: 1 } },
         { text: "Why should I believe any of this?", goto: "ch1_a_believe", set: { a1_believe: 1 } }
       ]
     },
@@ -195,7 +196,7 @@ window.NIGHTDESK_STORY = {
       messages: [],
       choices: [
         { text: "Where are you, exactly?", goto: "ch1_a_where", set: { a1_where: 1 }, if: { flag: "a1_where", max: 0 } },
-        { text: "What happened to the guards before you?", goto: "ch1_a_guards", set: { a1_guards: 1, curiosity: 1 }, if: { flag: "a1_guards", max: 0 } },
+        { text: "What happened to the night staff before you?", goto: "ch1_a_guards", set: { a1_guards: 1, curiosity: 1 }, if: { flag: "a1_guards", max: 0 } },
         { text: "Why should I believe any of this?", goto: "ch1_a_believe", set: { a1_believe: 1 }, if: { flag: "a1_believe", max: 0 } }
       ]
     },
@@ -204,18 +205,30 @@ window.NIGHTDESK_STORY = {
       messages: [
         { text: "Same building. Between 11 and 14, where the panel says there's nothing.", delay: "8s" },
         { text: "Same hallways, wrong decade. Ashtrays. A calendar on the wall that says 1974.", delay: "8s" },
-        { text: "I'm in a stairwell. It's the only place the hum doesn't reach.", delay: "6s" }
+        { text: "I'm in a stairwell. It's the only place the hum doesn't reach.", delay: "6s" },
+        { text: "And before you ask: the stairs here only go up. I've tried down. Every landing is 12 again.", delay: "8s" }
       ],
       goto: [{ if: [{ flag: "a1_where", min: 1 }, { flag: "a1_guards", min: 1 }, { flag: "a1_believe", min: 1 }], goto: "ch1_clock" }, { goto: "ch1_ask_hub" }]
     },
 
     ch1_a_guards: {
       messages: [
-        { text: "Open Doug's thread on that phone. Scroll up.", delay: "6s" },
-        { system: "You open it. Four messages sent from this phone since May. Same words every time: I quit. Sorry for the short notice. All four at 3:14 in the morning.", delay: "6s" },
-        { text: "Four night guards since May. Same words. Same minute.", delay: "8s" },
-        { text: "The last one has my date on it. I didn't send it. I was already up here.", delay: "8s" },
-        { text: "I spent a month looking into the other three. Then I got close enough for it to notice.", delay: "9s" }
+        { text: "Open Doug's thread on that phone. Scroll up. Count the 'I quit's.", delay: "6s" },
+        { system: "You open it. Messages sent from this phone, all with the same words: I quit. Sorry for the short notice. All of them at 3:14 in the morning.", delay: "6s", set: { k_quits_seen: 1 } },
+        { text: "I read three of those every night I had that phone. {month:-158d}, {month:-103d}, {month:-49d}. Three of us on nights, gone, same words, same minute.", delay: "10s" },
+        { text: "I spent a month trying to find out where they went.", delay: "6s" },
+        { text: "How many are there now?", delay: "5s" }
+      ],
+      choices: [
+        { text: "Four. The last one is from {date:-21d}.", goto: "ch1_a_fourth", set: { k_fourth_told: 1 }, knows: ["k_quits_seen"] }
+      ]
+    },
+
+    ch1_a_fourth: {
+      messages: [
+        { text: "{date:-21d}.", delay: "8s" },
+        { text: "That's my night. I didn't send that. I was already up here.", delay: "7s", knows: ["k_fourth_told"] },
+        { text: "And Doug never asked a single question. He just believed them. Every time.", delay: "8s" }
       ],
       goto: [{ if: [{ flag: "a1_where", min: 1 }, { flag: "a1_guards", min: 1 }, { flag: "a1_believe", min: 1 }], goto: "ch1_clock" }, { goto: "ch1_ask_hub" }]
     },
@@ -223,7 +236,7 @@ window.NIGHTDESK_STORY = {
     ch1_a_believe: {
       messages: [
         { text: "You shouldn't. Not yet. Open the bottom drawer. The logbook. My last entry.", delay: "8s" },
-        { system: "The logbook's last page, in fast handwriting: '{date:-21d}. 3:12. Indicator on 12 again, same as the other three nights. My card opens the old doors. Going up to see where they went. If I'm not back by'", delay: "6s" },
+        { system: "The logbook's last page, in fast handwriting: '{date:-21d}. 3:12. Indicator on 12 again, same as the other three nights. Going up to see where they went. Card's under this book in case I need someone to send it up. If I'm not back by'", delay: "6s" },
         { text: "That's where I stopped. I meant to finish that sentence.", delay: "7s" }
       ],
       goto: [{ if: [{ flag: "a1_where", min: 1 }, { flag: "a1_guards", min: 1 }, { flag: "a1_believe", min: 1 }], goto: "ch1_clock" }, { goto: "ch1_ask_hub" }]
@@ -234,20 +247,21 @@ window.NIGHTDESK_STORY = {
         { text: "What time is it down there?", delay: "5s" }
       ],
       choices: [
-        { text: "{time}", goto: "ch1_plan" },
+        { text: "{time}", goto: "ch1_plan", set: { gave_time: 1 } },
         { text: "Why does that matter?", goto: "ch1_plan", set: { curiosity: 1 } }
       ]
     },
 
     ch1_plan: {
       messages: [
-        { text: "Good. Then my 3:12 is maybe ten minutes away for you. Don't do the math. The clocks don't agree up here, and yours is the one that's wrong.", delay: "4s" },
+        { text: "Good. Then my 3:12 is maybe ten minutes away for you. Don't do the math. The clocks don't agree up here, and yours is the one that's wrong.", delay: "4s", if: { flag: "gave_time", min: 1 } },
+        { text: "Because it's nearly 3:12 up here, and the clocks don't agree. For you it's maybe ten minutes away. Don't do the math.", delay: "4s", if: { flag: "gave_time", max: 0 } },
         { text: "I'm sending you what it sounds like up here. Don't play it loud.", delay: "6s" },
         { audio: "hum", duration: 11, delay: "4s", set: { heard_hum: 1 } },
         { text: "That's not a fan. It comes up through the floor every night at 3:12. You feel it in your teeth before you hear it.", delay: "14s" },
         { text: "When my clock says 3:12, the car will come down to L and open. Nobody will be in it.", delay: "12s" },
         { text: "Do not get in.", delay: "3s" },
-        { text: "Open the bottom drawer. Taped to the bottom of the logbook there's my key card. Blue lanyard. Nobody lifts a logbook. I left it there on purpose. I was going up to look and come straight back down.", delay: "8s" },
+        { text: "Lift the logbook. My key card is taped underneath. Blue lanyard. I left it there in case I needed someone to send it up after me. Turns out I do. Every door up here wants a card.", delay: "8s" },
         { text: "When the doors open, put the card on the floor of the car. Then step back and keep the phone on you. I need you to tell me what the indicator does.", delay: "10s" },
         { text: "I have to go dark now. It hears the phone.", delay: "9s" },
         { status: "offline" }
@@ -262,11 +276,13 @@ window.NIGHTDESK_STORY = {
     // The long gap. In the real game this is the actual wait until 3:12.
     ch1_wait: {
       messages: [
-        { text: "It's here.", delay: "8m", notify: true },
+        { system: "You lift the logbook. A blue lanyard is taped underneath, a key card on the end of it: DANA R., NIGHTS.", delay: "5s", set: { k_card: 1 } },
+        { system: "On camera 6 the indicator starts to drop. 12. 11. 10. All the way down.", delay: "8m", notify: true },
+        { text: "It's here.", delay: "6s", notify: true },
         { text: "Doors are opening. Please.", delay: "15s", notify: true }
       ],
       choices: [
-        { text: "Put the key card in the elevator.", goto: "ch1_end_card", set: { card_in_elevator: 1, trust: 1 } },
+        { text: "Put the key card in the elevator.", goto: "ch1_end_card", set: { card_in_elevator: 1, trust: 1 }, knows: ["k_card"] },
         { text: "Get in the elevator.", goto: "ch1_death_elevator" },
         { text: "I'm calling the police.", goto: "ch1_end_police", set: { told_police: 1, trust: -2 } }
       ]
@@ -310,7 +326,7 @@ window.NIGHTDESK_STORY = {
     ch1_end_police: {
       messages: [
         { text: "They'll come. They'll look at camera 6.", delay: "6s" },
-        { text: "They'll see an empty lobby and a night guard texting a number that doesn't exist.", delay: "8s" },
+        { text: "They'll see an empty lobby and whoever's on the desk texting a number that was disconnected three weeks ago.", delay: "8s" },
         { system: "The elevator doors close on their own. The indicator stays on L." },
         { text: "I'll try again tomorrow. If it lets me.", delay: "20s", notify: true },
         { status: "offline" }
@@ -325,10 +341,11 @@ window.NIGHTDESK_STORY = {
         { text: "I watched the flashlights on the ceiling. From up here the lobby is a ceiling.", delay: "9s", if: { flag: "retry_seen", max: 0 } },
         { text: "Same time. Same doors.", delay: "night", notify: true, if: { flag: "retry_seen", min: 1 } },
         { text: "It's 3:11 up here. I'm not going to beg twice.", delay: "12s" },
-        { text: "Doors.", delay: "60s", notify: true }
+        { system: "On camera 6 the indicator drops. 12. 11. 10. All the way to L.", delay: "50s" },
+        { text: "Doors.", delay: "10s", notify: true }
       ],
       choices: [
-        { text: "Put the key card in the elevator.", goto: "ch1b_card", set: { card_in_elevator: 1, retry_seen: 1 } },
+        { text: "Put the key card in the elevator.", goto: "ch1b_card", set: { card_in_elevator: 1, retry_seen: 1 }, knows: ["k_card"] },
         { text: "Get in the elevator.", goto: "ch1_death_elevator" },
         { text: "Not tonight.", goto: "ch1b_refuse", set: { trust: -1, retry_seen: 1 } }
       ]
@@ -350,7 +367,8 @@ window.NIGHTDESK_STORY = {
         { system: "12." },
         { text: "Then it reached me.", delay: "35s", notify: true },
         { text: "I have my card. The doors up here open for me again.", delay: "7s" },
-        { text: "Thank you. I mean it. Even if you made me wait a night.", delay: "8s" },
+        { text: "Thank you. I mean it. Even if you made me wait a night.", delay: "8s", if: { flag: "retry_seen", max: 1 } },
+        { text: "Thank you. I mean it. Even if you made me wait.", delay: "8s", if: { flag: "retry_seen", min: 2 } },
         { text: "I'll write when it's safe. Keep that phone on you. Don't let Doug shut it off.", delay: "9s" },
         { status: "offline" },
         { system: "Two minutes later the desk phone lights up on its own. Doug's thread is open. In the text field, letters you didn't type: I q", delay: "40s", notify: true },
@@ -767,7 +785,7 @@ window.NIGHTDESK_STORY = {
 
     ch2_sleep_late: {
       messages: [
-        { text: "Of course you are. Night guard.", delay: "5s" },
+        { text: "Of course you are. You're on nights.", delay: "5s" },
         { text: "Still. If it comes while you're out, I'll tell you what happened. Nothing you miss is on you.", delay: "10s" }
       ],
       goto: "ch2_rule"
@@ -784,7 +802,7 @@ window.NIGHTDESK_STORY = {
     ch2_rule: {
       messages: [
         { text: "Rule for tonight. Whatever you hear through the ceiling, you stay in 11C. You do not go to the lobby. You do not help anyone into the elevator.", delay: "8s" },
-        { text: "And if someone's already in it at my 3:12, they stay in it. The doors open on a floor that looks like home. It isn't. I stepped out. That's the whole story of how I got here.", delay: "13s" },
+        { set: { k_stay_rule: 1 }, text: "And if someone's already in it at my 3:12, they stay in it. The doors open on a floor that looks like home. It isn't. I stepped out. That's the whole story of how I got here.", delay: "13s" },
         { text: "Stay in the car, keep pressing L. That's all I know so far. It's more than I knew.", delay: "8s" },
         { text: "Phone on you around {window}. If anyone else texts the desk, you tell me before you answer them.", delay: "11s" },
         { text: "I have to go dark.", delay: "8s" },
@@ -823,7 +841,7 @@ window.NIGHTDESK_STORY = {
       ],
       thread: "tom",
       choices: [
-        { text: "Tom, stay in the elevator. Don't get out when the doors open.", goto: "ch3_tom_stay", set: { trust: 1 } },
+        { text: "Tom, stay in the elevator. Don't get out when the doors open.", goto: "ch3_tom_stay", set: { trust: 1 }, knows: ["k_stay_rule"] },
         { text: "What does the indicator say?", goto: "ch3_tom_indicator", set: { curiosity: 1 } },
         { text: "Hang on. Let me check something.", goto: "ch3_tom_hangon" }
       ]
@@ -901,7 +919,7 @@ window.NIGHTDESK_STORY = {
         { to: "tom", text: "ok hang on", delay: "8s" },
         { to: "tom", text: "it won't send. no signal. one bar then nothing", delay: "9s" },
         { to: "tom", text: "someone's at the end of the hall", delay: "7s", notify: true },
-        { to: "tom", text: "I think it's Dana?? the old night guard? she's waving me over", delay: "6s", notify: true },
+        { to: "tom", text: "I think it's Dana?? the woman from the night desk? she's waving me over", delay: "6s", notify: true },
         { text: "Desk. Something just walked past the day room door. In my jacket. Wearing my face. If he can see it, tell him it isn't me.", delay: "5s", notify: true }
       ],
       thread: "tom",
@@ -1035,7 +1053,7 @@ window.NIGHTDESK_STORY = {
         { me: true, text: "Excuse me?? Is this DANA?", delay: "20s" },
         { text: "I'm fine. I'm away. Don't tell Doug this number texted. Please.", delay: "12s" },
         { me: true, text: "Dana what the hell. Everyone thinks you ghosted. Marjorie filed a missing person thing. WHERE are you", delay: "25s" },
-        { text: "The night guard knows. Ask them, not me. I have to go.", delay: "14s" },
+        { text: "The one on nights knows. Ask them, not me. I have to go.", delay: "14s" },
         { status: "offline" },
         { me: true, text: "ok but this is weird", delay: "30s" },
         { system: "{time}. Priya hands you the phone at shift change and looks at you for a long moment before she leaves.", delay: "1h 57m" },
@@ -1162,7 +1180,7 @@ window.NIGHTDESK_STORY = {
 
     ch4_marjorie_cold: {
       messages: [
-        { to: "marjorie", text: "Mr. Haskett's rule, not yours. He sends the same paragraph to every one of you. I've had eleven night guards say that to me and I've outlived two building managers.", delay: "18s" },
+        { to: "marjorie", text: "Mr. Haskett's rule, not yours. He sends the same paragraph to every one of you. I've had eleven night clerks say that to me and I've outlived two building managers.", delay: "18s" },
         { to: "marjorie", text: "I'll tell you one thing anyway, since you'll lie awake.", delay: "9s" }
       ],
       goto: "ch4_marjorie_1979"
@@ -1293,7 +1311,7 @@ window.NIGHTDESK_STORY = {
       choices: [
         { text: "Sounds good. Thanks, Doug.", goto: "ch5_doug_ok" },
         { text: "Define low-drama.", goto: "ch5_doug_define", set: { curiosity: 1 } },
-        { text: "Doug. I know what's happening to the night guards. Dana is alive, and she's upstairs.", goto: "ch5_doug_truth", set: { told_mgmt: 1 } }
+        { text: "Doug. I know what's happening to the night staff. Dana is alive, and she's upstairs.", goto: "ch5_doug_truth", set: { told_mgmt: 1 } }
       ]
     },
 
@@ -1349,7 +1367,7 @@ window.NIGHTDESK_STORY = {
       messages: [
         { text: "Ray Lindqvist. There's a wallet in the desk drawer here that isn't from 74.", delay: "9s" },
         { image: "lindqvist_badge", caption: "Sent 1 photo", delay: "8s" },
-        { text: "Retired cop, private investigator. Hired by the family of the guard from 87. There's a notebook too. Half of it is about his divorce. The other half is about this building.", delay: "14s" },
+        { text: "Retired cop, private investigator. Hired by the family of the night man from 87. There's a notebook too. Half of it is about his divorce. The other half is about this building.", delay: "14s" },
         { text: "Last page: 'It wrote to Carol as me. Perfect spelling. I never spelled anything right in my life.'", delay: "12s", set: { knows_copy: 1 } },
         { text: "so that's a thing it can do.", delay: "6s" }
       ],
@@ -2089,7 +2107,7 @@ window.NIGHTDESK_STORY = {
         { system: "Priya will see it at 8. Doug will forward it to the police. Your mother will say you do this.", delay: "6s" },
         { text: "Are you there?", delay: "21d" }
       ],
-      endOfChapter: { title: "You changed places", subtitle: "Three weeks from now a new night guard will read your threads and an unknown number will text the desk. It will spell everything right." }
+      endOfChapter: { title: "You changed places", subtitle: "Three weeks from now someone new on nights will read your threads and an unknown number will text the desk. It will spell everything right." }
     },
 
     ch7_step_back: {
