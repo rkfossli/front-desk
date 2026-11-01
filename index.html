@@ -659,7 +659,7 @@ window.NIGHTDESK_STORY = {
         { text: "Same hallways, wrong decade. Ashtrays. A calendar on the wall that says 1974.", delay: "8s" },
         { text: "I'm in a stairwell. It's the only place the hum doesn't reach.", delay: "6s" },
         { text: "And before you ask: the stairs here only go up, and up ends at a door I can't open. I've tried down. Every landing is 12 again.", delay: "8s" },
-        { text: "My phone says three weeks. My body says one night. I haven't been hungry once. I'm trying not to think about what that means.", delay: "10s" }
+        { text: "My phone says three weeks. My body says one long night that keeps restarting. I haven't been hungry once. I'm trying not to think about what that means.", delay: "10s" }
       ],
       goto: [{ if: [{ flag: "a1_where", min: 1 }, { flag: "a1_guards", min: 1 }, { flag: "a1_believe", min: 1 }], goto: "ch1_clock" }, { goto: "ch1_ask_hub" }]
     },
@@ -724,7 +724,7 @@ window.NIGHTDESK_STORY = {
 
     ch1_plan: {
       messages: [
-        { text: "{time}. Okay. Mine says 3:02. Doesn't matter what yours says. When mine says 3:12, the car comes. Ten minutes, maybe.", delay: "6s", if: { flag: "gave_time", min: 1 } },
+        { text: "{time}. Okay. Just wanted to know you're real. Mine says 3:02. Doesn't matter what yours says. When mine says 3:12, the car comes. Ten minutes, maybe.", delay: "6s", if: { flag: "gave_time", min: 1 } },
         { text: "Because it's 3:02 up here, and the clocks don't agree. For you it's maybe ten minutes away. Don't do the math.", delay: "6s", if: { flag: "gave_time", max: 0 } },
         { text: "This is what it sounds like at 3:12. I recorded the last one with the stairwell door open. Don't play it loud.", delay: "8s" },
         { audio: "hum", duration: 11, delay: "4s", set: { heard_hum: 1 } }
@@ -740,6 +740,7 @@ window.NIGHTDESK_STORY = {
         { text: "That's not a fan. It comes up through the floor every night at 3:12. Teeth first, then ears.", delay: "10s" },
         { text: "When my clock says 3:12, the car will come down to L and open. Nobody will be in it.", delay: "10s" },
         { text: "Do not get in.", delay: "3s" },
+        { text: "And no, I can't ride it back. Up here its doors don't open for me, only for whatever's inside. They opened once, the night I came up.", delay: "10s" },
         { text: "Lift the logbook. My key card is taped underneath. Blue lanyard. I meant to hold the doors and look. I stepped out.", delay: "10s" },
         { text: "Every door up here has the same card readers as ours, bolted onto 1974 doors. The card's coded to the building, not the year. Without it all I've got is the elevator lobby up here and the stairwell. The monitor's in the lobby, by the stairwell door. Every other door is locked.", delay: "11s" },
         { text: "When the doors open, put the card on the floor of the car and step back.", delay: "7s" },
