@@ -83,8 +83,14 @@ window.NIGHTDESK_STORY = {
     {
       id: "carl", name: "Doug Haskett (Mgmt)", saved: true,
       messages: [
-        { from: "me", text: "I quit", ago: "21d" },
-        { from: "them", text: "Dana? Call me in the morning please.", ago: "20d 18h" },
+        { from: "me", text: "I quit. Sorry for the short notice.", ago: "158d@3:14" },
+        { from: "them", text: "Sorry to hear that. Please leave the desk phone on the counter for Priya.", ago: "158d@8:02" },
+        { from: "me", text: "I quit. Sorry for the short notice.", ago: "103d@3:14" },
+        { from: "them", text: "Understood. Phone on the counter please.", ago: "103d@7:55" },
+        { from: "me", text: "I quit. Sorry for the short notice.", ago: "49d@3:14" },
+        { from: "them", text: "Ok.", ago: "49d@9:31" },
+        { from: "me", text: "I quit. Sorry for the short notice.", ago: "21d@3:14" },
+        { from: "them", text: "Dana? Call me in the morning please.", ago: "21d@7:40" },
         { from: "them", text: "Reminder: new night guard starts {weekday:-6d}. Dana's last shift was {date:-21d}. Please leave the handover notes in the bottom drawer.", ago: "6d 12h" },
         { from: "me", text: "Will do.", ago: "6d 11h" },
         { from: "them", text: "Also the elevator inspection got pushed again. Just put the sign back up if it does the thing.", ago: "2d 5h" },
@@ -160,7 +166,7 @@ window.NIGHTDESK_STORY = {
         { image: "camera6", caption: "CAM 06 · ELEVATOR LOBBY", delay: "9s" },
         { text: "There is no 12. The panel goes 11, 14. You've noticed that.", delay: "6s" }
       ],
-      goto: "ch1_clock"
+      goto: "ch1_ask"
     },
 
     ch1_stubborn: {
@@ -170,7 +176,57 @@ window.NIGHTDESK_STORY = {
         { text: "I'm still up here.", delay: "6s" },
         { image: "camera6", caption: "CAM 06 · ELEVATOR LOBBY", delay: "7s" }
       ],
-      goto: "ch1_clock"
+      goto: "ch1_ask"
+    },
+
+    // The player is holding a building's desk phone; they get to demand answers before doing anything for her.
+    ch1_ask: {
+      messages: [
+        { text: "I know. You've got questions. Ask. Fast.", delay: "6s" }
+      ],
+      choices: [
+        { text: "Where are you, exactly?", goto: "ch1_a_where", set: { a1_where: 1 } },
+        { text: "What happened to the guards before you?", goto: "ch1_a_guards", set: { a1_guards: 1, curiosity: 1 } },
+        { text: "Why should I believe any of this?", goto: "ch1_a_believe", set: { a1_believe: 1 } }
+      ]
+    },
+
+    ch1_ask_hub: {
+      messages: [],
+      choices: [
+        { text: "Where are you, exactly?", goto: "ch1_a_where", set: { a1_where: 1 }, if: { flag: "a1_where", max: 0 } },
+        { text: "What happened to the guards before you?", goto: "ch1_a_guards", set: { a1_guards: 1, curiosity: 1 }, if: { flag: "a1_guards", max: 0 } },
+        { text: "Why should I believe any of this?", goto: "ch1_a_believe", set: { a1_believe: 1 }, if: { flag: "a1_believe", max: 0 } }
+      ]
+    },
+
+    ch1_a_where: {
+      messages: [
+        { text: "Same building. Between 11 and 14, where the panel says there's nothing.", delay: "8s" },
+        { text: "Same hallways, wrong decade. Ashtrays. A calendar on the wall that says 1974.", delay: "8s" },
+        { text: "I'm in a stairwell. It's the only place the hum doesn't reach.", delay: "6s" }
+      ],
+      goto: [{ if: [{ flag: "a1_where", min: 1 }, { flag: "a1_guards", min: 1 }, { flag: "a1_believe", min: 1 }], goto: "ch1_clock" }, { goto: "ch1_ask_hub" }]
+    },
+
+    ch1_a_guards: {
+      messages: [
+        { text: "Open Doug's thread on that phone. Scroll up.", delay: "6s" },
+        { system: "You open it. Four messages sent from this phone since May. Same words every time: I quit. Sorry for the short notice. All four at 3:14 in the morning.", delay: "6s" },
+        { text: "Four night guards since May. Same words. Same minute.", delay: "8s" },
+        { text: "The last one has my date on it. I didn't send it. I was already up here.", delay: "8s" },
+        { text: "I spent a month looking into the other three. Then I got close enough for it to notice.", delay: "9s" }
+      ],
+      goto: [{ if: [{ flag: "a1_where", min: 1 }, { flag: "a1_guards", min: 1 }, { flag: "a1_believe", min: 1 }], goto: "ch1_clock" }, { goto: "ch1_ask_hub" }]
+    },
+
+    ch1_a_believe: {
+      messages: [
+        { text: "You shouldn't. Not yet. Open the bottom drawer. The logbook. My last entry.", delay: "8s" },
+        { system: "The logbook's last page, in fast handwriting: '{date:-21d}. 3:12. Indicator on 12 again, same as the other three nights. My card opens the old doors. Going up to see where they went. If I'm not back by'", delay: "6s" },
+        { text: "That's where I stopped. I meant to finish that sentence.", delay: "7s" }
+      ],
+      goto: [{ if: [{ flag: "a1_where", min: 1 }, { flag: "a1_guards", min: 1 }, { flag: "a1_believe", min: 1 }], goto: "ch1_clock" }, { goto: "ch1_ask_hub" }]
     },
 
     ch1_clock: {
@@ -191,7 +247,7 @@ window.NIGHTDESK_STORY = {
         { text: "That's not a fan. It comes up through the floor every night at 3:12. You feel it in your teeth before you hear it.", delay: "14s" },
         { text: "When my clock says 3:12, the car will come down to L and open. Nobody will be in it.", delay: "12s" },
         { text: "Do not get in.", delay: "3s" },
-        { text: "Open the bottom drawer. Taped to the bottom of the logbook there's my key card. Blue lanyard. Nobody lifts a logbook. I left it there on purpose. I only meant to look.", delay: "8s" },
+        { text: "Open the bottom drawer. Taped to the bottom of the logbook there's my key card. Blue lanyard. Nobody lifts a logbook. I left it there on purpose. I was going up to look and come straight back down.", delay: "8s" },
         { text: "When the doors open, put the card on the floor of the car. Then step back and keep the phone on you. I need you to tell me what the indicator does.", delay: "10s" },
         { text: "I have to go dark now. It hears the phone.", delay: "9s" },
         { status: "offline" }
@@ -244,9 +300,11 @@ window.NIGHTDESK_STORY = {
         { text: "Then it reached me.", delay: "35s", notify: true },
         { text: "I have my card. That means the doors up here open for me again.", delay: "7s" },
         { text: "I'll write when it's safe. It might be a while. Keep that phone on you. Don't let Doug shut it off.", delay: "9s" },
-        { status: "offline" }
+        { status: "offline" },
+        { system: "Two minutes later the desk phone lights up on its own. Doug's thread is open. In the text field, letters you didn't type: I q", delay: "40s", notify: true },
+        { system: "They delete themselves, one by one, until the field is empty.", delay: "5s" }
       ],
-      endOfChapter: { title: "End of Chapter 1", subtitle: "Dana has her key card. The elevator hasn't come back down.", next: "ch2_start" }
+      endOfChapter: { title: "End of Chapter 1", subtitle: "Dana has her key card. Something else tried to use your phone.", next: "ch2_start" }
     },
 
     ch1_end_police: {
@@ -294,7 +352,9 @@ window.NIGHTDESK_STORY = {
         { text: "I have my card. The doors up here open for me again.", delay: "7s" },
         { text: "Thank you. I mean it. Even if you made me wait a night.", delay: "8s" },
         { text: "I'll write when it's safe. Keep that phone on you. Don't let Doug shut it off.", delay: "9s" },
-        { status: "offline" }
+        { status: "offline" },
+        { system: "Two minutes later the desk phone lights up on its own. Doug's thread is open. In the text field, letters you didn't type: I q", delay: "40s", notify: true },
+        { system: "They delete themselves, one by one, until the field is empty.", delay: "5s" }
       ],
       goto: "ch2_start"
     },

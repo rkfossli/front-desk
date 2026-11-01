@@ -568,8 +568,14 @@ button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent
   const now = Date.now();
   const archive = S.archive.map(t => ({
     id: t.id, name: t.name, saved: t.saved, service: t.service, story: false,
-    messages: t.messages.map(m => ({ from: m.from, text: fill(m.text), at: now - parseDur(m.ago) * 1000 }))
+    messages: t.messages.map(m => ({ from: m.from, text: fill(m.text), at: archiveAt(m.ago) }))
   }));
+  // "21d@3:14" = 21 days ago at 3:14 AM on the player's clock; anything else is a plain duration ago.
+  function archiveAt(ago) {
+    const m = /^(\d+)d@(\d{1,2}):(\d{2})$/.exec(String(ago).trim());
+    if (!m) return now - parseDur(ago) * 1000;
+    const d = new Date(); d.setDate(d.getDate() - +m[1]); d.setHours(+m[2], +m[3], 0, 0); return d.getTime();
+  }
   const STORY_ID = "__story";
   function storyThread() {
     return { id: STORY_ID, name: S.contact.name, saved: S.contact.saved, service: S.contact.service, story: true, messages: state.log };
