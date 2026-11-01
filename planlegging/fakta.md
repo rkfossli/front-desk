@@ -10,7 +10,7 @@ Sist oppdatert: 2026-10-18 (etter full logikkrevisjon, manus v21).
 
 - **The Calloway**, boligblokk i Portland, Oregon. Lobby med resepsjonsdesk, kameramonitor til venstre for desken (sykler gjennom kameraene; kamera 6 = heislobbyen). Lounge med den brune pianoet bak planten, rett ved lobbyen.
 - Heispanelet går 11, 14. Etasje 12 og 13 ble **fylt med betong** da bygget ble kjøpt i 1979 (Marjorie så betongbilene). Dana sier «there is no 12».
-- **Etasje 12 (Danas side)** = Ashgrove Institute, Ward 12, frosset i november 1974: beige, askebegre, dagrom med piano, TV med skive, rom 1–13 med senger og stropper, Dr. Hallorans kontor med ulåste arkivskap, myntelefon ved trappesjakten (det har ikke etasje 11), gammel kameramonitor som viser lobbyen. To trapper: **hovedtrappen** ved heisen (der Dana gjemmer seg natt 1) går bare opp; hver repos er 12 igjen. **Servicetrappen** bak dagrommet, som hun finner først dag 4, går opp til 13 (døren lenket fra 12-siden) og ned forbi 12 til 11. På spillerens side er trappen **en vegg**; panelet i skapet i 11C er «der de sluttet å støpe».
+- **Etasje 12 (Danas side)** = Ashgrove Institute, Ward 12, frosset i november 1974: beige, askebegre, dagrom med piano, TV med skive, rom 1–13 med senger og stropper, Dr. Hallorans kontor med ulåste arkivskap, myntelefon ved trappesjakten (det har ikke etasje 11), gammel kameramonitor som viser lobbyen; den står i heislobbyen på 12, ved døren til hovedtrappen. Uten kort har Dana bare heislobbyen og trappen; alle avdelingsdører krever kort. Monitoren viser 1974-tid (11-14-74, 02:58 på bildet). To trapper: **hovedtrappen** ved heisen (der Dana gjemmer seg natt 1) går bare opp; hver repos er 12 igjen. **Servicetrappen** bak dagrommet, som hun finner først dag 4, går opp til 13 (døren lenket fra 12-siden) og ned forbi 12 til 11. På spillerens side er trappen **en vegg**; panelet i skapet i 11C er «der de sluttet å støpe».
 - **Etasje 13** = Resonatoren. Kjører «hver natt 3:12». Lyden (hum) kommer opp gjennom gulvet.
 - **11C** = personalleiligheten («Staff residence, utilities included», no-pets-klausul). Alltid 11C, «top residential floor, for response time». Kommode med nederste skuff som ikke går helt inn (Kevins notatbok bak). Skap med malt servicepanel. Tom bor i 11A (taket hans brummer).
 - **4B** = Marjorie. **6A** = Delgado-paret (bodde der i 1974). **7C**, **2F** (Lena), **9F** = småfolk fra arkivet.
@@ -169,6 +169,6 @@ En replikk eller et valg som bruker et faktum noen må ha fått vite, merkes `kn
 - Lydopptaket tok hun natten før med trappedøren åpen.
 - Hun vet ikke at nummeret er koblet fra; hun sier «a number nobody can call back».
 - Spilleren så indikatoren på 12 én gang andre kveld og trodde det var en feil.
-- Politigrenen: Doug skriver dagen etter kl. 14 om velferdssjekken (ikke dag 3).
+- Politigrenen: Doug skriver dagen etter kl. 14 om velferdssjekken (ikke dag 3), uten tidspunkt. Natt 1b legger til én dag per natt; senere ukedagsreferanser (Dougs «Seven days», {weekday:-Nd}) må sjekkes mot dette når dag 3–6 gjennomgås.
 - Motoren: stille timer (23–08) holder bare tilbake pauser på 30 min eller mer og «night»/«day». En samtale midt på natta går i ett.
 - Arkivtrådene har faste klokkeslett (`Nd@H:MM`). Doug: «Dana's last shift was {date:-22d}» (skiftet begynte kvelden før oppsigelsen kl. 03:14).
