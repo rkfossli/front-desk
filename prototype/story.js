@@ -2193,7 +2193,8 @@ window.NIGHTDESK_STORY = {
         { text: "its in the thread with us now", delay: "5s" },
         { text: "it hears this too. cant help that. its the only way", delay: "7s" },
         { text: "listen. tomorrow. my 3:12. i come down the stairs, not the car. on my side its a stair. on yours its a wall. the panel in your closet is where they stopped pouring", delay: "12s" },
-        { text: "be in 11c. not the lobby. dont take the sign down. dont hold any", delay: "9s" },
+        { text: "kevin told me not to come get him. i always went anyway. and now im saying it to you. dont come get me. be in 11c and let me come to you.", delay: "11s" },
+        { text: "not the lobby. dont take the sign down. dont hold any", delay: "9s" },
         { status: "offline" },
         { system: "Nothing more. Not Delivered, not Read. Just the last word hanging there without its full stop.", delay: "20s" }
       ],
