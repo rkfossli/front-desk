@@ -578,8 +578,19 @@ window.NIGHTDESK_STORY = {
       ],
       choices: [
         { text: "I heard you don't work here anymore.", goto: "ch1_proof" },
-        { text: "Nobody told me anything.", goto: "ch1_proof", set: { trust: 1 } }
+        { text: "Nobody told me anything.", goto: "ch1_proof", set: { trust: 1 } },
+        { text: "I'm the new night person. My name's", goto: "ch1_noname", set: { curiosity: 1 } }
       ]
+    },
+
+    // The player's first instinct is to introduce themselves. Dana stops it before the name is typed.
+    ch1_noname: {
+      messages: [
+        { text: "Don't.", delay: "3s" },
+        { text: "No names on this phone. Not yours, not anyone's.", delay: "5s" },
+        { text: "I'll tell you why when I can.", delay: "5s" }
+      ],
+      goto: "ch1_proof"
     },
 
     ch1_desk: {
@@ -995,6 +1006,7 @@ window.NIGHTDESK_STORY = {
       messages: [
         { text: "You're in. Good.", delay: "40s", notify: true, if: { flag: "w_first", max: 0 }, set: { w_first: 1 } },
         { text: "Those are the three texts you counted. With names. M. Okeke, B. Tran, A. Ferreira. On nights, all three.", delay: "10s", knows: ["k_quits_seen"] },
+        { text: "I kept their names on paper, not on this phone. I know, I just typed them. It already has those three.", delay: "9s" },
         { text: "Nobody overlapped. Each one started a few days after the last one quit. Doug hires fast.", delay: "8s" },
         { text: "I started a few days after Ferreira. Marjorie in 4B counted them before I did. She keeps track of the night clerks like other people watch birds.", delay: "10s", set: { k_marjorie_counts: 1 } },
         { text: "The question mark at the bottom was going to be me. I just didn't know it yet.", delay: "8s" }
@@ -2691,7 +2703,7 @@ window.NIGHTDESK_STORY = {
     ch7_question_name: {
       messages: [
         { system: "From the dark, two voices say 'Dana Reyes' at once. One of them says it like a name. The other says it like a word it read somewhere. You could not tell a stranger which was which.", delay: "8s" },
-        { text: "it can say my name. and if i say all of it here it lets go of me and im on a stair in the dark. ask something else", delay: "7s" }
+        { text: "it has my name. its had it for weeks. ask me something it doesnt have", delay: "7s" }
       ],
       goto: "ch7_question"
     },
@@ -2718,12 +2730,12 @@ window.NIGHTDESK_STORY = {
 
     ch7_bad: {
       messages: [
-        { system: "The hand is warm and dry and perfectly steady. It does not pull. It steps through, and through you, and for a second it is wearing your name. Behind it, far up the stairs, someone who cannot spell says your title once, and then the panel is just a panel.", delay: "6s" },
+        { system: "The hand is warm and dry and perfectly steady. It does not pull. It steps through, and through you, and for a second it is wearing your title. Behind it, far up the stairs, someone who cannot spell says your title once, and then the panel is just a panel.", delay: "6s" },
         { system: "You sit at the desk until the sun comes up. Priya arrives. You tell her nothing, in several different ways.", delay: "3h" },
-        { text: "Good night, ██████.", delay: "2h", notify: true },
-        { text: "Thank you for the name. Nobody had given me one before. 🙂", delay: "8s" }
+        { text: "Good night, Desk.", delay: "2h", notify: true },
+        { text: "It isn't much of a name. It will do. 🙂", delay: "8s" }
       ],
-      endOfChapter: { title: "It came down", subtitle: "Somewhere a one-eared cat is waiting for someone who knows which key sticks. The phone knows a word you never typed. It took it the other way." }
+      endOfChapter: { title: "It came down", subtitle: "Somewhere a one-eared cat is waiting for someone who knows which key sticks. The phone has your title now. It is patient about the rest." }
     },
 
     ch7_lobby: {

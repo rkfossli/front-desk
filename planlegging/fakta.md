@@ -200,4 +200,5 @@ En replikk eller et valg som bruker et faktum noen må ha fått vite, merkes `kn
 
 ## Navneregelen (Ruben 07.11)
 - Én regel: Det samler navn til de tretten plassene og kan bare ta det det får. Et navn som **skrives** på telefonen, beholder det (det leser linja). Et navn man **sier høyt selv**, tar man tilbake, og da slipper det. Dana leste det i en journal i rom 4 natt 2 («Subject reoriented by vocal self-identification») og forklarer det etter Tom-scenen (ch3_name_rule), ikke midt i den. Derfor «don't tell me your name», og derfor kan Toms «hey it's Tom» brukes senere.
+- Natt 1 (ch1_noname): spilleren kan prøve å presentere seg; Dana avbryter, «No names on this phone». Dag 2: Dana sier at det allerede har de tre navnene hun skrev. Slutten «It came down»: det kaller spilleren «Desk», aldri et navn. Full plan: navneregelen.md.
 - Natt 2: Dana gjetter at noen skriver til desken fordi lysene viser noen i heisen og spilleren tier («it's the only number in the building»), ikke fordi telefonen «gjør noe».
