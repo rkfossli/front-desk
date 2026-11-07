@@ -194,3 +194,6 @@ En replikk eller et valg som bruker et faktum noen må ha fått vite, merkes `kn
 - Dag 2-kvelden: Dana sier «my clock doesn't keep yours», og at hennes viser ca. ett. Regelen er: lås «as soon as we're done here», vær i 11C innen {window} med døren låst.
 - Motor: dag 2 (og andre «day»-pauser) starter alltid kl. 14 (i dag hvis klokka er før 10, ellers i morgen). Klokkeslettet Dana sier som {window} holdes til natten kommer.
 - Åpent til dag 4: hvorfor Kevins notatbok (K.L.) lå i 11C, som Dana aldri brukte. Forslag: hun tålte ikke å ha den hjemme.
+
+## Handlingsvalg (Ruben 07.11)
+- Et valg som er noe spilleren gjør, ikke skriver («Say nothing…», «Take the hand…»), får `action: "<systemlinje>"` i story.js. Motoren viser det som et sentrert, kursivt valg og legger systemlinjen i tråden i stedet for en sendt boble. Brukt i ch2_evening og ch7_question / ch7_question_gerald. Nye scener skal bruke dette for alle handlinger.

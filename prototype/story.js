@@ -774,7 +774,7 @@ window.NIGHTDESK_STORY = {
       ],
       choices: [
         { text: "Dana. The camera 6 recording has a hole in it. Right when the car came.", goto: "ch2_evening_dana", set: { knows_tape: 1, k_tape_told: 1 }, knows: ["k_tape"] },
-        { text: "Say nothing. Keep watching the lobby.", goto: "ch2_piano" }
+        { text: "Say nothing. Keep watching the lobby.", action: "You say nothing and keep watching the lobby.", goto: "ch2_piano" }
       ]
     },
 
@@ -2215,8 +2215,8 @@ window.NIGHTDESK_STORY = {
         { system: "Two hands come out of the dark at the same height. Both have the triangle on the wrist.", delay: "5s" }
       ],
       choices: [
-        { text: "Take the hand of the one who can't spell.", goto: "ch7_good", set: { trust: 1 } },
-        { text: "Take the hand of the one with the full stops.", goto: "ch7_bad" }
+        { text: "Take the hand of the one who can't spell.", action: "You take the hand of the one who can't spell.", goto: "ch7_good", set: { trust: 1 } },
+        { text: "Take the hand of the one with the full stops.", action: "You take the hand of the one with the full stops.", goto: "ch7_bad" }
       ]
     },
 
@@ -2227,8 +2227,8 @@ window.NIGHTDESK_STORY = {
         { system: "Both knew. Both were written on this phone. Two hands come out of the dark at the same height.", delay: "6s" }
       ],
       choices: [
-        { text: "Take the hand of the one who can't spell.", goto: "ch7_good", set: { trust: 1 } },
-        { text: "Take the hand with the smiley face.", goto: "ch7_bad" }
+        { text: "Take the hand of the one who can't spell.", action: "You take the hand of the one who can't spell.", goto: "ch7_good", set: { trust: 1 } },
+        { text: "Take the hand with the smiley face.", action: "You take the hand with the smiley face.", goto: "ch7_bad" }
       ]
     },
 

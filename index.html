@@ -285,6 +285,8 @@ button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent
 :root[data-skin="ios"] .sms .draft { --d: #34c759; }
 :root[data-skin="ios"] .draft:hover { background: color-mix(in srgb, var(--d) 22%, transparent); }
 .draft + .draft { margin-top: 2px; }
+/* Action choices: things the player does rather than texts. Centered and italic like a system line, never a bubble. */
+.draft.act, :root[data-skin="ios"] .draft.act, .choice.act { align-self: center; text-align: center; font-style: italic; border-style: dashed; border-radius: 14px; background: transparent; color: var(--sys-fg); border-color: color-mix(in srgb, var(--sys-fg) 55%, transparent); font-size: 14px; }
 .msg + .draft { margin-top: 10px; }
 .draft.photo { padding: 4px; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
 .draft.photo svg { display: block; width: 140px; max-width: 100%; height: auto; border-radius: 12px; opacity: .85; }
@@ -1225,7 +1227,7 @@ window.NIGHTDESK_STORY = {
       ],
       choices: [
         { text: "Dana. The camera 6 recording has a hole in it. Right when the car came.", goto: "ch2_evening_dana", set: { knows_tape: 1, k_tape_told: 1 }, knows: ["k_tape"] },
-        { text: "Say nothing. Keep watching the lobby.", goto: "ch2_piano" }
+        { text: "Say nothing. Keep watching the lobby.", action: "You say nothing and keep watching the lobby.", goto: "ch2_piano" }
       ]
     },
 
@@ -2666,8 +2668,8 @@ window.NIGHTDESK_STORY = {
         { system: "Two hands come out of the dark at the same height. Both have the triangle on the wrist.", delay: "5s" }
       ],
       choices: [
-        { text: "Take the hand of the one who can't spell.", goto: "ch7_good", set: { trust: 1 } },
-        { text: "Take the hand of the one with the full stops.", goto: "ch7_bad" }
+        { text: "Take the hand of the one who can't spell.", action: "You take the hand of the one who can't spell.", goto: "ch7_good", set: { trust: 1 } },
+        { text: "Take the hand of the one with the full stops.", action: "You take the hand of the one with the full stops.", goto: "ch7_bad" }
       ]
     },
 
@@ -2678,8 +2680,8 @@ window.NIGHTDESK_STORY = {
         { system: "Both knew. Both were written on this phone. Two hands come out of the dark at the same height.", delay: "6s" }
       ],
       choices: [
-        { text: "Take the hand of the one who can't spell.", goto: "ch7_good", set: { trust: 1 } },
-        { text: "Take the hand with the smiley face.", goto: "ch7_bad" }
+        { text: "Take the hand of the one who can't spell.", action: "You take the hand of the one who can't spell.", goto: "ch7_good", set: { trust: 1 } },
+        { text: "Take the hand with the smiley face.", action: "You take the hand with the smiley face.", goto: "ch7_bad" }
       ]
     },
 
@@ -3207,8 +3209,9 @@ window.NIGHTDESK_STORY = {
     requestNotifyPermission(); hideBanner();
     const dest = state.awaitingThread || STORY_ID; state.awaiting = null; state.awaitingThread = null;
     const text = fill(c.text);
-    const entry = { from: "me", text, at: Date.now() };
-    if (c.image) { entry.image = c.image; delete entry.text; }
+    // An action choice ("Say nothing", "Take the hand") is something the player does, not a text: it becomes an italic system line.
+    const entry = c.action ? { system: fill(typeof c.action === "string" ? c.action : c.text), at: Date.now() } : { from: "me", text, at: Date.now() };
+    if (c.image && !c.action) { entry.image = c.image; delete entry.text; }
     if (dest === STORY_ID) state.log.push(entry); else (state.extra[dest] = state.extra[dest] || []).push(entry);
     $("log").querySelectorAll(".draft").forEach(g => g.remove()); resetField();
     renderMsg(entry); updateNotices(); scrollLog(false); $("choices").innerHTML = "";
@@ -3265,6 +3268,7 @@ window.NIGHTDESK_STORY = {
       // iPhone: text replies become QuickType suggestions above the keyboard; photo replies stay as chips.
       resetField(); showKeyboard(true);
       state.awaiting.forEach((c, i) => {
+        if (c.action) { const b = document.createElement("button"); b.type = "button"; b.className = "choice act"; b.textContent = fill(c.text); b.addEventListener("click", () => choose(c)); box.appendChild(b); return; }
         if (c.image && IMAGES[c.image]) {
           const b = document.createElement("button"); b.type = "button"; b.className = "choice photo"; b.innerHTML = IMAGES[c.image]() + "<span></span>"; b.querySelector("span").textContent = fill(c.text);
           b.addEventListener("click", () => typeInto(c)); box.appendChild(b); return;
@@ -3278,13 +3282,15 @@ window.NIGHTDESK_STORY = {
         const b = document.createElement("button"); b.type = "button"; b.className = "choice"; b.style.animationDelay = (i * 80) + "ms";
         if (c.image && IMAGES[c.image]) { b.classList.add("photo"); b.innerHTML = IMAGES[c.image]() + "<span></span>"; b.querySelector("span").textContent = fill(c.text); }
         else b.textContent = fill(c.text);
-        b.addEventListener("click", () => typeInto(c)); box.appendChild(b);
+        if (c.action) b.classList.add("act");
+        b.addEventListener("click", () => c.action ? choose(c) : typeInto(c)); box.appendChild(b);
       });
     } else {
       state.awaiting.forEach((c, i) => {
         const g = document.createElement("button"); g.type = "button"; g.className = "draft"; g.style.animationDelay = (i * 80) + "ms";
         if (c.image && IMAGES[c.image]) { g.classList.add("photo"); g.innerHTML = IMAGES[c.image]() + "<small></small>"; g.querySelector("small").textContent = fill(c.text); }
         else g.textContent = fill(c.text);
+        if (c.action) g.classList.add("act");
         g.addEventListener("click", () => choose(c)); $("log").appendChild(g);
       });
     }
