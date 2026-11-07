@@ -197,3 +197,7 @@ En replikk eller et valg som bruker et faktum noen må ha fått vite, merkes `kn
 
 ## Handlingsvalg (Ruben 07.11)
 - Et valg som er noe spilleren gjør, ikke skriver («Say nothing…», «Take the hand…»), får `action: "<systemlinje>"` i story.js. Motoren viser det som et sentrert, kursivt valg og legger systemlinjen i tråden i stedet for en sendt boble. Brukt i ch2_evening og ch7_question / ch7_question_gerald. Nye scener skal bruke dette for alle handlinger.
+
+## Navneregelen (Ruben 07.11)
+- Én regel: Det samler navn til de tretten plassene og kan bare ta det det får. Et navn som **skrives** på telefonen, beholder det (det leser linja). Et navn man **sier høyt selv**, tar man tilbake, og da slipper det. Dana leste det i en journal i rom 4 natt 2 («a patient got out by shouting his own name at it»). Derfor «don't tell me your name», og derfor kan Toms «hey it's Tom» brukes senere.
+- Natt 2: Dana gjetter at noen skriver til desken fordi lysene viser noen i heisen og spilleren tier («it's the only number in the building»), ikke fordi telefonen «gjør noe».

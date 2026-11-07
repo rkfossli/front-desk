@@ -1050,7 +1050,7 @@ window.NIGHTDESK_STORY = {
         { to: "tom", text: "ok??", delay: "6s" },
         { to: "tom", text: "why would I get out it's not my floor", delay: "4s" },
         { text: "the lights just went. all of them, down the hall. it only does that when it's got someone in the car.", delay: "8s" },
-        { text: "and you've gone quiet. you're typing to someone else, I can tell, the phone does a thing up here when you type.", delay: "7s" },
+        { text: "and you've gone quiet. is someone texting the desk? whoever's in that car, that's who they'd text. it's the only number in the building.", delay: "7s" },
         { text: "Who's texting you.", delay: "4s" },
         { text: "Desk. Who.", delay: "3s" }
       ],
@@ -1061,7 +1061,7 @@ window.NIGHTDESK_STORY = {
       messages: [
         { to: "tom", text: "nothing. it's dark. the little arrow is lit and pointing up", delay: "7s" },
         { text: "the lights just went. all of them, down the hall. it only does that when it's got someone in the car.", delay: "8s" },
-        { text: "and you've gone quiet. you're typing to someone else, I can tell, the phone does a thing up here when you type.", delay: "7s" },
+        { text: "and you've gone quiet. is someone texting the desk? whoever's in that car, that's who they'd text. it's the only number in the building.", delay: "7s" },
         { text: "Who's texting you.", delay: "4s" },
         { text: "Desk. Who.", delay: "3s" }
       ],
@@ -1072,7 +1072,7 @@ window.NIGHTDESK_STORY = {
       messages: [
         { to: "tom", text: "ok. quick please. it's humming", delay: "6s" },
         { text: "the lights just went. all of them, down the hall. it only does that when it's got someone in the car.", delay: "6s" },
-        { text: "and you've gone quiet. you're typing to someone else, I can tell, the phone does a thing up here when you type.", delay: "7s" },
+        { text: "and you've gone quiet. is someone texting the desk? whoever's in that car, that's who they'd text. it's the only number in the building.", delay: "7s" },
         { text: "Who's texting you.", delay: "4s" },
         { text: "Desk. Who.", delay: "3s" }
       ],
@@ -1133,7 +1133,8 @@ window.NIGHTDESK_STORY = {
         { to: "tom", text: "ok L. pressing. nothing's happening", delay: "6s" },
         { to: "tom", text: "the doors aren't closing", delay: "5s", notify: true },
         { text: "the car's still sitting at the end of the hall with the doors open. i can hear it.", delay: "6s", notify: true },
-        { text: "Tell him to say his own name out loud. Full name. Then press L again.", delay: "6s" }
+        { text: "Tell him to say his own name out loud. Full name. Out loud, not in a text. Then press L again.", delay: "6s" },
+        { text: "There's a chart in room 4. A nurse wrote that a patient got out by shouting his own name at it. Typed names it keeps. That's why you don't tell me yours.", delay: "9s", set: { k_name_rule: 1 } }
       ],
       thread: "tom",
       choices: [
