@@ -936,7 +936,7 @@ window.NIGHTDESK_STORY = {
 
     ch2_game_need: {
       messages: [
-        { text: "Same. That's how it gets you. It doesn't look for heroes. It looks for people who need the room.", delay: "11s" }
+        { text: "Same. That's how this place gets you. It doesn't look for heroes. It looks for people who need the room. Nobody comes looking for them.", delay: "11s" }
       ],
       goto: "ch2_end"
     },
