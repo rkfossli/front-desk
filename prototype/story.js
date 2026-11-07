@@ -1133,8 +1133,7 @@ window.NIGHTDESK_STORY = {
         { to: "tom", text: "ok L. pressing. nothing's happening", delay: "6s" },
         { to: "tom", text: "the doors aren't closing", delay: "5s", notify: true },
         { text: "the car's still sitting at the end of the hall with the doors open. i can hear it.", delay: "6s", notify: true },
-        { text: "Tell him to say his own name out loud. Full name. Out loud, not in a text. Then press L again.", delay: "6s" },
-        { text: "There's a chart in room 4. A nurse wrote that a patient got out by shouting his own name at it. Typed names it keeps. That's why you don't tell me yours.", delay: "9s", set: { k_name_rule: 1 } }
+        { text: "Tell him to say his own name out loud. Full name. Out loud, not in a text. Then press L again. I'll explain after.", delay: "7s" }
       ],
       thread: "tom",
       choices: [
@@ -1149,7 +1148,10 @@ window.NIGHTDESK_STORY = {
         { to: "tom", text: "fine", delay: "4s" },
         { to: "tom", text: "I said it and the doors closed. how did you know that", delay: "20s", notify: true },
         { to: "tom", text: "moving. it's moving", delay: "5s" },
-        { to: "tom", text: "lobby. I'm in the lobby. what the fuck was that", delay: "25s", notify: true }
+        { to: "tom", text: "lobby. I'm in the lobby. what the fuck was that", delay: "25s", notify: true },
+        { to: "tom", text: "that's the weirdest way I've ever seen an elevator get fixed", delay: "9s" },
+        { to: "tom", text: "the name thing was a coincidence. it has to be", delay: "6s" },
+        { to: "tom", text: "and if this is some kind of prank, there will be consequences. I'm not joking", delay: "7s" }
       ],
       thread: "tom",
       choices: [
@@ -1196,9 +1198,9 @@ window.NIGHTDESK_STORY = {
 
     ch3_name_rule: {
       messages: [
-        { text: "The name thing. I found it in a chart in room 4. 'Subject reoriented by vocal self-identification.' It was how they brought people back when the machine went too far.", delay: "14s" },
-        { text: "It works on the building too. It hates being told who someone is.", delay: "8s" },
-        { text: "Which is why you never tell it yours. Desk.", delay: "6s" },
+        { text: "The name thing. I found it in a chart in room 4 tonight. 'Subject reoriented by vocal self-identification.' It was how they brought people back when the machine went too far.", delay: "14s" },
+        { text: "Here's how I read it. Every name that goes over this phone, it keeps. It can't make anything up, so it collects. But your own name, out loud, in your own mouth, it can't hold on to.", delay: "12s", set: { k_name_rule: 1 } },
+        { text: "That's why Tom had to say his. And that's why you never type yours. Desk.", delay: "7s" },
         { text: "The lights are coming back up. It's done for tonight. Lock your door and get some sleep when you can. I mean it.", delay: "10s" },
         { text: "🐈", delay: "3s", if: { flag: "fed_toto", min: 1 } },
         { status: "offline" }
@@ -1344,7 +1346,7 @@ window.NIGHTDESK_STORY = {
         { text: "It can only write down what it's been given. That's the rule I keep finding. It doesn't invent. It copies.", delay: "11s" },
         { text: "So as long as all it has is Desk, all it can call is Desk. You understand why I never asked.", delay: "10s" },
         { text: "The chart in room 4 says one more thing, and I wish I'd read it before Tom went up. 'Subject reoriented by vocal self-identification.' You say your own full name out loud and it has to let go. It's how they brought people back when the machine went too far.", delay: "16s", if: { flag: "tom_lost", min: 1 } },
-        { text: "It works on the building too. It hates being told who someone is. Which is why you never tell it yours.", delay: "9s", if: { flag: "tom_lost", min: 1 } },
+        { text: "Every name that goes over this phone, it keeps. But your own name, out loud, in your own mouth, it can't hold on to. That's the difference. Which is why you never type yours.", delay: "10s", if: { flag: "tom_lost", min: 1 } },
         { text: "And when Marjorie in 4B gets to you, and she will, she gets to everyone: talk to her. She was here when they poured the floors.", delay: "12s" },
         { status: "offline" },
         { to: "marjorie", text: "Dear, this is Marjorie in 4B. I saw you carry a cat carrier up the stairs yesterday, which means two things. The elevator is misbehaving again, and you have a cat.", delay: "40m", notify: true, if: { flag: "toto_home", min: 1 } },
