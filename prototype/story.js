@@ -1424,7 +1424,27 @@ window.NIGHTDESK_STORY = {
 
     ch4_end: {
       messages: [
-        { text: "Lock your door, Desk. Marjorie tomorrow, after ten. Then I'll tell you what else was on the back of that chart.", delay: "8s" },
+        { text: "Lock your door, Desk.", delay: "8s" }
+      ],
+      choices: [
+        { text: "Marjorie texted, like you said she would. Tea tomorrow after ten. She says the man who sold the building was called Ashgrove.", goto: "ch4_end_tea", set: { told_tea: 1, trust: 1 } },
+        { text: "Goodnight, Dana.", goto: "ch4_end_quiet" }
+      ]
+    },
+
+    ch4_end_tea: {
+      messages: [
+        { text: "Ashgrove. Same as my sticky note.", delay: "7s" },
+        { text: "Go. Take the note with you. Then I'll tell you what else was on the back of that chart.", delay: "8s" },
+        { text: "🐈", delay: "3s", if: { flag: "fed_toto", min: 1 } },
+        { status: "offline" }
+      ],
+      endOfChapter: { title: "End of Day 3", subtitle: "Priya knows something. Marjorie knows more. Name eleven on the list is a word only two people use.", next: "ch5_start" }
+    },
+
+    ch4_end_quiet: {
+      messages: [
+        { text: "Night. Tomorrow I'll tell you what else was on the back of that chart.", delay: "7s" },
         { text: "🐈", delay: "3s", if: { flag: "fed_toto", min: 1 } },
         { status: "offline" }
       ],
@@ -1443,7 +1463,8 @@ window.NIGHTDESK_STORY = {
       messages: [
         { system: "You sleep badly and late. Light through the blind. The notebook is on the table where you left it, closed. You put it in your jacket without opening it.", delay: "day" },
         { text: "morning desk", delay: "20s", notify: true },
-        { text: "did you go to marjorie", delay: "6s" }
+        { text: "did you go to marjorie", delay: "6s", if: { flag: "told_tea", min: 1 } },
+        { text: "did marjorie get to you yet", delay: "6s", if: { flag: "told_tea", max: 0 } }
       ],
       choices: [
         { text: "Going now. {weekday:+0d}s are for cake.", goto: "ch5_marjorie_go" },
