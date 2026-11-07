@@ -205,3 +205,8 @@ En replikk eller et valg som bruker et faktum noen må ha fått vite, merkes `kn
 
 ## Dana og Marjorie (Ruben 07.11)
 - Dana kjenner Marjorie fra egne netter (talte nattevaktene, inviterte til te, gul lapp). På dag 3 spår hun at Marjorie vil ta kontakt (ch4_desk_name). Hun vet **ikke** at Marjorie faktisk inviterte spilleren før spilleren sier det i ch4_end (told_tea). Uten told_tea spør hun på dag 4 «did marjorie get to you yet».
+
+## Tatoveringen og Kevin (Ruben 07.11)
+- Dag 2: wristband-bildet viser kanten av Danas hånd med tre små trekanter på håndleddet. Spilleren kan spørre (ch2_tattoo, valgfritt, k_tattoo): «Long story. Not today.»
+- Dag 4 (ch5_kevin_tell) forklarer i rekkefølge: Li er familienavnet, Dana tok stefarens navn Reyes, Kevin beholdt Li; Zelda-replikken fra den gamle mannen i hula; Kevin døde 19 år; tatoveringen er Triforce fra samme spill. Siste side er papir i spillerens jakke, så det har ikke sett den.
+- Natt 6: begge hendene har trekanten, fordi det har sett bildet.

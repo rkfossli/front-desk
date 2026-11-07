@@ -860,7 +860,8 @@ window.NIGHTDESK_STORY = {
       choices: [
         { text: "Desk?", goto: "ch2_desk_name", set: { wq_desk: 1 } },
         { text: "What is LANTERN?", goto: "ch2_lantern", set: { curiosity: 1, wq_lantern: 1 } },
-        { text: "Dana, get out of that room.", goto: "ch2_getout", set: { trust: 1, wq_out: 1 } }
+        { text: "Dana, get out of that room.", goto: "ch2_getout", set: { trust: 1, wq_out: 1 } },
+        { text: "Is that a tattoo on your wrist?", goto: "ch2_tattoo", set: { wq_tattoo: 1 } }
       ]
     },
 
@@ -869,8 +870,17 @@ window.NIGHTDESK_STORY = {
       choices: [
         { text: "Desk?", goto: "ch2_desk_name", set: { wq_desk: 1 }, if: { flag: "wq_desk", max: 0 } },
         { text: "What is LANTERN?", goto: "ch2_lantern", set: { curiosity: 1, wq_lantern: 1 }, if: { flag: "wq_lantern", max: 0 } },
-        { text: "Dana, get out of that room.", goto: "ch2_getout", set: { trust: 1, wq_out: 1 }, if: { flag: "wq_out", max: 0 } }
+        { text: "Dana, get out of that room.", goto: "ch2_getout", set: { trust: 1, wq_out: 1 }, if: { flag: "wq_out", max: 0 } },
+        { text: "Is that a tattoo on your wrist?", goto: "ch2_tattoo", set: { wq_tattoo: 1 }, if: { flag: "wq_tattoo", max: 0 } }
       ]
+    },
+
+    ch2_tattoo: {
+      messages: [
+        { text: "Three triangles. Yes.", delay: "6s" },
+        { text: "Long story. Not today. Today I'm busy being a ghost.", delay: "7s", set: { k_tattoo: 1 } }
+      ],
+      goto: [{ if: [{ flag: "wq_desk", min: 1 }, { flag: "wq_lantern", min: 1 }, { flag: "wq_out", min: 1 }], goto: "ch2_game" }, { goto: "ch2_wristband_hub" }]
     },
 
     ch2_desk_name: {
@@ -1700,13 +1710,15 @@ window.NIGHTDESK_STORY = {
     ch5_kevin_tell: {
       messages: [
         { system: "The last page isn't music. A letter in blue ballpoint, the handwriting slanting hard to the right: 'Dan. Don't come get me this time. It's dangerous to go alone, take this. K.'", delay: "4s" },
-        { text: "K.L. is Kevin Li. My brother. Li was Dad's name. I took Reyes when Mom remarried, Kevin wouldn't. The notebook was his. The songs are his, mostly bad, one good.", delay: "12s" },
-        { text: "He died when he was 19. Overdose, in a bathroom in Gresham, with his phone in his hand. The last thing on it was a text to me. 'dangerous to go alone'. It's from Zelda. We said it instead of goodbye.", delay: "16s" },
-        { text: "The tattoo is that. Not a nerd thing. Well. Also a nerd thing.", delay: "8s" },
+        { text: "K.L. is Kevin Li. My little brother. Li is our real family name. Mom remarried a man called Hector Reyes and I took his name. Kevin kept ours. The notebook was his. The songs are his, mostly bad, one good.", delay: "13s" },
+        { text: "When we were kids we played Zelda on a bootleg console behind the laundromat. At the start an old man in a cave gives you a sword and says 'It's dangerous to go alone, take this.' Kevin and I said it instead of goodbye.", delay: "14s" },
+        { text: "He died when he was 19. Overdose, in a bathroom in Gresham, with his phone in his hand. The last text on it was to me. 'dangerous to go alone'.", delay: "12s" },
+        { text: "The triangles on my wrist you asked about. That's the Triforce, from the same game. I got it the week after.", delay: "9s", if: { flag: "k_tattoo", min: 1 } },
+        { text: "I've got three triangles on my wrist, you might have seen them in the wristband photo. That's the Triforce, from the same game. I got it the week after.", delay: "10s", if: { flag: "k_tattoo", max: 0 } },
         { text: "I went and got him every time before that one. Every single time.", delay: "9s" },
         { text: "that's why I couldn't leave tom in that car.", delay: "7s", if: { flag: "tom_lost", max: 0 } },
         { text: "that's why I'm not leaving tom up here.", delay: "7s", if: { flag: "tom_lost", min: 1 } },
-        { text: "I've never told anyone in this building that. Not Priya. And I've just typed it on this phone, so now it knows too. It only knows what I typed, desk. The page is in your jacket, not mine. Remember which is which.", delay: "14s", set: { knows_kevin: 1 } }
+        { text: "I've never told anyone in this building that. Not Priya. And I just typed it on this phone, so now it has it too. But the last page is paper, in your jacket. It hasn't seen that. Remember that.", delay: "13s", set: { knows_kevin: 1 } }
       ],
       choices: [
         { text: "I'm sorry about Kevin.", goto: "ch5_after_kevin" },

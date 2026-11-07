@@ -1121,12 +1121,14 @@ button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent
         <rect width="240" height="180" filter="url(#g6)" opacity=".9"/></svg>`;
     },
     wristband() {
-      return `<svg viewBox="0 0 240 180" role="img" aria-label="A yellowed plastic patient wristband on a tiled floor">
+      return `<svg viewBox="0 0 240 180" role="img" aria-label="A yellowed plastic patient wristband on a tiled floor, the edge of a hand and wrist in the corner with a small tattoo of three triangles">
         <defs><filter id="g3"><feTurbulence baseFrequency=".7" numOctaves="2" seed="11"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".18"/></feComponentTransfer></filter></defs>
         <rect width="240" height="180" fill="#3b3a33"/>
         ${Array.from({ length: 6 }, (_, r) => Array.from({ length: 8 }, (_, c) => `<rect x="${c * 30 + 1}" y="${r * 30 + 1}" width="28" height="28" fill="${(r + c) % 2 ? "#4a483f" : "#44423a"}"/>`).join("")).join("")}
         <path d="M60 110 C 90 60, 160 60, 190 100 C 200 115, 190 125, 175 118 C 150 90, 100 90, 75 120 C 65 130, 55 122, 60 110 Z" fill="#e6dcb8" stroke="#b9ae8a"/>
         <text x="122" y="86" text-anchor="middle" font-family="Roboto Mono, monospace" font-size="7" fill="#3a2f20" transform="rotate(-8 122 86)">PT-09  LANTERN  ASHGROVE</text>
+        <path d="M240 128 L196 112 C 186 109, 178 114, 180 121 L 186 124 C 176 126, 172 133, 178 137 L 240 158 Z" fill="#d9b89a" stroke="#b8957a" stroke-width=".8"/>
+        <g fill="#2b2b35" transform="translate(214 136) rotate(18)"><path d="M0 -7 L4 0 L-4 0 Z"/><path d="M-4 0 L0 7 L-8 7 Z"/><path d="M4 0 L8 7 L0 7 Z"/></g>
         <rect width="240" height="180" filter="url(#g3)" opacity=".9"/></svg>`;
     }
   };

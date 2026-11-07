@@ -127,3 +127,6 @@ Status:    planlagt (prototypen tegner SVG)
 
 - **clipping_1979** (dag 5, systemlinje i `ch6_start`; bilde ikke skrevet ennå): Marjories avisutklipp fra The Oregonian 1979, «CALLOWAY TOWER REOPENS AS CONDOMINIUMS», skjøvet under døren til 11C. Vår side, kilde 1: spillerens mobil i dagslys, skarpt; det eneste «kornet» er trykkrasteret i avispapiret.
 - **sign** (dag 3, ikke brukt ennå): skiltet «ELEVATOR OUT OF SERVICE – USE STAIRS» foran heisdørene i lobbyen, vår side, kilde 1: spillerens mobil under lobbyens lysrør, skarpt.
+
+
+> Tillegg 07.11: wristband-bildet skal også vise kanten av Danas hånd i hjørnet, med en liten Triforce-tatovering (tre trekanter) på håndleddet. Den må være tydelig nok til at spilleren spør om den.
