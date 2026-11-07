@@ -561,8 +561,8 @@ window.NIGHTDESK_STORY = {
   nodes: {
     ch1_start: {
       messages: [
-        { text: "Are you there?", delay: "0s", notify: true },
-        { text: "Please. I know someone has the desk phone. It's the only number that reaches down there. Don't ask me how yet.", delay: "6s", notify: true }
+        { text: "are you there?", delay: "0s", notify: true },
+        { text: "please. i know someone has the desk phone. it's the only number that reaches down there. don't ask me how yet", delay: "6s", notify: true }
       ],
       choices: [
         { text: "Who is this?", goto: "ch1_who" },
@@ -573,8 +573,8 @@ window.NIGHTDESK_STORY = {
 
     ch1_who: {
       messages: [
-        { text: "Dana. I worked the desk. Nights. Before you.", delay: "5s" },
-        { text: "What did they tell you? That I quit?", delay: "4s" }
+        { text: "dana. i worked the desk. nights. before you", delay: "5s" },
+        { text: "what did they tell you? that i quit?", delay: "4s" }
       ],
       choices: [
         { text: "I heard you don't work here anymore.", goto: "ch1_proof" },
@@ -586,35 +586,36 @@ window.NIGHTDESK_STORY = {
     // The player's first instinct is to introduce themselves. Dana stops it before the name is typed.
     ch1_noname: {
       messages: [
-        { text: "Don't.", delay: "3s" },
-        { text: "No names on this phone. Not yours, not anyone's.", delay: "5s" },
-        { text: "I'll tell you why when I can.", delay: "5s" }
+        { text: "don't", delay: "3s" },
+        { text: "no names on this phone. not yours, not anyone's", delay: "5s" },
+        { text: "i'll tell you why when i can", delay: "5s" }
       ],
       goto: "ch1_proof"
     },
 
     ch1_desk: {
       messages: [
-        { text: "Dana Reyes. I had your job until three weeks ago.", delay: "5s" },
-        { text: "Same desk. I sat where you're sitting.", delay: "7s" }
+        { text: "dana reyes. i had your job until three weeks ago", delay: "5s" },
+        { text: "same desk. i sat where you're sitting", delay: "7s" },
+        { text: "and you can drop the front desk voice. capital letters were for residents. doug spot-checks the resident threads", delay: "5s" }
       ],
       goto: "ch1_proof"
     },
 
     ch1_wrong: {
       messages: [
-        { text: "It's not. This number is the desk phone.", delay: "4s" },
-        { text: "I used to be the one holding it.", delay: "5s" },
-        { text: "Dana. Nights. Before you.", delay: "3s" }
+        { text: "it's not. this number is the desk phone", delay: "4s" },
+        { text: "i used to be the one holding it", delay: "5s" },
+        { text: "dana. nights. before you", delay: "3s" }
       ],
       goto: "ch1_proof"
     },
 
     ch1_proof: {
       messages: [
-        { text: "I need you to do something and I need you to not ask why yet.", delay: "8s" },
-        { text: "Go down to the desk if you're not there. Sit where the lamp is. Then look at camera 6, the elevator lobby. What floor is the elevator on?", delay: "8s" },
-        { text: "I've got an old monitor up here that shows me the same lobby. Mine has said 12 for three weeks. I need to know if yours does too.", delay: "9s" },
+        { text: "i need you to do something and i need you to not ask why yet", delay: "8s" },
+        { text: "go down to the desk if you're not there. sit where the lamp is. then look at camera 6, the elevator lobby. what floor is the elevator on?", delay: "8s" },
+        { text: "i've got an old monitor up here that shows me the same lobby. mine has said 12 for three weeks. i need to know if yours does too", delay: "9s" },
         { system: "The desk lamp is on, the way it always is. The monitor cycles through the cameras to your left and stops on 6. The lobby is empty. Above the elevator doors, the floor indicator reads 12. It did that once on your second night. You thought it was a glitch.", delay: "1m", set: { k_floor12: 1, at_desk: 1 } }
       ],
       choices: [
@@ -625,22 +626,22 @@ window.NIGHTDESK_STORY = {
 
     ch1_floor12: {
       messages: [
-        { text: "Okay. Okay.", delay: "4s" },
-        { text: "Then yours sees it too. It isn't just me up here.", delay: "5s" },
+        { text: "okay. okay", delay: "4s" },
+        { text: "then yours sees it too. it isn't just me up here", delay: "5s" },
         { image: "camera6", caption: "CAM 06 · ELEVATOR LOBBY", delay: "9s", set: { k_monitor_date: 1 } },
-        { text: "That's my screen. Same camera, same 12.", delay: "5s" },
-        { text: "There is no 12. The panel inside goes 11, 14. Look next time you're in there.", delay: "6s" }
+        { text: "that's my screen. same camera, same 12", delay: "5s" },
+        { text: "there is no 12. the panel inside goes 11, 14. look next time you're in there", delay: "6s" }
       ],
       goto: "ch1_ask"
     },
 
     ch1_stubborn: {
       messages: [
-        { text: "Fair.", delay: "5s" },
-        { text: "Three weeks ago I took the elevator up at 3:12. It didn't stop at 11. It didn't stop at 14.", delay: "9s" },
-        { text: "I'm still up here.", delay: "6s" },
+        { text: "fair", delay: "5s" },
+        { text: "three weeks ago i took the elevator up at 3:12. it didn't stop at 11. it didn't stop at 14", delay: "9s" },
+        { text: "i'm still up here", delay: "6s" },
         { image: "camera6", caption: "CAM 06 · ELEVATOR LOBBY", delay: "7s", set: { k_monitor_date: 1 } },
-        { text: "That's mine. Up here.", delay: "4s" }
+        { text: "that's mine. up here", delay: "4s" }
       ],
       goto: "ch1_ask"
     },
@@ -648,7 +649,7 @@ window.NIGHTDESK_STORY = {
     // The player is holding a building's desk phone; they get to demand answers before doing anything for her.
     ch1_ask: {
       messages: [
-        { text: "I know. You've got questions. Ask. Fast.", delay: "6s" }
+        { text: "i know. you've got questions. ask. fast", delay: "6s" }
       ],
       choices: [
         { text: "Where are you, exactly?", goto: "ch1_a_where", set: { a1_where: 1 } },
@@ -668,22 +669,22 @@ window.NIGHTDESK_STORY = {
 
     ch1_a_where: {
       messages: [
-        { text: "Same building. Between 11 and 14, where the panel says there's nothing.", delay: "8s" },
-        { text: "Same hallways, wrong decade. Ashtrays. A calendar on the wall that says 1974.", delay: "8s" },
-        { text: "I'm in a stairwell. It's the only place the hum doesn't reach.", delay: "6s" },
-        { text: "And before you ask: the stairs here only go up, and up ends at a door I can't open. I've tried down. Every landing is 12 again.", delay: "8s" },
-        { text: "My phone says three weeks. My body says one long night that keeps restarting. I haven't been hungry once. I'm trying not to think about what that means.", delay: "10s" }
+        { text: "same building. between 11 and 14, where the panel says there's nothing", delay: "8s" },
+        { text: "same hallways, wrong decade. ashtrays. a calendar on the wall that says 1974", delay: "8s" },
+        { text: "i'm in a stairwell. it's the only place the hum doesn't reach", delay: "6s" },
+        { text: "and before you ask: the stairs here only go up, and up ends at a door i can't open. i've tried down. every landing is 12 again", delay: "8s" },
+        { text: "my phone says three weeks. my body says one long night that keeps restarting. i haven't been hungry once. i'm trying not to think about what that means", delay: "10s" }
       ],
       goto: [{ if: [{ flag: "a1_where", min: 1 }, { flag: "a1_guards", min: 1 }, { flag: "a1_believe", min: 1 }], goto: "ch1_clock" }, { goto: "ch1_ask_hub" }]
     },
 
     ch1_a_guards: {
       messages: [
-        { text: "Open Doug's thread on that phone. Scroll up. Count the 'I quit's.", delay: "6s" },
+        { text: "open doug's thread on that phone. scroll up. count the 'i quit's", delay: "6s" },
         { system: "You open it. Messages sent from this phone, all with the same words: I quit. Sorry for the short notice. All of them at 3:14 in the morning.", delay: "6s", set: { k_quits_seen: 1 } },
-        { text: "Every night I had that phone, I read those three. {month:-158d}, {month:-103d}, {month:-49d}. Three of us on nights, gone, same words, same minute.", delay: "10s" },
-        { text: "I spent a month trying to find out where they went.", delay: "6s" },
-        { text: "How many are there now?", delay: "5s" }
+        { text: "every night i had that phone, i read those three. {month:-158d}, {month:-103d}, {month:-49d}. three of us on nights, gone, same words, same minute", delay: "10s" },
+        { text: "i spent a month trying to find out where they went", delay: "6s" },
+        { text: "how many are there now?", delay: "5s" }
       ],
       choices: [
         { text: "Four. The last one is from {date:-21d}.", goto: "ch1_a_fourth", set: { k_fourth_told: 1 }, knows: ["k_quits_seen"] }
@@ -692,9 +693,9 @@ window.NIGHTDESK_STORY = {
 
     ch1_a_fourth: {
       messages: [
-        { text: "{date:-21d}.", delay: "8s" },
-        { text: "That's my night. I didn't send that. I was already up here.", delay: "7s", knows: ["k_fourth_told"] },
-        { text: "And Doug just said okay. Three times. Nobody came looking.", delay: "8s" }
+        { text: "{date:-21d}", delay: "8s" },
+        { text: "that's my night. i didn't send that. i was already up here", delay: "7s", knows: ["k_fourth_told"] },
+        { text: "and doug just said okay. three times. nobody came looking", delay: "8s" }
       ],
       choices: [
         { text: "Then who sent yours?", goto: "ch1_a_who_sent" },
@@ -704,30 +705,30 @@ window.NIGHTDESK_STORY = {
 
     ch1_a_who_sent: {
       messages: [
-        { text: "I don't know yet. The same thing that sent the other three, from the same phone you're holding.", delay: "9s" }
+        { text: "i don't know yet. the same thing that sent the other three, from the same phone you're holding", delay: "9s" }
       ],
       goto: [{ if: [{ flag: "a1_where", min: 1 }, { flag: "a1_guards", min: 1 }, { flag: "a1_believe", min: 1 }], goto: "ch1_clock" }, { goto: "ch1_ask_hub" }]
     },
 
     ch1_a_doug_call: {
       messages: [
-        { text: "And when I didn't call, he hired you.", delay: "7s" }
+        { text: "and when i didn't call, he hired you", delay: "7s" }
       ],
       goto: [{ if: [{ flag: "a1_where", min: 1 }, { flag: "a1_guards", min: 1 }, { flag: "a1_believe", min: 1 }], goto: "ch1_clock" }, { goto: "ch1_ask_hub" }]
     },
 
     ch1_a_believe: {
       messages: [
-        { text: "You shouldn't. Not yet. Open the bottom drawer. The logbook. My last entry.", delay: "8s" },
+        { text: "you shouldn't. not yet. open the bottom drawer. the logbook. my last entry", delay: "8s" },
         { system: "The logbook's last page, in fast handwriting: '{date:-21d}. 3:05. Indicator on 12 again. Third time this month. Going up to look. Just look, doors held. Card's under this book so whoever's next can find it if I'm stupid. If I'm not back by'", delay: "6s" },
-        { text: "That's where I stopped. I meant to finish that sentence.", delay: "7s" }
+        { text: "that's where i stopped. i meant to finish that sentence", delay: "7s" }
       ],
       goto: [{ if: [{ flag: "a1_where", min: 1 }, { flag: "a1_guards", min: 1 }, { flag: "a1_believe", min: 1 }], goto: "ch1_clock" }, { goto: "ch1_ask_hub" }]
     },
 
     ch1_clock: {
       messages: [
-        { text: "What time is it down there?", delay: "5s" }
+        { text: "what time is it down there?", delay: "5s" }
       ],
       choices: [
         { text: "{time}", goto: "ch1_plan", set: { gave_time: 1 } },
@@ -737,9 +738,9 @@ window.NIGHTDESK_STORY = {
 
     ch1_plan: {
       messages: [
-        { text: "{time}. Okay. Just wanted to know you're real. Mine says 3:02. Doesn't matter what yours says. When mine says 3:12, the car comes. Ten minutes, maybe.", delay: "6s", if: { flag: "gave_time", min: 1 } },
-        { text: "Because it's 3:02 up here, and the clocks don't agree. For you it's maybe ten minutes away. Don't do the math.", delay: "6s", if: { flag: "gave_time", max: 0 } },
-        { text: "This is what it sounds like at 3:12. I recorded the last one with the stairwell door open. Don't play it loud.", delay: "8s" },
+        { text: "{time}. okay. just wanted to know you're real. mine says 3:02. doesn't matter what yours says. when mine says 3:12, the car comes. ten minutes, maybe", delay: "6s", if: { flag: "gave_time", min: 1 } },
+        { text: "because it's 3:02 up here, and the clocks don't agree. for you it's maybe ten minutes away. don't do the math", delay: "6s", if: { flag: "gave_time", max: 0 } },
+        { text: "this is what it sounds like at 3:12. i recorded the last one with the stairwell door open. don't play it loud", delay: "8s" },
         { audio: "hum", duration: 11, delay: "4s", set: { heard_hum: 1 } }
       ],
       choices: [
@@ -750,15 +751,15 @@ window.NIGHTDESK_STORY = {
 
     ch1_plan_2: {
       messages: [
-        { text: "That's not a fan. It comes up through the floor every night at 3:12. Teeth first, then ears.", delay: "10s" },
-        { text: "When my clock says 3:12, the car will come down to L and open. Nobody will be in it.", delay: "10s" },
-        { text: "Do not get in.", delay: "3s" },
-        { text: "And no, I can't ride it back. Up here its doors don't open for me, only for whatever's inside. They opened once, the night I came up.", delay: "10s" },
-        { text: "Lift the logbook. My key card is taped underneath. Blue lanyard. I meant to hold the doors and look. I stepped out.", delay: "10s" },
-        { text: "Every door up here has the same card readers as ours, bolted onto 1974 doors. The card's coded to the building, not the year. Without it all I've got is the elevator lobby up here and the stairwell. The monitor's in the lobby, by the stairwell door. Every other door is locked.", delay: "11s" },
-        { text: "When the doors open, put the card on the floor of the car and step back.", delay: "7s" },
-        { text: "When the hum starts I have to be in the stairwell. There's no monitor in there. So you're my eyes. Tell me what the indicator does.", delay: "11s" },
-        { text: "I have to go dark now. It hears the phone.", delay: "7s" },
+        { text: "that's not a fan. it comes up through the floor every night at 3:12. teeth first, then ears", delay: "10s" },
+        { text: "when my clock says 3:12, the car will come down to L and open. nobody will be in it", delay: "10s" },
+        { text: "do not get in", delay: "3s" },
+        { text: "and no, i can't ride it back. up here its doors don't open for me, only for whatever's inside. they opened once, the night i came up", delay: "10s" },
+        { text: "lift the logbook. my key card is taped underneath. blue lanyard. i meant to hold the doors and look. i stepped out", delay: "10s" },
+        { text: "every door up here has the same card readers as ours, bolted onto 1974 doors. the card's coded to the building, not the year. without it all i've got is the elevator lobby up here and the stairwell. the monitor's in the lobby, by the stairwell door. every other door is locked", delay: "11s" },
+        { text: "when the doors open, put the card on the floor of the car and step back", delay: "7s" },
+        { text: "when the hum starts i have to be in the stairwell. there's no monitor in there. so you're my eyes. tell me what the indicator does", delay: "11s" },
+        { text: "i have to go dark now. it hears the phone", delay: "7s" },
         { status: "offline" }
       ],
       choices: [
@@ -775,9 +776,9 @@ window.NIGHTDESK_STORY = {
         { system: "You lift the logbook.", delay: "20s", if: { flag: "prank", max: 0 } },
         { system: "A blue lanyard is taped underneath, a key card on the end of it: DANA R., NIGHTS.", delay: "5s", set: { k_card: 1 } },
         { system: "On camera 6 the indicator starts to drop. 12. 11. 10. All the way to L.", delay: "8m", notify: true },
-        { text: "I can hear it in the shaft. It's going down.", delay: "6s", notify: true },
+        { text: "i can hear it in the shaft. it's going down", delay: "6s", notify: true },
         { system: "You walk to the elevator, the card in your hand. The doors stand open on an empty car.", delay: "20s" },
-        { text: "Please.", delay: "8s", notify: true }
+        { text: "please", delay: "8s", notify: true }
       ],
       choices: [
         { text: "Card's in. Stepping back.", goto: "ch1_end_card", set: { card_in_elevator: 1, trust: 1 }, knows: ["k_card"] },
@@ -801,7 +802,7 @@ window.NIGHTDESK_STORY = {
         { system: "You drop the key card on the floor of the elevator and step back. The doors close on their own." },
         { system: "The indicator climbs. 9. 10. 11." },
         { system: "12. The indicator stays there." },
-        { text: "Tell me what it says.", delay: "6s" }
+        { text: "tell me what it says", delay: "6s" }
       ],
       choices: [
         { text: "It stopped on 12.", goto: "ch1_end_card_2", set: { knows_floor: 1 } },
@@ -811,11 +812,11 @@ window.NIGHTDESK_STORY = {
 
     ch1_end_card_2: {
       messages: [
-        { text: "Hum's dropping. Going out.", delay: "25s", notify: true },
-        { text: "Then it reached me.", delay: "35s", notify: true },
-        { text: "I have my card. That means the doors up here open for me again.", delay: "7s" },
-        { text: "Thank you. I mean it.", delay: "5s" },
-        { text: "I'll write when it's safe. It might be a while. Keep that phone on you. It's the only line I've got.", delay: "9s" },
+        { text: "hum's dropping. going out", delay: "25s", notify: true },
+        { text: "then it reached me", delay: "35s", notify: true },
+        { text: "i have my card. that means the doors up here open for me again", delay: "7s" },
+        { text: "thank you. i mean it", delay: "5s" },
+        { text: "i'll write when it's safe. it might be a while. keep that phone on you. it's the only line i've got", delay: "9s" },
         { status: "offline" },
         { system: "Two minutes later the desk phone lights up on its own. Doug's thread is open. In the text field, letters you didn't type: I q", delay: "2m", notify: true },
         { system: "They delete themselves, one by one, until the field is empty.", delay: "5s" }
@@ -825,10 +826,10 @@ window.NIGHTDESK_STORY = {
 
     ch1_end_police: {
       messages: [
-        { text: "They'll come. They'll look at camera 6.", delay: "6s" },
-        { text: "They'll see an empty lobby, and you texting a number nobody can call back.", delay: "8s" },
+        { text: "they'll come. they'll look at camera 6", delay: "6s" },
+        { text: "they'll see an empty lobby, and you texting a number nobody can call back", delay: "8s" },
         { system: "The elevator doors close on their own. The indicator stays on L." },
-        { text: "I'll try again tomorrow. If it lets me.", delay: "20s", notify: true },
+        { text: "i'll try again tomorrow. if it lets me", delay: "20s", notify: true },
         { status: "offline" }
       ],
       endOfChapter: { title: "End of Chapter 1", subtitle: "Dana is still up there. The police are on their way.", next: "ch1b_retry" }
@@ -838,13 +839,13 @@ window.NIGHTDESK_STORY = {
     ch1b_retry: {
       messages: [
         { to: "carl", text: "Portland Police called me about a welfare check from the desk line. Camera 6 shows an empty lobby. Let's not do that again, please.", delay: "day", notify: true, if: { flag: "retry_seen", max: 0 } },
-        { text: "They came, didn't they.", delay: "night", notify: true, if: { flag: "retry_seen", max: 0 } },
-        { text: "I watched them on the monitor. Two of them. One stood in the car a long time with the doors open.", delay: "9s", if: { flag: "retry_seen", max: 0 } },
-        { text: "Same time. Same doors.", delay: "night", notify: true, if: { flag: "retry_seen", min: 1 } },
-        { text: "It's 3:11 up here. I'm not going to beg twice.", delay: "12s" },
+        { text: "they came, didn't they", delay: "night", notify: true, if: { flag: "retry_seen", max: 0 } },
+        { text: "i watched them on the monitor. two of them. one stood in the car a long time with the doors open", delay: "9s", if: { flag: "retry_seen", max: 0 } },
+        { text: "same time. same doors", delay: "night", notify: true, if: { flag: "retry_seen", min: 1 } },
+        { text: "it's 3:11 up here. i'm not going to beg twice", delay: "12s" },
         { system: "On camera 6 the indicator drops. 12. 11. 10. All the way to L.", delay: "50s" },
         { system: "You walk to the elevator. The doors stand open on an empty car.", delay: "15s" },
-        { text: "Doors.", delay: "6s", notify: true }
+        { text: "doors", delay: "6s", notify: true }
       ],
       choices: [
         { text: "Card's in. Stepping back.", goto: "ch1b_card", set: { card_in_elevator: 1, retry_seen: 1 }, knows: ["k_card"] },
@@ -867,12 +868,12 @@ window.NIGHTDESK_STORY = {
         { system: "You drop the key card on the floor of the elevator and step back. The doors close on their own." },
         { system: "The indicator climbs. 9. 10. 11." },
         { system: "12." },
-        { text: "Hum's dropping. Going out.", delay: "25s", notify: true },
-        { text: "Then it reached me.", delay: "35s", notify: true },
-        { text: "I have my card. The doors up here open for me again.", delay: "7s" },
-        { text: "Thank you. I mean it. Even if you made me wait a night.", delay: "8s", if: { flag: "retry_seen", max: 1 } },
-        { text: "Thank you. I mean it. Even if you made me wait.", delay: "8s", if: { flag: "retry_seen", min: 2 } },
-        { text: "I'll write when it's safe. Keep that phone on you. It's the only line I've got.", delay: "9s" },
+        { text: "hum's dropping. going out", delay: "25s", notify: true },
+        { text: "then it reached me", delay: "35s", notify: true },
+        { text: "i have my card. the doors up here open for me again", delay: "7s" },
+        { text: "thank you. i mean it. even if you made me wait a night", delay: "8s", if: { flag: "retry_seen", max: 1 } },
+        { text: "thank you. i mean it. even if you made me wait", delay: "8s", if: { flag: "retry_seen", min: 2 } },
+        { text: "i'll write when it's safe. keep that phone on you. it's the only line i've got", delay: "9s" },
         { status: "offline" },
         { system: "Two minutes later the desk phone lights up on its own. Doug's thread is open. In the text field, letters you didn't type: I q", delay: "2m", notify: true },
         { system: "They delete themselves, one by one, until the field is empty.", delay: "5s" }
@@ -883,10 +884,10 @@ window.NIGHTDESK_STORY = {
     // ---------- Day 2: Toto, the free room, the piano. Dana explores Ward 12; the player gets to know her. ----------
     ch2_start: {
       messages: [
-        { text: "You up?", delay: "day", notify: true },
-        { text: "Sorry. Old habit. When I had your job I'd sleep till two after a night like that.", delay: "8s" },
-        { text: "I know it's different now. You get the apartment and a bed, and the phone on the nightstand. Doug was already talking about changing it before I left. Cheaper than paying someone to stay awake.", delay: "12s" },
-        { text: "I'm in. The card worked. I've been walking for what feels like an hour and the clock on the wall says it's been four minutes.", delay: "14s" }
+        { text: "you up?", delay: "day", notify: true },
+        { text: "sorry. old habit. when i had your job i'd sleep till two after a night like that", delay: "8s" },
+        { text: "i know it's different now. you get the apartment and a bed, and the phone on the nightstand. doug was already talking about changing it before i left. cheaper than paying someone to stay awake", delay: "12s" },
+        { text: "i'm in. the card worked. i've been walking for what feels like an hour and the clock on the wall says it's been four minutes", delay: "14s" }
       ],
       choices: [
         { text: "I'm here. Are you okay?", goto: "ch2_inside", set: { trust: 1 } },
@@ -897,11 +898,11 @@ window.NIGHTDESK_STORY = {
 
     ch2_inside: {
       messages: [
-        { text: "I'm okay. Define okay. I'm not bleeding.", delay: "6s" },
-        { text: "Walking it is worse than describing it. Same hallways, same stupid narrow windows, an ashtray on every table. Everything's beige.", delay: "12s" },
+        { text: "i'm okay. define okay. i'm not bleeding", delay: "6s" },
+        { text: "walking it is worse than describing it. same hallways, same stupid narrow windows, an ashtray on every table. everything's beige", delay: "12s" },
         { image: "ward12", caption: "Sent 1 photo", delay: "9s", set: { saw_photo: 1 } },
-        { text: "Nobody's here. I keep wanting to write 'everybody's here' and I don't know why.", delay: "11s" },
-        { text: "Before anything else. I need a favor and it's going to sound insane given the circumstances.", delay: "10s" }
+        { text: "nobody's here. i keep wanting to write 'everybody's here' and i don't know why", delay: "11s" },
+        { text: "before anything else. i need a favor and it's going to sound insane given the circumstances", delay: "10s" }
       ],
       choices: [
         { text: "Anything.", goto: "ch2_toto", set: { trust: 1 } },
@@ -920,11 +921,11 @@ window.NIGHTDESK_STORY = {
 
     ch2_toto: {
       messages: [
-        { text: "I have a cat. Toto. Orange, one ear, judgmental.", delay: "6s" },
-        { text: "My neighbor Mrs. Okonkwo will have been feeding him since I didn't come home. She'll have texted the desk by now too, she's that kind. Check the phone.", delay: "13s" },
-        { text: "Her lease doesn't allow pets and her landlord is the kind who counts. She can't keep doing it.", delay: "9s" },
-        { text: "I need him somewhere I know. 4017 SE Holgate, unit 3. Key's under the dead fern. Don't judge the fern.", delay: "10s", set: { k_dana_home: 1 } },
-        { text: "Take him to your place.", delay: "5s" }
+        { text: "i have a cat. toto. orange, one ear, judgmental", delay: "6s" },
+        { text: "my neighbor mrs. okonkwo will have been feeding him since i didn't come home. she'll have texted the desk by now too, she's that kind. check the phone", delay: "13s" },
+        { text: "her lease doesn't allow pets and her landlord is the kind who counts. she can't keep doing it", delay: "9s" },
+        { text: "i need him somewhere i know. 4017 SE holgate, unit 3. key's under the dead fern. don't judge the fern", delay: "10s", set: { k_dana_home: 1 } },
+        { text: "take him to your place", delay: "5s" }
       ],
       choices: [
         { text: "I'll go get him today.", goto: "ch2_toto_yes", set: { fed_toto: 1, trust: 2, toto_trip: 1 } },
@@ -935,12 +936,12 @@ window.NIGHTDESK_STORY = {
 
     ch2_toto_yes: {
       messages: [
-        { text: "Okay.", delay: "6s" },
-        { text: "Okay. Thank you.", delay: "4s" },
-        { text: "He bites when he's happy. Don't take it personally. Text me when you've got him.", delay: "7s" },
-        { text: "And while you're there. Behind my bedroom door there's a wall of paper. Everything I found out about the three before me, before I went up.", delay: "12s", set: { k_wall_told: 1 } },
-        { text: "Photograph it and send it to me, one piece at a time. I'll tell you what each one means. Then it's on two phones and not just one wall somebody can tidy away.", delay: "11s" },
-        { text: "I'm going to look at the rest of this floor while you're gone.", delay: "6s" },
+        { text: "okay", delay: "6s" },
+        { text: "okay. thank you", delay: "4s" },
+        { text: "he bites when he's happy. don't take it personally. text me when you've got him", delay: "7s" },
+        { text: "and while you're there. behind my bedroom door there's a wall of paper. everything i found out about the three before me, before i went up", delay: "12s", set: { k_wall_told: 1 } },
+        { text: "photograph it and send it to me, one piece at a time. i'll tell you what each one means. then it's on two phones and not just one wall somebody can tidy away", delay: "11s" },
+        { text: "i'm going to look at the rest of this floor while you're gone", delay: "6s" },
         { status: "offline" },
         { system: "Bus 17 to SE Holgate. Unit 3 has a dead fern, a key under it, and a very loud cat behind the door.", delay: "50m" },
         { to: "okonkwo", text: "Are you the one from the building? I saw you go in. This is the only number I have for you people, the one Dana gave me. If you're here for Toto, his carrier's in the hall closet and his food's under the sink.", delay: "20s", notify: true }
@@ -1004,60 +1005,60 @@ window.NIGHTDESK_STORY = {
 
     ch2_w_list: {
       messages: [
-        { text: "You're in. Good.", delay: "40s", notify: true, if: { flag: "w_first", max: 0 }, set: { w_first: 1 } },
-        { text: "Those are the three texts you counted. With names. M. Okeke, B. Tran, A. Ferreira. On nights, all three.", delay: "10s", knows: ["k_quits_seen"] },
-        { text: "I kept their names on paper, not on this phone. I know, I just typed them. It already has those three.", delay: "9s" },
-        { text: "Nobody overlapped. Each one started a few days after the last one quit. Doug hires fast.", delay: "8s" },
-        { text: "I started a few days after Ferreira. Marjorie in 4B counted them before I did. She keeps track of the night clerks like other people watch birds.", delay: "10s", set: { k_marjorie_counts: 1 } },
-        { text: "The question mark at the bottom was going to be me. I just didn't know it yet.", delay: "8s" }
+        { text: "you're in. good", delay: "40s", notify: true, if: { flag: "w_first", max: 0 }, set: { w_first: 1 } },
+        { text: "those are the three texts you counted. with names. m. okeke, b. tran, a. ferreira. on nights, all three", delay: "10s", knows: ["k_quits_seen"] },
+        { text: "i kept their names on paper, not on this phone. i know, i just typed them. it already has those three", delay: "9s" },
+        { text: "nobody overlapped. each one started a few days after the last one quit. doug hires fast", delay: "8s" },
+        { text: "i started a few days after ferreira. marjorie in 4B counted them before i did. she keeps track of the night clerks like other people watch birds", delay: "10s", set: { k_marjorie_counts: 1 } },
+        { text: "the question mark at the bottom was going to be me. i just didn't know it yet", delay: "8s" }
       ],
       goto: [{ if: [{ flag: "w_list", min: 1 }, { flag: "w_clip", min: 1 }, { flag: "w_plan", min: 1 }], goto: "ch2_wall_done" }, { goto: "ch2_wall_hub" }]
     },
 
     ch2_w_clip: {
       messages: [
-        { text: "You're in. Good.", delay: "40s", notify: true, if: { flag: "w_first", max: 0 }, set: { w_first: 1 } },
-        { text: "The Oregonian, November 15, 1974. A power failure on the upper floors. Fire crews in the lobby for an hour, nobody hurt.", delay: "11s" },
-        { text: "Read the last line. 'The building's owner, the Ashgrove Institute, declined to comment.'", delay: "7s", set: { k_ashgrove: 1 } },
-        { text: "An institute. It wasn't apartments then. Not the top of it.", delay: "7s" },
-        { text: "And the date on my monitor up here says 11-14-74. The night that paper is about.", delay: "9s", knows: ["k_monitor_date"] }
+        { text: "you're in. good", delay: "40s", notify: true, if: { flag: "w_first", max: 0 }, set: { w_first: 1 } },
+        { text: "the oregonian, november 15, 1974. a power failure on the upper floors. fire crews in the lobby for an hour, nobody hurt", delay: "11s" },
+        { text: "read the last line. 'The building's owner, the Ashgrove Institute, declined to comment.'", delay: "7s", set: { k_ashgrove: 1 } },
+        { text: "an institute. it wasn't apartments then. not the top of it", delay: "7s" },
+        { text: "and the date on my monitor up here says 11-14-74. the night that paper is about", delay: "9s", knows: ["k_monitor_date"] }
       ],
       goto: [{ if: [{ flag: "w_list", min: 1 }, { flag: "w_clip", min: 1 }, { flag: "w_plan", min: 1 }], goto: "ch2_wall_done" }, { goto: "ch2_wall_hub" }]
     },
 
     ch2_w_plan: {
       messages: [
-        { text: "You're in. Good.", delay: "40s", notify: true, if: { flag: "w_first", max: 0 }, set: { w_first: 1 } },
-        { text: "1979 renovation drawings. The city keeps them on microfiche. Three dollars a page.", delay: "8s" },
-        { text: "Look at 12 and 13. 'Infill, solid.' They didn't take two floors out. They filled them with concrete and took two buttons off the panel.", delay: "10s", set: { k_infill: 1 } },
-        { text: "So yes, I know. I'm standing in concrete. Don't ask me how that works, I'm in a hallway with carpet.", delay: "9s" },
-        { text: "The sticky note says ASHGROVE?? ask Marjorie. I did ask her. She said come up for tea that weekend and she'd tell me everything. I went up before the weekend came.", delay: "10s", set: { k_marjorie_tea: 1 } }
+        { text: "you're in. good", delay: "40s", notify: true, if: { flag: "w_first", max: 0 }, set: { w_first: 1 } },
+        { text: "1979 renovation drawings. the city keeps them on microfiche. three dollars a page", delay: "8s" },
+        { text: "look at 12 and 13. 'Infill, solid.' they didn't take two floors out. they filled them with concrete and took two buttons off the panel", delay: "10s", set: { k_infill: 1 } },
+        { text: "so yes, i know. i'm standing in concrete. don't ask me how that works, i'm in a hallway with carpet", delay: "9s" },
+        { text: "the sticky note says ASHGROVE?? ask marjorie. i did ask her. she said come up for tea that weekend and she'd tell me everything. i went up before the weekend came", delay: "10s", set: { k_marjorie_tea: 1 } }
       ],
       goto: [{ if: [{ flag: "w_list", min: 1 }, { flag: "w_clip", min: 1 }, { flag: "w_plan", min: 1 }], goto: "ch2_wall_done" }, { goto: "ch2_wall_hub" }]
     },
 
     ch2_w_why: {
       messages: [
-        { text: "I did. I told Doug about the three. He said turnover is the nature of nights.", delay: "9s" },
-        { text: "Then I told the police. They read the three texts and said people quit.", delay: "8s" },
-        { text: "So I stopped telling and started looking.", delay: "5s" }
+        { text: "i did. i told doug about the three. he said turnover is the nature of nights", delay: "9s" },
+        { text: "then i told the police. they read the three texts and said people quit", delay: "8s" },
+        { text: "so i stopped telling and started looking", delay: "5s" }
       ],
       goto: [{ if: [{ flag: "w_list", min: 1 }, { flag: "w_clip", min: 1 }, { flag: "w_plan", min: 1 }], goto: "ch2_wall_done" }, { goto: "ch2_wall_hub" }]
     },
 
     ch2_w_man: {
       messages: [
-        { text: "Doug doesn't do house calls.", delay: "8s" },
-        { text: "So somebody sent him. Somebody who thinks there's something here worth taking. Good for Grace.", delay: "9s" }
+        { text: "doug doesn't do house calls", delay: "8s" },
+        { text: "so somebody sent him. somebody who thinks there's something here worth taking. good for grace", delay: "9s" }
       ],
       goto: [{ if: [{ flag: "w_list", min: 1 }, { flag: "w_clip", min: 1 }, { flag: "w_plan", min: 1 }], goto: "ch2_wall_done" }, { goto: "ch2_wall_hub" }]
     },
 
     ch2_wall_done: {
       messages: [
-        { text: "So now you know what I knew when I went up. It's not much. It was enough to get me here.", delay: "10s" },
-        { text: "Take the sticky note. Leave the rest. If he comes back for it, let him think I never got past three names, a newspaper and a drawing.", delay: "9s", set: { has_note: 1 }, if: { flag: "w_man", min: 1 } },
-        { text: "Take the sticky note. Leave the rest. If somebody comes for it, let them think I never got past three names, a newspaper and a drawing.", delay: "9s", set: { has_note: 1 }, if: { flag: "w_man", max: 0 } },
+        { text: "so now you know what i knew when i went up. it's not much. it was enough to get me here", delay: "10s" },
+        { text: "take the sticky note. leave the rest. if he comes back for it, let him think i never got past three names, a newspaper and a drawing", delay: "9s", set: { has_note: 1 }, if: { flag: "w_man", min: 1 } },
+        { text: "take the sticky note. leave the rest. if somebody comes for it, let them think i never got past three names, a newspaper and a drawing", delay: "9s", set: { has_note: 1 }, if: { flag: "w_man", max: 0 } },
         { system: "Back in 11C. Toto walks the whole room once, then sits on the bed and stares at the ceiling.", delay: "40m", if: { flag: "toto_trip", min: 1 } },
         { system: "Bus 17 back to the Calloway and up to 11C, the yellow note in your pocket. Toto stays behind with Grace.", delay: "40m", if: { flag: "toto_trip", max: 0 } }
       ],
@@ -1067,7 +1068,7 @@ window.NIGHTDESK_STORY = {
     ch2_toto_back: {
       messages: [],
       choices: [
-        { text: "Send photo", goto: "ch2_toto_photo", image: "toto", caption: "You sent a photo", set: { fed_toto: 1, toto_home: 1 } },
+        { text: "Send photo", goto: "ch2_toto_photo", image: "toto", caption: "You sent a photo", set: { fed_toto: 1, toto_home: 1, toto_pic: 1 } },
         { text: "Got him. He's in 11C.", goto: "ch2_toto_text", set: { fed_toto: 1, toto_home: 1 } }
       ]
     },
@@ -1075,9 +1076,9 @@ window.NIGHTDESK_STORY = {
     ch2_toto_photo: {
       messages: [
         { text: "oh", delay: "25s", notify: true },
-        { text: "oh he's fat. Grace has been feeding him like a grandmother.", delay: "6s" },
-        { text: "He's looking at the ceiling. He knows where I am.", delay: "8s" },
-        { text: "Thank you. I mean it.", delay: "5s" },
+        { text: "oh he's fat. grace has been feeding him like a grandmother", delay: "6s" },
+        { text: "he's looking at the ceiling. he knows where i am", delay: "8s" },
+        { text: "thank you. i mean it", delay: "5s" },
         { text: "🐈", delay: "3s" }
       ],
       goto: "ch2_perk"
@@ -1085,8 +1086,8 @@ window.NIGHTDESK_STORY = {
 
     ch2_toto_text: {
       messages: [
-        { text: "You're a saint. A saint in a staff residence with a no-pets clause.", delay: "25s", notify: true },
-        { text: "Does he sit and look at the ceiling? He does that at home with the upstairs neighbor. Up here that's me.", delay: "10s" },
+        { text: "you're a saint. a saint in a staff residence with a no-pets clause", delay: "25s", notify: true, set: { toto_text: 1 } },
+        { text: "does he sit and look at the ceiling? he does that at home with the upstairs neighbor. up here that's me", delay: "10s" },
         { text: "🐈", delay: "3s" }
       ],
       goto: "ch2_perk"
@@ -1094,8 +1095,8 @@ window.NIGHTDESK_STORY = {
 
     ch2_toto_later: {
       messages: [
-        { text: "She'll say yes. She always says yes. That's the problem.", delay: "7s" },
-        { text: "Fine. A few days. Then he's yours. Her number will be in that phone somewhere.", delay: "8s" }
+        { text: "she'll say yes. she always says yes. that's the problem", delay: "7s" },
+        { text: "fine. a few days. then he's yours. her number will be in that phone somewhere", delay: "8s" }
       ],
       thread: "okonkwo",
       choices: [
@@ -1117,8 +1118,8 @@ window.NIGHTDESK_STORY = {
     ch2_toto_no: {
       messages: [
         { text: "ok", delay: "30s" },
-        { text: "No, you're right. You don't know me. I asked a stranger to adopt my cat from a haunted hallway.", delay: "2m" },
-        { text: "Forget it. Mrs. O will manage.", delay: "8s" }
+        { text: "no, you're right. you don't know me. i asked a stranger to adopt my cat from a haunted hallway", delay: "2m" },
+        { text: "forget it. mrs. O will manage", delay: "8s" }
       ],
       goto: "ch2_wall_ask"
     },
@@ -1126,9 +1127,9 @@ window.NIGHTDESK_STORY = {
     // Players who don't fetch the cat still go for the wall: it's the investigation, not a favor.
     ch2_wall_ask: {
       messages: [
-        { text: "One thing I do need, and it isn't the cat. Behind my bedroom door at home there's a wall of paper. Everything I found out about the three before me, before I went up.", delay: "12s", set: { k_wall_told: 1 } },
-        { text: "Photograph it and send it to me, one piece at a time. I'll tell you what each one means. Then it's on two phones and not just one wall somebody can tidy away.", delay: "11s" },
-        { text: "Key's under the fern. I'll be walking the floor. Text me from my bedroom.", delay: "8s" }
+        { text: "one thing i do need, and it isn't the cat. behind my bedroom door at home there's a wall of paper. everything i found out about the three before me, before i went up", delay: "12s", set: { k_wall_told: 1 } },
+        { text: "photograph it and send it to me, one piece at a time. i'll tell you what each one means. then it's on two phones and not just one wall somebody can tidy away", delay: "11s" },
+        { text: "key's under the fern. i'll be walking the floor. text me from my bedroom", delay: "8s" }
       ],
       choices: [
         { text: "Okay. I'll go now.", goto: "ch2_wall_trip", set: { trust: 1 } },
@@ -1152,10 +1153,10 @@ window.NIGHTDESK_STORY = {
 
     ch2_perk: {
       messages: [
-        { text: "Different question. The room they gave you. That one's about you.", delay: "15s", if: { flag: "toto_trip", max: 0 } },
-        { text: "The free room is the one real perk of the job. 'Staff residence, utilities included.' I never used it.", delay: "9s" },
-        { text: "Toto doesn't do elevators, and I don't do no-pets clauses. I kept a box of stuff in the closet and that was it.", delay: "10s" },
-        { text: "Which unit did they give you?", delay: "5s" }
+        { text: "different question. the room they gave you. that one's about you", delay: "15s", if: { flag: "toto_trip", max: 0 } },
+        { text: "the free room is the one real perk of the job. 'Staff residence, utilities included.' i never used it", delay: "9s" },
+        { text: "toto doesn't do elevators, and i don't do no-pets clauses. i kept a box of stuff in the closet and that was it", delay: "10s" },
+        { text: "which unit did they give you?", delay: "5s" }
       ],
       choices: [
         { text: "11C.", goto: "ch2_11c" },
@@ -1166,25 +1167,25 @@ window.NIGHTDESK_STORY = {
 
     ch2_11c_careful: {
       messages: [
-        { text: "Good instinct. Keep it.", delay: "5s" },
-        { text: "It's 11C though. They always give 11C. 'Top residential floor, for response time.'", delay: "9s" }
+        { text: "good instinct. keep it", delay: "5s" },
+        { text: "it's 11C though. they always give 11C. 'Top residential floor, for response time.'", delay: "9s" }
       ],
       goto: "ch2_sleep_under"
     },
 
     ch2_11c: {
       messages: [
-        { text: "11C. They always give 11C. 'Top residential floor, for response time.'", delay: "7s" }
+        { text: "11C. they always give 11C. 'Top residential floor, for response time.'", delay: "7s" }
       ],
       goto: "ch2_sleep_under"
     },
 
     ch2_sleep_under: {
       messages: [
-        { text: "And now it's sleep-in, so you don't even get to say no to the room. Doug's idea. Cheaper than someone awake in the chair, and closer to it.", delay: "10s" },
-        { text: "You sleep right under it. I need you to know that.", delay: "8s" },
-        { text: "Tom in 11A says the ceiling hums. He thinks it's the HVAC.", delay: "7s" },
-        { text: "Did they clear my box out of the closet?", delay: "9s" }
+        { text: "and now it's sleep-in, so you don't even get to say no to the room. doug's idea. cheaper than someone awake in the chair, and closer to it", delay: "10s" },
+        { text: "you sleep right under it. i need you to know that", delay: "8s" },
+        { text: "tom in 11A says the ceiling hums. he thinks it's the HVAC", delay: "7s" },
+        { text: "did they clear my box out of the closet?", delay: "9s" }
       ],
       choices: [
         { text: "The closet was empty when I moved in.", goto: "ch2_drawer" },
@@ -1194,8 +1195,8 @@ window.NIGHTDESK_STORY = {
 
     ch2_drawer: {
       messages: [
-        { text: "Doesn't matter. Clothes, a lamp, a plant I killed. Doug's people are efficient.", delay: "8s" },
-        { text: "Do one thing for me. The dresser. Pull the bottom drawer all the way out. It doesn't go all the way back.", delay: "10s" },
+        { text: "doesn't matter. clothes, a lamp, a plant i killed. doug's people are efficient", delay: "8s" },
+        { text: "do one thing for me. the dresser. pull the bottom drawer all the way out. it doesn't go all the way back", delay: "10s" },
         { system: "You pull the drawer out. A thin notebook is wedged behind it. Handwritten sheet music. Inside the cover, in marker: K.L. — DON'T TOUCH.", set: { found_notebook: 1 } }
       ],
       choices: [
@@ -1207,17 +1208,17 @@ window.NIGHTDESK_STORY = {
 
     ch2_notebook_who: {
       messages: [
-        { text: "Later.", delay: "12s" },
-        { text: "I'll tell you later. Not because it's a secret. Because I can't type it in a hallway like this.", delay: "9s" },
-        { text: "Don't read the last page. Please.", delay: "6s" }
+        { text: "later", delay: "12s" },
+        { text: "i'll tell you later. not because it's a secret. because i can't type it in a hallway like this", delay: "9s" },
+        { text: "don't read the last page. please", delay: "6s" }
       ],
       goto: "ch2_evening"
     },
 
     ch2_notebook_safe: {
       messages: [
-        { text: "Thank you.", delay: "6s" },
-        { text: "Don't read the last page. Not yet.", delay: "5s" }
+        { text: "thank you", delay: "6s" },
+        { text: "don't read the last page. not yet", delay: "5s" }
       ],
       goto: "ch2_evening"
     },
@@ -1225,9 +1226,9 @@ window.NIGHTDESK_STORY = {
     ch2_notebook_joke: {
       messages: [
         { text: "lol", delay: "5s" },
-        { text: "a spy who dropped out of high school and lives with a one-eared cat. the agency has standards.", delay: "8s" },
-        { text: "It's not hidden. It fell. I didn't go back for it because I didn't want to be in that room longer than I had to.", delay: "10s" },
-        { text: "Don't read the last page.", delay: "5s" }
+        { text: "a spy who dropped out of high school and lives with a one-eared cat. the agency has standards", delay: "8s" },
+        { text: "it's not hidden. it fell. i didn't go back for it because i didn't want to be in that room longer than i had to", delay: "10s" },
+        { text: "don't read the last page", delay: "5s" }
       ],
       goto: "ch2_evening"
     },
@@ -1245,20 +1246,20 @@ window.NIGHTDESK_STORY = {
 
     ch2_evening_dana: {
       messages: [
-        { text: "It always has a hole. Every time it comes. I used to rewind it in the mornings.", delay: "20s", notify: true, knows: ["k_tape_told"] },
-        { text: "I showed Doug once. He said the recorder's old. That was the whole conversation.", delay: "8s" }
+        { text: "it always has a hole. every time it comes. i used to rewind it in the mornings", delay: "20s", notify: true, knows: ["k_tape_told"] },
+        { text: "i showed doug once. he said the recorder's old. that was the whole conversation", delay: "8s" }
       ],
       goto: "ch2_piano"
     },
 
     ch2_piano: {
       messages: [
-        { text: "You know the piano in the lounge off the lobby? The brown upright nobody tunes, behind the plant.", delay: "20m", notify: true },
-        { text: "It's up here too. Same piano, in a day room at the end of the hall. Couches, a TV with a dial. Fifty years younger and still out of tune.", delay: "12s" },
-        { text: "Long nights down there. It was nice to have something to do on the rounds besides check doors. I used to play it at four when the building was asleep. Marjorie in 4B heard me once, God knows how, and sent down cake.", delay: "14s" },
-        { text: "Here. Don't laugh.", delay: "6s" },
+        { text: "you know the piano in the lounge off the lobby? the brown upright nobody tunes, behind the plant", delay: "20m", notify: true },
+        { text: "it's up here too. same piano, in a day room at the end of the hall. couches, a TV with a dial. fifty years younger and still out of tune", delay: "12s" },
+        { text: "long nights down there. it was nice to have something to do on the rounds besides check doors. i used to play it at four when the building was asleep. marjorie in 4B heard me once, god knows how, and sent down cake", delay: "14s" },
+        { text: "here. don't laugh", delay: "6s" },
         { audio: "piano", duration: 14, delay: "40s" },
-        { text: "Mom taught me that one by ear on a piano behind our laundromat. She couldn't read a note. Neither can I. I'm rusty. And the F sticks. Up here and down there.", delay: "12s" }
+        { text: "mom taught me that one by ear on a piano behind our laundromat. she couldn't read a note. neither can i. i'm rusty. and the F sticks. up here and down there", delay: "12s" }
       ],
       choices: [
         { text: "That was beautiful.", goto: "ch2_piano_warm", set: { spark: 1, piano_q: 1, pq_warm: 1 } },
@@ -1280,16 +1281,16 @@ window.NIGHTDESK_STORY = {
 
     ch2_piano_warm: {
       messages: [
-        { text: "It was a sticky F in a dead building. But thank you.", delay: "7s" },
-        { text: "Nobody's said that to me in a while. Toto's a tough crowd.", delay: "6s" }
+        { text: "it was a sticky F in a dead building. but thank you", delay: "7s" },
+        { text: "nobody's said that to me in a while. toto's a tough crowd", delay: "6s" }
       ],
       goto: [{ if: { flag: "piano_q", min: 3 }, goto: "ch2_wristband" }, { goto: "ch2_piano_hub" }]
     },
 
     ch2_piano_curious: {
       messages: [
-        { text: "Six years of lessons from my mom, who learned from a record. We did Clementi and Teresa Teng. In that order, every night.", delay: "10s" },
-        { text: "I quit when Dad died. Hands were needed elsewhere.", delay: "8s" }
+        { text: "six years of lessons from my mom, who learned from a record. we did clementi and teresa teng. in that order, every night", delay: "10s" },
+        { text: "i quit when dad died. hands were needed elsewhere", delay: "8s" }
       ],
       goto: [{ if: { flag: "piano_q", min: 3 }, goto: "ch2_wristband" }, { goto: "ch2_piano_hub" }]
     },
@@ -1297,18 +1298,18 @@ window.NIGHTDESK_STORY = {
     ch2_piano_careful: {
       messages: [
         { text: "lol you sound like my mother", delay: "6s" },
-        { text: "It knows where I am. Noise doesn't change that.", delay: "8s" },
-        { text: "Silence is what it listens for.", delay: "5s" }
+        { text: "it knows where i am. noise doesn't change that", delay: "8s" },
+        { text: "silence is what it listens for", delay: "5s" }
       ],
       goto: [{ if: { flag: "piano_q", min: 3 }, goto: "ch2_wristband" }, { goto: "ch2_piano_hub" }]
     },
 
     ch2_wristband: {
       messages: [
-        { text: "Found this under the couch.", delay: "25s" },
+        { text: "found this under the couch", delay: "25s" },
         { image: "wristband", caption: "Sent 1 photo", delay: "6s", set: { k_wristband: 1 } },
-        { text: "PT-09. There are rooms down the hall with numbers on the doors. 1 to 13. Beds with straps.", delay: "11s" },
-        { text: "Ashgrove again. Your clipping was right, Desk.", delay: "8s" }
+        { text: "PT-09. there are rooms down the hall with numbers on the doors. 1 to 13. beds with straps", delay: "11s" },
+        { text: "ashgrove again. your clipping was right, desk", delay: "8s" }
       ],
       choices: [
         { text: "Desk?", goto: "ch2_desk_name", set: { wq_desk: 1 } },
@@ -1330,42 +1331,42 @@ window.NIGHTDESK_STORY = {
 
     ch2_tattoo: {
       messages: [
-        { text: "Three triangles. Yes.", delay: "6s" },
-        { text: "Long story. Not today. Today I'm busy being a ghost.", delay: "7s", set: { k_tattoo: 1 } }
+        { text: "three triangles. yes", delay: "6s" },
+        { text: "long story. not today. today i'm busy being a ghost", delay: "7s", set: { k_tattoo: 1 } }
       ],
       goto: [{ if: [{ flag: "wq_desk", min: 1 }, { flag: "wq_lantern", min: 1 }, { flag: "wq_out", min: 1 }], goto: "ch2_game" }, { goto: "ch2_wristband_hub" }]
     },
 
     ch2_desk_name: {
       messages: [
-        { text: "That's you. Desk. You're the desk now.", delay: "6s" },
-        { text: "Don't tell me your name. I'm serious. It reads over my shoulder, and it collects names.", delay: "10s" },
-        { text: "It's read everything we've sent today. The wall too. That's fine. It already knows what's on that wall. Doug's people don't.", delay: "9s" },
-        { text: "Desk is fine. Desk is safe. I kind of like it.", delay: "6s" }
+        { text: "that's you. desk. you're the desk now", delay: "6s" },
+        { text: "don't tell me your name. i'm serious. it reads over my shoulder, and it collects names", delay: "10s" },
+        { text: "it's read everything we've sent today. the wall too. that's fine. it already knows what's on that wall. doug's people don't", delay: "9s" },
+        { text: "desk is fine. desk is safe. i kind of like it", delay: "6s" }
       ],
       goto: [{ if: [{ flag: "wq_desk", min: 1 }, { flag: "wq_lantern", min: 1 }, { flag: "wq_out", min: 1 }], goto: "ch2_game" }, { goto: "ch2_wristband_hub" }]
     },
 
     ch2_lantern: {
       messages: [
-        { text: "I don't know yet. It's on the wristband, and it's stenciled on a door my card doesn't work on. That one and the one at the top of the stairs. No reader. Just a keyhole.", delay: "9s" },
-        { text: "Whatever it was, they did it to people with numbers instead of names.", delay: "8s" }
+        { text: "i don't know yet. it's on the wristband, and it's stenciled on a door my card doesn't work on. that one and the one at the top of the stairs. no reader. just a keyhole", delay: "9s" },
+        { text: "whatever it was, they did it to people with numbers instead of names", delay: "8s" }
       ],
       goto: [{ if: [{ flag: "wq_desk", min: 1 }, { flag: "wq_lantern", min: 1 }, { flag: "wq_out", min: 1 }], goto: "ch2_game" }, { goto: "ch2_wristband_hub" }]
     },
 
     ch2_getout: {
       messages: [
-        { text: "Moving.", delay: "5s" },
-        { text: "Hallway. Better. You worry like a person with a name.", delay: "8s" }
+        { text: "moving", delay: "5s" },
+        { text: "hallway. better. you worry like a person with a name", delay: "8s" }
       ],
       goto: [{ if: [{ flag: "wq_desk", min: 1 }, { flag: "wq_lantern", min: 1 }, { flag: "wq_out", min: 1 }], goto: "ch2_game" }, { goto: "ch2_wristband_hub" }]
     },
 
     ch2_game: {
       messages: [
-        { text: "I've got maybe two hours before it gets loud. Entertain me, Desk.", delay: "20s" },
-        { text: "Two truths and a lie. 1. I dropped out of high school at fifteen. 2. I tended bar at a place called the Lucky Devil. 3. I've never been outside Oregon.", delay: "14s" }
+        { text: "i've got maybe two hours before it gets loud. entertain me, desk", delay: "20s" },
+        { text: "two truths and a lie. 1. i dropped out of high school at fifteen. 2. i tended bar at a place called the lucky devil. 3. i've never been outside oregon", delay: "14s" }
       ],
       choices: [
         { text: "The lie is 1. You finished school.", goto: "ch2_game_wrong" },
@@ -1376,31 +1377,31 @@ window.NIGHTDESK_STORY = {
 
     ch2_game_wrong: {
       messages: [
-        { text: "Nope. Fifteen. Dad died, the laundromat needed hands, school didn't.", delay: "9s" },
-        { text: "The lie is 3. Sacramento, every Christmas. My mom and her husband live there. The Lucky Devil is real and I'm not proud of it.", delay: "11s" }
+        { text: "nope. fifteen. dad died, the laundromat needed hands, school didn't", delay: "9s" },
+        { text: "the lie is 3. sacramento, every christmas. my mom and her husband live there. the lucky devil is real and i'm not proud of it", delay: "11s" }
       ],
       goto: "ch2_game_turn"
     },
 
     ch2_game_wrong2: {
       messages: [
-        { text: "The Lucky Devil is extremely real. SE Powell. Sticky floor, two pool tables, a regular named Gus who tipped in scratch tickets.", delay: "11s" },
-        { text: "The lie is 3. Sacramento, every Christmas. My mom and her husband live there.", delay: "9s" }
+        { text: "the lucky devil is extremely real. SE powell. sticky floor, two pool tables, a regular named gus who tipped in scratch tickets", delay: "11s" },
+        { text: "the lie is 3. sacramento, every christmas. my mom and her husband live there", delay: "9s" }
       ],
       goto: "ch2_game_turn"
     },
 
     ch2_game_right: {
       messages: [
-        { text: "Look at you.", delay: "5s" },
-        { text: "Sacramento. Every Christmas. My mom and her husband live there. The other two are true and I'm not proud of the bar.", delay: "10s" }
+        { text: "look at you", delay: "5s" },
+        { text: "sacramento. every christmas. my mom and her husband live there. the other two are true and i'm not proud of the bar", delay: "10s" }
       ],
       goto: "ch2_game_turn"
     },
 
     ch2_game_turn: {
       messages: [
-        { text: "Your turn. No names. Why did you take this job?", delay: "8s" }
+        { text: "your turn. no names. why did you take this job?", delay: "8s" }
       ],
       choices: [
         { text: "I needed it. A job that comes with a bed is a job you take.", goto: "ch2_game_need", set: { why_need: 1 } },
@@ -1411,23 +1412,23 @@ window.NIGHTDESK_STORY = {
 
     ch2_game_need: {
       messages: [
-        { text: "Same. That's how this place gets you. It doesn't look for heroes. It looks for people who need the room. Nobody comes looking for them.", delay: "11s" }
+        { text: "same. that's how this place gets you. it doesn't look for heroes. it looks for people who need the room. nobody comes looking for them", delay: "11s" }
       ],
       goto: "ch2_end"
     },
 
     ch2_game_curious: {
       messages: [
-        { text: "Curious.", delay: "5s" },
-        { text: "You and me and whoever came before us. Great club. Terrible retention.", delay: "8s" }
+        { text: "curious", delay: "5s" },
+        { text: "you and me and whoever came before us. great club. terrible retention", delay: "8s" }
       ],
       goto: "ch2_end"
     },
 
     ch2_game_lost: {
       messages: [
-        { text: "Yeah.", delay: "6s" },
-        { text: "That was me too. I'm not going to say it gets better. I'm going to say you're the only person who answered.", delay: "11s" }
+        { text: "yeah", delay: "6s" },
+        { text: "that was me too. i'm not going to say it gets better. i'm going to say you're the only person who answered", delay: "11s" }
       ],
       goto: "ch2_end"
     },
@@ -1436,8 +1437,8 @@ window.NIGHTDESK_STORY = {
       messages: [
         { text: "it's getting quiet", delay: "90s" },
         { text: "that's the bad kind", delay: "4s" },
-        { text: "One practical thing. My clock doesn't keep yours. Right now mine says about one. If it keeps running like this, the next 3:12 lands around {window} your time.", delay: "16s" },
-        { text: "When are you off the desk?", delay: "6s" }
+        { text: "one practical thing. my clock doesn't keep yours. right now mine says about one. if it keeps running like this, the next 3:12 lands around {window} your time", delay: "16s" },
+        { text: "when are you off the desk?", delay: "6s" }
       ],
       choices: [
         { text: "Eight. I lock up at eight.", goto: "ch2_sleep_normal", set: { sleep_normal: 1 } },
@@ -1448,37 +1449,37 @@ window.NIGHTDESK_STORY = {
 
     ch2_sleep_normal: {
       messages: [
-        { text: "Lock up early tonight. Then it's sleep-in after. Lucky. I had to sit in that chair till seven.", delay: "8s" },
-        { text: "If anything happens while you're asleep later, I'll keep it short and tell you the rest when you're up. Nothing you miss while you sleep is your fault. Remember I said that.", delay: "12s" }
+        { text: "lock up early tonight. then it's sleep-in after. lucky. i had to sit in that chair till seven", delay: "8s" },
+        { text: "if anything happens while you're asleep later, i'll keep it short and tell you the rest when you're up. nothing you miss while you sleep is your fault. remember i said that", delay: "12s" }
       ],
       goto: "ch2_rule"
     },
 
     ch2_sleep_late: {
       messages: [
-        { text: "Doug checks. He watches camera 6 like it's cable. Lock up a little early tonight. He won't notice fifteen minutes.", delay: "7s" },
-        { text: "And if it comes while you're not looking, I'll tell you what happened. Nothing you miss is on you.", delay: "10s" }
+        { text: "doug checks. he watches camera 6 like it's cable. lock up a little early tonight. he won't notice fifteen minutes", delay: "7s" },
+        { text: "and if it comes while you're not looking, i'll tell you what happened. nothing you miss is on you", delay: "10s" }
       ],
       goto: "ch2_rule"
     },
 
     ch2_sleep_wake: {
       messages: [
-        { text: "Before {window}. Lock up, go up, lock your door.", delay: "6s" },
-        { text: "After that I'll wake you for people. Not for noises. Deal?", delay: "7s" }
+        { text: "before {window}. lock up, go up, lock your door", delay: "6s" },
+        { text: "after that i'll wake you for people. not for noises. deal?", delay: "7s" }
       ],
       goto: "ch2_rule"
     },
 
     ch2_rule: {
       messages: [
-        { text: "Rule for tonight. Lock up as soon as we're done here. Be in 11C by {window} with the door locked. Whatever you hear through the ceiling, you stay there. You don't come back down to the lobby. You don't help anyone into the elevator.", delay: "10s" },
-        { set: { k_stay_rule: 1 }, text: "And if someone's already in it at my 3:12, they stay in it. The doors open on a floor that looks like yours. Same carpet, same light. It isn't. I stepped out. That's the whole story of how I got here.", delay: "13s" },
-        { text: "Stay in the car, keep pressing L. That's all I know so far. It's more than I knew.", delay: "8s" },
-        { text: "Phone on you around {window}. If anyone else texts the desk, you tell me before you answer them.", delay: "11s" },
-        { text: "One more thing. That LANTERN door. I knocked on it.", delay: "10s", knows: ["k_wristband"] },
-        { text: "Something knocked back. Twice. Like it was counting.", delay: "7s" },
-        { text: "I have to go dark.", delay: "8s" },
+        { text: "rule for tonight. lock up as soon as we're done here. be in 11C by {window} with the door locked. whatever you hear through the ceiling, you stay there. you don't come back down to the lobby. you don't help anyone into the elevator", delay: "10s" },
+        { set: { k_stay_rule: 1 }, text: "and if someone's already in it at my 3:12, they stay in it. the doors open on a floor that looks like yours. same carpet, same light. it isn't. i stepped out. that's the whole story of how i got here", delay: "13s" },
+        { text: "stay in the car, keep pressing L. that's all i know so far. it's more than i knew", delay: "8s" },
+        { text: "phone on you around {window}. if anyone else texts the desk, you tell me before you answer them", delay: "11s" },
+        { text: "one more thing. that LANTERN door. i knocked on it", delay: "10s", knows: ["k_wristband"] },
+        { text: "something knocked back. twice. like it was counting", delay: "7s" },
+        { text: "i have to go dark", delay: "8s" },
         { text: "🐈", delay: "3s", if: { flag: "fed_toto", min: 1 } },
         { status: "offline" }
       ],
@@ -1488,8 +1489,8 @@ window.NIGHTDESK_STORY = {
     // ---------- Night 2: Tom in 11A takes the elevator. The player talks to two people at once. ----------
     ch3_start: {
       messages: [
-        { text: "It's 2:50 up here.", delay: "night", notify: true },
-        { text: "Where are you?", delay: "5s" }
+        { text: "it's 2:50 up here", delay: "night", notify: true },
+        { text: "where are you?", delay: "5s" }
       ],
       choices: [
         { text: "11C. Door locked. Phone in hand.", goto: "ch3_ready", set: { trust: 1 } },
@@ -1500,15 +1501,15 @@ window.NIGHTDESK_STORY = {
 
     ch3_lobby: {
       messages: [
-        { text: "Lock it and go up. Now. Don't be anywhere near the car when it opens.", delay: "9s" }
+        { text: "lock it and go up. now. don't be anywhere near the car when it opens", delay: "9s" }
       ],
       goto: "ch3_ready"
     },
 
     ch3_ready: {
       messages: [
-        { text: "Okay. The hallway lights just started dimming one by one towards the elevator. They did that the night I came up.", delay: "8s" },
-        { text: "Something's coming up. Or someone.", delay: "7s" },
+        { text: "okay. the hallway lights just started dimming one by one towards the elevator. they did that the night i came up", delay: "8s" },
+        { text: "something's coming up. or someone", delay: "7s" },
         { to: "tom", text: "hey it's Tom, 11A. is the elevator doing the sign thing again? I'm in it. it stopped. panel's dark", delay: "40s", notify: true },
         { to: "tom", text: "just got home, pressed 11, it went past", delay: "6s", notify: true }
       ],
@@ -1524,10 +1525,10 @@ window.NIGHTDESK_STORY = {
       messages: [
         { to: "tom", text: "ok??", delay: "6s" },
         { to: "tom", text: "why would I get out it's not my floor", delay: "4s" },
-        { text: "the lights just went. all of them, down the hall. it only does that when it's got someone in the car.", delay: "8s" },
-        { text: "and you've gone quiet. is someone texting the desk? whoever's in that car, that's who they'd text. it's the only number in the building.", delay: "7s" },
-        { text: "Who's texting you.", delay: "4s" },
-        { text: "Desk. Who.", delay: "3s" }
+        { text: "the lights just went. all of them, down the hall. it only does that when it's got someone in the car", delay: "8s" },
+        { text: "and you've gone quiet. is someone texting the desk? whoever's in that car, that's who they'd text. it's the only number in the building", delay: "7s" },
+        { text: "who's texting you", delay: "4s" },
+        { text: "desk. who", delay: "3s" }
       ],
       goto: "ch3_tell_dana"
     },
@@ -1535,10 +1536,10 @@ window.NIGHTDESK_STORY = {
     ch3_tom_indicator: {
       messages: [
         { to: "tom", text: "nothing. it's dark. the little arrow is lit and pointing up", delay: "7s" },
-        { text: "the lights just went. all of them, down the hall. it only does that when it's got someone in the car.", delay: "8s" },
-        { text: "and you've gone quiet. is someone texting the desk? whoever's in that car, that's who they'd text. it's the only number in the building.", delay: "7s" },
-        { text: "Who's texting you.", delay: "4s" },
-        { text: "Desk. Who.", delay: "3s" }
+        { text: "the lights just went. all of them, down the hall. it only does that when it's got someone in the car", delay: "8s" },
+        { text: "and you've gone quiet. is someone texting the desk? whoever's in that car, that's who they'd text. it's the only number in the building", delay: "7s" },
+        { text: "who's texting you", delay: "4s" },
+        { text: "desk. who", delay: "3s" }
       ],
       goto: "ch3_tell_dana"
     },
@@ -1546,10 +1547,10 @@ window.NIGHTDESK_STORY = {
     ch3_tom_hangon: {
       messages: [
         { to: "tom", text: "ok. quick please. it's humming", delay: "6s" },
-        { text: "the lights just went. all of them, down the hall. it only does that when it's got someone in the car.", delay: "6s" },
-        { text: "and you've gone quiet. is someone texting the desk? whoever's in that car, that's who they'd text. it's the only number in the building.", delay: "7s" },
-        { text: "Who's texting you.", delay: "4s" },
-        { text: "Desk. Who.", delay: "3s" }
+        { text: "the lights just went. all of them, down the hall. it only does that when it's got someone in the car", delay: "6s" },
+        { text: "and you've gone quiet. is someone texting the desk? whoever's in that car, that's who they'd text. it's the only number in the building", delay: "7s" },
+        { text: "who's texting you", delay: "4s" },
+        { text: "desk. who", delay: "3s" }
       ],
       goto: "ch3_tell_dana"
     },
@@ -1564,17 +1565,17 @@ window.NIGHTDESK_STORY = {
 
     ch3_dana_plan_cool: {
       messages: [
-        { text: "You don't. Nobody has this handled. Which resident.", delay: "6s" },
-        { text: "Never mind. I watched him get in on the monitor. Tom, 11A, the one with the Amazon boxes.", delay: "8s" }
+        { text: "you don't. nobody has this handled. which resident", delay: "6s" },
+        { text: "never mind. i watched him get in on the monitor. tom, 11A, the one with the amazon boxes", delay: "8s" }
       ],
       goto: "ch3_dana_plan"
     },
 
     ch3_dana_plan: {
       messages: [
-        { text: "Okay. Listen. The doors are going to open and it's going to look like 11.", delay: "9s" },
-        { text: "It isn't. The hallway up here has a payphone by the stairwell. His floor doesn't.", delay: "8s" },
-        { text: "He stays in the car. He presses L and keeps pressing it. He does not step out, not even one foot. Tell him exactly that.", delay: "11s" },
+        { text: "okay. listen. the doors are going to open and it's going to look like 11", delay: "9s" },
+        { text: "it isn't. the hallway up here has a payphone by the stairwell. his floor doesn't", delay: "8s" },
+        { text: "he stays in the car. he presses L and keeps pressing it. he does not step out, not even one foot. tell him exactly that", delay: "11s" },
         { to: "tom", text: "doors opened", delay: "20s", notify: true },
         { to: "tom", text: "it's my floor. I think. the carpet's wrong", delay: "6s" },
         { to: "tom", text: "there's a payphone?? we don't have a payphone", delay: "7s", notify: true }
@@ -1593,7 +1594,7 @@ window.NIGHTDESK_STORY = {
         { to: "tom", text: "it won't send. no signal. one bar then nothing", delay: "9s" },
         { to: "tom", text: "someone's at the end of the hall", delay: "7s", notify: true },
         { to: "tom", text: "I think it's Dana?? the woman from the night desk? she's waving me over", delay: "6s", notify: true },
-        { text: "Desk. Something just walked past the day room door. In my jacket. Wearing my face. If he can see it, tell him it isn't me.", delay: "5s", notify: true }
+        { text: "desk. something just walked past the day room door. in my jacket. wearing my face. if he can see it, tell him it isn't me", delay: "5s", notify: true }
       ],
       thread: "tom",
       choices: [
@@ -1607,8 +1608,8 @@ window.NIGHTDESK_STORY = {
         { to: "tom", text: "ok", delay: "6s" },
         { to: "tom", text: "ok L. pressing. nothing's happening", delay: "6s" },
         { to: "tom", text: "the doors aren't closing", delay: "5s", notify: true },
-        { text: "the car's still sitting at the end of the hall with the doors open. i can hear it.", delay: "6s", notify: true },
-        { text: "Tell him to say his own name out loud. Full name. Out loud, not in a text. Then press L again. I'll explain after.", delay: "7s" }
+        { text: "the car's still sitting at the end of the hall with the doors open. i can hear it", delay: "6s", notify: true },
+        { text: "tell him to say his own name out loud. full name. out loud, not in a text. then press L again. i'll explain after", delay: "7s" }
       ],
       thread: "tom",
       choices: [
@@ -1641,7 +1642,7 @@ window.NIGHTDESK_STORY = {
         { to: "tom", text: "thank you. seriously.", delay: "6s" },
         { to: "tom", text: "eleven floors. love living up high lol", delay: "3m" },
         { to: "tom", text: "they need to replace that elevator. I'm emailing Doug in the morning", delay: "8s" },
-        { text: "He's down?", delay: "4s" }
+        { text: "he's down?", delay: "4s" }
       ],
       goto: "ch3_after_safe"
     },
@@ -1651,7 +1652,7 @@ window.NIGHTDESK_STORY = {
         { to: "tom", text: "management knows?? and I'm paying $2400 a month", delay: "9s" },
         { to: "tom", text: "fine. stairs. eleven floors. great.", delay: "6s" },
         { to: "tom", text: "that elevator gets replaced or I'm out of my lease. tell Doug.", delay: "3m" },
-        { text: "He's down?", delay: "4s" }
+        { text: "he's down?", delay: "4s" }
       ],
       goto: "ch3_after_safe"
     },
@@ -1666,17 +1667,17 @@ window.NIGHTDESK_STORY = {
 
     ch3_name_rule_warm: {
       messages: [
-        { text: "We did that. I'm up here typing with one bar. You're the one who kept him in the box.", delay: "9s" }
+        { text: "we did that. i'm up here typing with one bar. you're the one who kept him in the box", delay: "9s" }
       ],
       goto: "ch3_name_rule"
     },
 
     ch3_name_rule: {
       messages: [
-        { text: "The name thing. I found it in a chart in room 4 tonight. 'Subject reoriented by vocal self-identification.' It was how they brought people back when the machine went too far.", delay: "14s" },
-        { text: "Here's how I read it. Every name that goes over this phone, it keeps. It can't make anything up, so it collects. But your own name, out loud, in your own mouth, it can't hold on to.", delay: "12s", set: { k_name_rule: 1 } },
-        { text: "That's why Tom had to say his. And that's why you never type yours. Desk.", delay: "7s" },
-        { text: "The lights are coming back up. It's done for tonight. Lock your door and get some sleep when you can. I mean it.", delay: "10s" },
+        { text: "the name thing. i found it in a chart in room 4 tonight. 'Subject reoriented by vocal self-identification.' it was how they brought people back when the machine went too far", delay: "14s" },
+        { text: "here's how i read it. every name that goes over this phone, it keeps. it can't make anything up, so it collects. but your own name, out loud, in your own mouth, it can't hold on to", delay: "12s", set: { k_name_rule: 1 } },
+        { text: "that's why tom had to say his. and that's why you never type yours. desk", delay: "7s" },
+        { text: "the lights are coming back up. it's done for tonight. lock your door and get some sleep when you can. i mean it", delay: "10s" },
         { text: "🐈", delay: "3s", if: { flag: "fed_toto", min: 1 } },
         { status: "offline" }
       ],
@@ -1687,13 +1688,13 @@ window.NIGHTDESK_STORY = {
       messages: [
         { to: "tom", text: "ok going", delay: "6s" },
         { to: "tom", text: "stairwell door's heavy", delay: "9s" },
-        { text: "No. No no no. The doors closed. The car's going back down empty.", delay: "12s", notify: true },
-        { text: "Desk, the stairwell up here just slammed.", delay: "5s" },
-        { text: "He's here.", delay: "8s" },
+        { text: "no. no no no. the doors closed. the car's going back down empty", delay: "12s", notify: true },
+        { text: "desk, the stairwell up here just slammed", delay: "5s" },
+        { text: "he's here", delay: "8s" },
         { to: "tom", text: "hello?", delay: "2m", notify: true },
         { to: "tom", text: "I'm on 11 but it's not 11", delay: "6s" },
         { to: "tom", text: "I can hear a piano", delay: "8s" },
-        { text: "I'm going to find him. Don't text him again tonight. It's reading his phone now.", delay: "15s" },
+        { text: "i'm going to find him. don't text him again tonight. it's reading his phone now", delay: "15s" },
         { status: "offline" }
       ],
       choices: [
@@ -1704,15 +1705,15 @@ window.NIGHTDESK_STORY = {
 
     ch3_lost_end_fault: {
       messages: [
-        { text: "It's the building's fault. It's been the building's fault since 1974.", delay: "2h 30m", notify: true },
-        { text: "I can't find him. The hallway's longer than it was.", delay: "8s" }
+        { text: "it's the building's fault. it's been the building's fault since 1974", delay: "2h 30m", notify: true },
+        { text: "i can't find him. the hallway's longer than it was", delay: "8s" }
       ],
       goto: "ch3_lost_end_2"
     },
 
     ch3_lost_end: {
       messages: [
-        { text: "I can't find him. The hallway's longer than it was.", delay: "2h 30m", notify: true }
+        { text: "i can't find him. the hallway's longer than it was", delay: "2h 30m", notify: true }
       ],
       goto: "ch3_lost_end_2"
     },
@@ -1721,15 +1722,15 @@ window.NIGHTDESK_STORY = {
     ch4_start: {
       messages: [
         { system: "You don't sleep after Tom. At eight you hand Priya the desk phone so you can try. You sleep until two.", delay: "day" },
-        { text: "Desk? You up?", delay: "20s" },
-        { text: "Found something. Room 4 has a chart with a list of names on the back. Staff, not patients. One of them is from 2003.", delay: "9s" },
+        { text: "desk? you up?", delay: "20s" },
+        { text: "found something. room 4 has a chart with a list of names on the back. staff, not patients. one of them is from 2003", delay: "9s" },
         { me: true, text: "Hi! This is Priya at the day desk 🙂 who is this?", delay: "40s" },
-        { text: "priya.", delay: "15s" },
-        { text: "put the phone down.", delay: "4s" },
+        { text: "priya", delay: "15s" },
+        { text: "put the phone down", delay: "4s" },
         { me: true, text: "Excuse me?? Is this DANA?", delay: "20s" },
-        { text: "I'm fine. I'm away. Don't tell Doug this number texted. Please.", delay: "12s" },
+        { text: "i'm fine. i'm away. don't tell doug this number texted. please", delay: "12s" },
         { me: true, text: "Dana what the hell. Everyone thinks you ghosted. Marjorie filed a missing person thing. WHERE are you", delay: "25s" },
-        { text: "The one on nights knows. Ask them, not me. I have to go.", delay: "14s" },
+        { text: "the one on nights knows. ask them, not me. i have to go", delay: "14s" },
         { status: "offline" },
         { me: true, text: "ok but this is weird", delay: "30s" },
         { system: "{time}. Priya hands you the phone at shift change and looks at you for a long moment before she leaves.", delay: "1h 57m" },
@@ -1777,7 +1778,7 @@ window.NIGHTDESK_STORY = {
         { to: "tom", text: "hey. 'management knows' my ass. emailed Doug anyway. still taking the stairs", delay: "6m", if: [{ flag: "saved_tom", min: 1 }, { flag: "told_tom", max: -1 }] },
         { to: "carl", text: "Also Tom Okafor in 11A emailed about the elevator. Inspection is booked. Please put the Out of Service sign on the elevator tonight.", delay: "10s", if: { flag: "tom_lost", is: 0 } },
         { to: "carl", text: "Also, Tom Okafor's wife called. He didn't come home last night. If he contacts the desk, you call me first, not her. Thanks.", delay: "10s", if: { flag: "tom_lost", min: 1 } },
-        { text: "Did Priya believe any of that.", delay: "2m" }
+        { text: "did priya believe any of that", delay: "2m" }
       ],
       choices: [
         { text: "All of it. She knows it's you now.", goto: "ch4_dana_list", if: { flag: "told_priya", is: 1 } },
@@ -1789,17 +1790,17 @@ window.NIGHTDESK_STORY = {
 
     ch4_dana_list_lie: {
       messages: [
-        { text: "Good. I mean it. Lying to Priya is the kindest thing you've done for her.", delay: "8s" }
+        { text: "good. i mean it. lying to priya is the kindest thing you've done for her", delay: "8s" }
       ],
       goto: "ch4_dana_list"
     },
 
     ch4_dana_list: {
       messages: [
-        { text: "It matters because of the list. The one on the back of the chart.", delay: "9s" },
-        { text: "It's in different handwriting. Thirteen lines, ten names. The last four are this year. Mine is number ten.", delay: "11s" },
-        { text: "Number eleven is blank. It's been blank since I got here and today it isn't.", delay: "10s" },
-        { text: "It says Desk.", delay: "6s" }
+        { text: "it matters because of the list. the one on the back of the chart", delay: "9s" },
+        { text: "it's in different handwriting. thirteen lines, ten names. the last four are this year. mine is number ten", delay: "11s" },
+        { text: "number eleven is blank. it's been blank since i got here and today it isn't", delay: "10s" },
+        { text: "it says desk", delay: "6s" }
       ],
       choices: [
         { text: "That's not a name. That's a joke you made.", goto: "ch4_desk_name" },
@@ -1810,19 +1811,19 @@ window.NIGHTDESK_STORY = {
 
     ch4_desk_name_safe: {
       messages: [
-        { text: "I'm out. I'm in the day room with the piano. It's the only room that doesn't feel like it's listening.", delay: "9s" }
+        { text: "i'm out. i'm in the day room with the piano. it's the only room that doesn't feel like it's listening", delay: "9s" }
       ],
       goto: "ch4_desk_name"
     },
 
     ch4_desk_name: {
       messages: [
-        { text: "It's a joke I made. On this phone. Which is how it knows the word.", delay: "9s" },
-        { text: "It can only write down what it's been given. That's the rule I keep finding. It doesn't invent. It copies.", delay: "11s" },
-        { text: "So as long as all it has is Desk, all it can call is Desk. You understand why I never asked.", delay: "10s" },
-        { text: "The chart in room 4 says one more thing, and I wish I'd read it before Tom went up. 'Subject reoriented by vocal self-identification.' You say your own full name out loud and it has to let go. It's how they brought people back when the machine went too far.", delay: "16s", if: { flag: "tom_lost", min: 1 } },
-        { text: "Every name that goes over this phone, it keeps. But your own name, out loud, in your own mouth, it can't hold on to. That's the difference. Which is why you never type yours.", delay: "10s", if: { flag: "tom_lost", min: 1 } },
-        { text: "And when Marjorie in 4B gets to you, and she will, she gets to everyone: talk to her. She was here when they poured the floors.", delay: "12s" },
+        { text: "it's a joke i made. on this phone. which is how it knows the word", delay: "9s" },
+        { text: "it can only write down what it's been given. that's the rule i keep finding. it doesn't invent. it copies", delay: "11s" },
+        { text: "so as long as all it has is desk, all it can call is desk. you understand why i never asked", delay: "10s" },
+        { text: "the chart in room 4 says one more thing, and i wish i'd read it before tom went up. 'Subject reoriented by vocal self-identification.' you say your own full name out loud and it has to let go. it's how they brought people back when the machine went too far", delay: "16s", if: { flag: "tom_lost", min: 1 } },
+        { text: "every name that goes over this phone, it keeps. but your own name, out loud, in your own mouth, it can't hold on to. that's the difference. which is why you never type yours", delay: "10s", if: { flag: "tom_lost", min: 1 } },
+        { text: "and when marjorie in 4B gets to you, and she will, she gets to everyone: talk to her. she was here when they poured the floors", delay: "12s" },
         { status: "offline" },
         { to: "marjorie", text: "Dear, this is Marjorie in 4B. I saw you carry a cat carrier up the stairs yesterday, which means two things. The elevator is misbehaving again, and you have a cat.", delay: "40m", notify: true, if: { flag: "toto_home", min: 1 } },
         { to: "marjorie", text: "Dear, this is Marjorie in 4B. I saw you take the stairs this morning with a face like a wet week, which means the elevator is misbehaving again.", delay: "40m", notify: true, if: { flag: "toto_home", max: 0 } },
@@ -1834,7 +1835,7 @@ window.NIGHTDESK_STORY = {
         { text: "Yes. Thank you, Marjorie. Can I ask you something now? What was this building before 1979?", goto: "ch4_marjorie_1979", set: { curiosity: 1 } },
         { text: "Yes, I'd like that. The cat's name is Toto.", goto: "ch4_marjorie_warm", set: { trust: 1 }, if: { flag: "toto_home", min: 1 } },
         { text: "Yes, I'd like that. Thank you.", goto: "ch4_marjorie_warm2", set: { trust: 1 }, if: { flag: "toto_home", max: 0 } },
-        { text: "I'm not supposed to socialise with residents. Sorry.", goto: "ch4_marjorie_cold" }
+        { text: "I'm not supposed to socialize with residents. Sorry.", goto: "ch4_marjorie_cold" }
       ]
     },
 
@@ -1867,7 +1868,7 @@ window.NIGHTDESK_STORY = {
         { to: "marjorie", text: "The man who sold it was called Ashgrove. Nobody says that name here anymore. Tomorrow. Bring the cat.", delay: "14s", if: { flag: "toto_home", min: 1 } },
         { to: "marjorie", text: "The man who sold it was called Ashgrove. Nobody says that name here anymore. Tomorrow. Bring an appetite.", delay: "14s", if: { flag: "toto_home", max: 0 } },
         { text: "it's 3:12 up here", delay: "night", notify: true },
-        { text: "the car just went down. nobody called it.", delay: "5s" },
+        { text: "the car just went down. nobody called it", delay: "5s" },
         { text: "is the sign up?", delay: "6s" }
       ],
       choices: [
@@ -1880,14 +1881,14 @@ window.NIGHTDESK_STORY = {
     ch4_end_nosign: {
       messages: [
         { text: "ok", delay: "6s" },
-        { text: "then stay inside and don't pick up if the lobby phone rings. it rings sometimes when the sign's down.", delay: "10s" }
+        { text: "then stay inside and don't pick up if the lobby phone rings. it rings sometimes when the sign's down", delay: "10s" }
       ],
       goto: "ch4_end"
     },
 
     ch4_end: {
       messages: [
-        { text: "Lock your door, Desk.", delay: "8s" }
+        { text: "lock your door, desk", delay: "8s" }
       ],
       choices: [
         { text: "Marjorie texted, like you said she would. Tea tomorrow after ten. She says the man who sold the building was called Ashgrove.", goto: "ch4_end_tea", set: { told_tea: 1, trust: 1 } },
@@ -1897,8 +1898,8 @@ window.NIGHTDESK_STORY = {
 
     ch4_end_tea: {
       messages: [
-        { text: "Ashgrove. Same as my sticky note.", delay: "7s" },
-        { text: "Go. Take the note with you. Then I'll tell you what else was on the back of that chart.", delay: "8s" },
+        { text: "ashgrove. same as my sticky note", delay: "7s" },
+        { text: "go. take the note with you. then i'll tell you what else was on the back of that chart", delay: "8s" },
         { text: "🐈", delay: "3s", if: { flag: "fed_toto", min: 1 } },
         { status: "offline" }
       ],
@@ -1907,7 +1908,7 @@ window.NIGHTDESK_STORY = {
 
     ch4_end_quiet: {
       messages: [
-        { text: "Night. Tomorrow I'll tell you what else was on the back of that chart.", delay: "7s" },
+        { text: "night. tomorrow i'll tell you what else was on the back of that chart", delay: "7s" },
         { text: "🐈", delay: "3s", if: { flag: "fed_toto", min: 1 } },
         { status: "offline" }
       ],
@@ -1916,7 +1917,7 @@ window.NIGHTDESK_STORY = {
 
     ch3_lost_end_2: {
       messages: [
-        { text: "Go to sleep, Desk. I'll keep looking.", delay: "7s" },
+        { text: "go to sleep, desk. i'll keep looking", delay: "7s" },
         { status: "offline" }
       ],
       endOfChapter: { title: "End of Night 2", subtitle: "Tom Okafor's thread says Delivered. Not Read. Dana is looking for him.", next: "ch4_start" }
@@ -1938,20 +1939,20 @@ window.NIGHTDESK_STORY = {
 
     ch5_chart_first: {
       messages: [
-        { text: "no. cake first. im not telling you the rest while youre alone in that flat", delay: "8s" },
-        { text: "go. ask her about november 1974. the date. not the building, the night.", delay: "7s" }
+        { text: "no. cake first. im not telling you the rest while youre alone in that apartment", delay: "8s" },
+        { text: "go. ask her about november 1974. the date. not the building, the night", delay: "7s" }
       ],
       goto: "ch5_marjorie_go"
     },
 
     ch5_marjorie_go: {
       messages: [
-        { text: "ask her about november 1974. the date. not the building, the night.", delay: "8s", if: { flag: "chart_first", max: 0 } },
+        { text: "ask her about november 1974. the date. not the building, the night", delay: "8s", if: { flag: "chart_first", max: 0 } },
         { text: "and get my cat on the way back. grace has done enough. hes yours now", delay: "6s", if: [{ flag: "fed_toto", min: 1 }, { flag: "toto_home", max: 0 }] },
         { text: "and eat the cake. she'll know if you don't", delay: "5s" },
         { status: "offline" },
         { system: "4B. Tea in cups with saucers, three husbands in frames, and ninety minutes of Marjorie. You don't get a word in and you don't mind.", delay: "1h 30m" },
-        { system: "Bus 17 after tea. Grace hands over a carrier and a bag of food and says to tell Dana to call her mother. Toto walks 11C once and sits on the bed, staring at the ceiling.", delay: "4s", if: [{ flag: "fed_toto", min: 1 }, { flag: "toto_home", max: 0 }], set: { toto_home: 1 } },
+        { system: "Bus 17 after tea. Grace hands over a carrier and a bag of food and says to tell Dana to call her mother. Toto walks 11C once and sits on the bed, staring at the ceiling.", delay: "4s", if: [{ flag: "fed_toto", min: 1 }, { flag: "toto_home", max: 0 }], set: { toto_home: 1, toto_d4: 1 } },
         { to: "priya", text: "coffee on the desk for you, going cold. you still owe me the whole story. tomorrow, no excuses", delay: "3s", if: { flag: "told_priya", min: 1 } },
         { system: "Toto eats a piece of cake off the carpet and is declared a gentleman.", delay: "2s", if: { flag: "toto_home", min: 1 } },
         { to: "marjorie", text: "Thank you for coming, dear. I found a clipping for you after you left. The Oregonian, the week we moved in. I'll slide it under your door.", delay: "20m", notify: true },
@@ -2037,11 +2038,11 @@ window.NIGHTDESK_STORY = {
 
     ch5_chart: {
       messages: [
-        { text: "I'm in the office. Dr. Halloran's, it says so on the door. Filing cabinets, all unlocked. Nobody locked anything because nobody was supposed to come back.", delay: "40m", notify: true },
-        { text: "I said I'd show you the list. Here.", delay: "5s" },
+        { text: "i'm in the office. dr. halloran's, it says so on the door. filing cabinets, all unlocked. nobody locked anything because nobody was supposed to come back", delay: "40m", notify: true },
+        { text: "i said i'd show you the list. here", delay: "5s" },
         { image: "chart_room4", caption: "Sent 1 photo", delay: "6s" },
-        { text: "Four from 74, the night it happened. One in 87. Lindqvist in 2003. Then four of us this year.", delay: "12s" },
-        { text: "Ten names and yours. Thirteen lines.", delay: "6s" }
+        { text: "four from 74, the night it happened. one in 87. lindqvist in 2003. then four of us this year", delay: "12s" },
+        { text: "ten names and yours. thirteen lines", delay: "6s" }
       ],
       choices: [
         { text: "Who's Lindqvist?", goto: "ch5_lindqvist", set: { curiosity: 1, cq_lind: 1 } },
@@ -2061,34 +2062,34 @@ window.NIGHTDESK_STORY = {
 
     ch5_lindqvist: {
       messages: [
-        { text: "Ray Lindqvist. There's a wallet in the desk drawer here that isn't from 74.", delay: "9s" },
+        { text: "ray lindqvist. there's a wallet in the desk drawer here that isn't from 74", delay: "9s" },
         { image: "lindqvist_badge", caption: "Sent 1 photo", delay: "8s" },
-        { text: "Retired cop, private investigator. Hired by the family of the night man from 87. There's a notebook too. Half of it is about his divorce. The other half is about this building.", delay: "14s" },
-        { text: "Last page: 'It wrote to Carol as me. Perfect spelling. I never spelled anything right in my life.'", delay: "12s", set: { knows_copy: 1 } },
-        { text: "so that's a thing it can do.", delay: "6s" }
+        { text: "retired cop, private investigator. hired by the family of the night man from 87. there's a notebook too. half of it is about his divorce. the other half is about this building", delay: "14s" },
+        { text: "last page: 'It wrote to Carol as me. Perfect spelling. I never spelled anything right in my life.'", delay: "12s", set: { knows_copy: 1 } },
+        { text: "so that's a thing it can do", delay: "6s" }
       ],
       goto: "ch5_chart_hub"
     },
 
     ch5_come_down: {
       messages: [
-        { text: "I can't. Not yet. The car only goes down at 3:12 and I'm not getting in it while the lights are on in here.", delay: "9s" },
-        { text: "Let me read. Then I'll come to the door and we'll figure out how.", delay: "8s" }
+        { text: "i can't. not yet. the car only goes down at 3:12 and i'm not getting in it while the lights are on in here", delay: "9s" },
+        { text: "let me read. then i'll come to the door and we'll figure out how", delay: "8s" }
       ],
       goto: "ch5_chart_hub"
     },
 
     ch5_lantern: {
       messages: [
-        { text: "ok. I've read enough.", delay: "25m", notify: true },
-        { text: "The Ashgrove Institute for Behavioral Research. 1966 to 1974. Project LANTERN. Thirteen patients, 'severe characterological disturbance'. Most of them came from prisons.", delay: "14s" },
-        { text: "They thought you could split a person. Take out the part that hurts people and leave the rest. They called it the shadow fraction.", delay: "12s" },
-        { text: "A machine on 13. The Resonator. It ran every night at 3:12, when they were deepest asleep. That's the hum, desk. That's what I sent you the first night.", delay: "13s" },
-        { text: "It worked. That's the part that gets me. The notes say the patients became 'tractable'. Quiet. Empty.", delay: "11s" },
-        { text: "The part they took out didn't go anywhere.", delay: "8s" },
-        { text: "Halloran's last report, 11-13-74: 'The aggregate is now responsive. It has begun answering questions put to the patients, in their voices. Recommend immediate suspension.' Next day the floor was gone.", delay: "16s" },
-        { text: "They call it the Composite.", delay: "7s", set: { knows_truth: 1 } },
-        { text: "thirteen people's worst parts in one thing with no body to keep them in. and it wants one.", delay: "10s" }
+        { text: "ok. i've read enough", delay: "25m", notify: true },
+        { text: "the ashgrove institute for behavioral research. 1966 to 1974. project LANTERN. thirteen patients, 'severe characterological disturbance'. most of them came from prisons", delay: "14s" },
+        { text: "they thought you could split a person. take out the part that hurts people and leave the rest. they called it the shadow fraction", delay: "12s" },
+        { text: "a machine on 13. the resonator. it ran every night at 3:12, when they were deepest asleep. that's the hum, desk. that's what i sent you the first night", delay: "13s" },
+        { text: "it worked. that's the part that gets me. the notes say the patients became 'tractable'. quiet. empty", delay: "11s" },
+        { text: "the part they took out didn't go anywhere", delay: "8s" },
+        { text: "halloran's last report, 11-13-74: 'The aggregate is now responsive. It has begun answering questions put to the patients, in their voices. Recommend immediate suspension.' next day the floor was gone", delay: "16s" },
+        { text: "they call it the composite", delay: "7s", set: { knows_truth: 1 } },
+        { text: "thirteen people's worst parts in one thing with no body to keep them in. and it wants one", delay: "10s" }
       ],
       choices: [
         { text: "So what does it want with you?", goto: "ch5_want", set: { lq: 1, lq_want: 1 } },
@@ -2108,17 +2109,17 @@ window.NIGHTDESK_STORY = {
 
     ch5_want: {
       messages: [
-        { text: "to finish. every one it takes it gets more... person. the 74 notes say it could barely spell.", delay: "12s" },
-        { text: "Lindqvist says it wrote his wife a letter.", delay: "5s", if: { flag: "knows_copy", min: 1 } },
-        { text: "I'm ten. You're eleven. thirteen lines, thirteen patients. it wants the set.", delay: "8s" }
+        { text: "to finish. every one it takes it gets more... person. the 74 notes say it could barely spell", delay: "12s" },
+        { text: "lindqvist says it wrote his wife a letter", delay: "5s", if: { flag: "knows_copy", min: 1 } },
+        { text: "i'm ten. you're eleven. thirteen lines, thirteen patients. it wants the set", delay: "8s" }
       ],
       goto: [{ if: { flag: "lq", min: 3 }, goto: "ch5_kevin_ask" }, { goto: "ch5_lantern_hub" }]
     },
 
     ch5_machine: {
       messages: [
-        { text: "The Resonator is on 13. Service stair at the end of the ward, behind the day room. It goes up to 13 and down past us to 11. The door up is chained. From this side.", delay: "10s" },
-        { text: "Halloran's note says 'the aggregate persists when the device is inactive but weakens'. weakens. that's a word I can work with.", delay: "10s" }
+        { text: "the resonator is on 13. service stair at the end of the ward, behind the day room. it goes up to 13 and down past us to 11. the door up is chained. from this side", delay: "10s" },
+        { text: "halloran's note says 'the aggregate persists when the device is inactive but weakens'. weakens. that's a word i can work with", delay: "10s" }
       ],
       goto: [{ if: { flag: "lq", min: 3 }, goto: "ch5_kevin_ask" }, { goto: "ch5_lantern_hub" }]
     },
@@ -2126,15 +2127,15 @@ window.NIGHTDESK_STORY = {
     ch5_breathe: {
       messages: [
         { text: "lol ok", delay: "6s" },
-        { text: "Something only I'd say. Toto once ate a whole sock and I named the vet bill. It was called Gerald. I paid Gerald off over eleven months.", delay: "11s", set: { knows_gerald: 1 } },
-        { text: "Thanks, desk.", delay: "5s" }
+        { text: "something only i'd say. toto once ate a whole sock and i named the vet bill. it was called gerald. i paid gerald off over eleven months", delay: "11s", set: { knows_gerald: 1 } },
+        { text: "thanks, desk", delay: "5s" }
       ],
       goto: [{ if: { flag: "lq", min: 3 }, goto: "ch5_kevin_ask" }, { goto: "ch5_lantern_hub" }]
     },
 
     ch5_kevin_ask: {
       messages: [
-        { text: "can I ask you something and you tell me the truth", delay: "3m", notify: true },
+        { text: "can i ask you something and you tell me the truth", delay: "3m", notify: true },
         { text: "did you read the last page", delay: "6s" }
       ],
       choices: [
@@ -2147,7 +2148,7 @@ window.NIGHTDESK_STORY = {
     ch5_kevin_no: {
       messages: [
         { text: "thank you", delay: "6s" },
-        { text: "read it now. I'd rather you heard it while I'm still the one telling it.", delay: "9s" }
+        { text: "read it now. i'd rather you heard it while i'm still the one telling it", delay: "9s" }
       ],
       goto: "ch5_kevin_tell"
     },
@@ -2163,15 +2164,15 @@ window.NIGHTDESK_STORY = {
     ch5_kevin_tell: {
       messages: [
         { system: "The last page isn't music. A letter in blue ballpoint, the handwriting slanting hard to the right: 'Dan. Don't come get me this time. It's dangerous to go alone, take this. K.'", delay: "4s" },
-        { text: "K.L. is Kevin Li. My little brother. Li is our real family name. Mom remarried a man called Hector Reyes and I took his name. Kevin kept ours. The notebook was his. The songs are his, mostly bad, one good.", delay: "13s" },
-        { text: "When we were kids we played Zelda on a bootleg console behind the laundromat. At the start an old man in a cave gives you a sword and says 'It's dangerous to go alone, take this.' Kevin and I said it instead of goodbye.", delay: "14s" },
-        { text: "He died when he was 19. Overdose, in a bathroom in Gresham, with his phone in his hand. The last text on it was to me. 'dangerous to go alone'.", delay: "12s" },
-        { text: "The triangles on my wrist you asked about. That's the Triforce, from the same game. I got it the week after.", delay: "9s", if: { flag: "k_tattoo", min: 1 } },
-        { text: "I've got three triangles on my wrist, you might have seen them in the wristband photo. That's the Triforce, from the same game. I got it the week after.", delay: "10s", if: { flag: "k_tattoo", max: 0 } },
-        { text: "I went and got him every time before that one. Every single time.", delay: "9s" },
-        { text: "that's why I couldn't leave tom in that car.", delay: "7s", if: { flag: "tom_lost", max: 0 } },
-        { text: "that's why I'm not leaving tom up here.", delay: "7s", if: { flag: "tom_lost", min: 1 } },
-        { text: "I've never told anyone in this building that. Not Priya. And I just typed it on this phone, so now it has it too. But the last page is paper, in your jacket. It hasn't seen that. Remember that.", delay: "13s", set: { knows_kevin: 1 } }
+        { text: "K.L. is kevin li. my little brother. li is our real family name. mom remarried a man called hector reyes and i took his name. kevin kept ours. the notebook was his. the songs are his, mostly bad, one good", delay: "13s" },
+        { text: "when we were kids we played zelda on a bootleg console behind the laundromat. at the start an old man in a cave gives you a sword and says 'It's dangerous to go alone, take this.' kevin and i said it instead of goodbye", delay: "14s" },
+        { text: "he died when he was 19. overdose, in a bathroom in gresham, with his phone in his hand. the last text on it was to me. 'dangerous to go alone'", delay: "12s" },
+        { text: "the triangles on my wrist you asked about. that's the triforce, from the same game. i got it the week after", delay: "9s", if: { flag: "k_tattoo", min: 1 } },
+        { text: "i've got three triangles on my wrist, you might have seen them in the wristband photo. that's the triforce, from the same game. i got it the week after", delay: "10s", if: { flag: "k_tattoo", max: 0 } },
+        { text: "i went and got him every time before that one. every single time", delay: "9s" },
+        { text: "that's why i couldn't leave tom in that car", delay: "7s", if: { flag: "tom_lost", max: 0 } },
+        { text: "that's why i'm not leaving tom up here", delay: "7s", if: { flag: "tom_lost", min: 1 } },
+        { text: "i've never told anyone in this building that. not priya. and i just typed it on this phone, so now it has it too. but the last page is paper, in your jacket. it hasn't seen that. remember that", delay: "13s", set: { knows_kevin: 1 } }
       ],
       choices: [
         { text: "I'm sorry about Kevin.", goto: "ch5_after_kevin" },
@@ -2182,8 +2183,8 @@ window.NIGHTDESK_STORY = {
 
     ch5_after_kevin: {
       messages: [
-        { text: "Thanks.", delay: "7s" },
-        { text: "Don't be weird about it tomorrow.", delay: "5s" }
+        { text: "thanks", delay: "7s" },
+        { text: "don't be weird about it tomorrow", delay: "5s" }
       ],
       goto: "ch5_quiet"
     },
@@ -2191,15 +2192,15 @@ window.NIGHTDESK_STORY = {
     ch5_after_kevin_joke: {
       messages: [
         { text: "lol", delay: "6s" },
-        { text: "he'd have hated you. that's a compliment, he hated everyone I liked.", delay: "8s" }
+        { text: "he'd have hated you. that's a compliment, he hated everyone i liked", delay: "8s" }
       ],
       goto: "ch5_quiet"
     },
 
     ch5_after_kevin_mom: {
       messages: [
-        { text: "Mom knows he died. She doesn't know about the text. She thinks he went quiet on us. She'll have said the same about me by now. 'She does this.' I can hear her saying it to some cop.", delay: "13s" },
-        { text: "Sacramento, if you ever need a number. Hector Reyes, her husband. Not for this. For after.", delay: "9s", set: { knows_mom: 1 } }
+        { text: "mom knows he died. she doesn't know about the text. she thinks he went quiet on us. she'll have said the same about me by now. 'She does this.' i can hear her saying it to some cop", delay: "13s" },
+        { text: "sacramento, if you ever need a number. hector reyes, her husband. not for this. for after", delay: "9s", set: { knows_mom: 1 } }
       ],
       choices: [
         { text: "I'm sorry about Kevin.", goto: "ch5_after_kevin" },
@@ -2212,8 +2213,8 @@ window.NIGHTDESK_STORY = {
         { text: "desk", delay: "1h", notify: true },
         { text: "the piano's playing", delay: "5s" },
         { text: "i'm in the office. the day room is at the other end of the ward", delay: "7s" },
-        { text: "its my song. mom's song.", delay: "6s" },
-        { text: "the F is right.", delay: "5s" },
+        { text: "its my song. mom's song", delay: "6s" },
+        { text: "the F is right", delay: "5s" },
         { text: "im going to look", delay: "6s" }
       ],
       choices: [
@@ -2230,7 +2231,7 @@ window.NIGHTDESK_STORY = {
         { text: "its stopped", delay: "2m" },
         { text: "desk theres someone in the hall", delay: "6s" },
         { text: "its standing at the end of the hall. where the car opens", delay: "7s", if: { flag: "knows_mimic", min: 1 } },
-        { text: "its me. its wearing my jacket. it waved.", delay: "8s" }
+        { text: "its me. its wearing my jacket. it waved", delay: "8s" }
       ],
       goto: "ch5_silence"
     },
@@ -2238,10 +2239,10 @@ window.NIGHTDESK_STORY = {
     ch5_photo: {
       messages: [
         { text: "ok", delay: "6s" },
-        { text: "it won't take. camera says storage full. it's not full.", delay: "40s" },
+        { text: "it won't take. camera says storage full. it's not full", delay: "40s", set: { k_storage: 1 } },
         { text: "theres someone at the piano", delay: "7s" },
-        { text: "its me. its wearing my jacket.", delay: "6s" },
-        { text: "the F is right because it watched me play.", delay: "8s" }
+        { text: "its me. its wearing my jacket", delay: "6s" },
+        { text: "the F is right because it watched me play", delay: "8s" }
       ],
       goto: "ch5_silence"
     },
@@ -2264,7 +2265,7 @@ window.NIGHTDESK_STORY = {
         { text: "its looking at the phone", delay: "8s" },
         { text: "it hears the phone", delay: "6s" },
         { text: "im going to the stair. 13. the chain on that door is older than me. if it weakens when the machine is off then", delay: "10s" },
-        { text: "dont text me. it hears you.", delay: "5s" },
+        { text: "dont text me. it hears you", delay: "5s" },
         { text: "dangerous to go alone", delay: "9s" },
         { status: "offline" },
         { system: "Nothing. You put the phone face down on the desk. You turn it face up. Nothing.", delay: "1h" }
@@ -2362,8 +2363,17 @@ window.NIGHTDESK_STORY = {
       choices: [
         { text: "Dana?! Where have you been? I thought you were gone.", goto: "ch6_back_warm", set: { spark: 1 } },
         { text: "I'm here. Tell me everything.", goto: "ch6_back_plain" },
-        { text: "Prove it's you.", goto: "ch6_back_prove", set: { curiosity: 1 } }
+        { text: "Prove it's you.", goto: "ch6_back_prove", set: { curiosity: 1 } },
+        { text: "Since when do you use capital letters?", goto: "ch6_back_caps", set: { doubt: 1 } }
       ]
+    },
+
+    ch6_back_caps: {
+      messages: [
+        { text: "New habits. Autocorrect. 🙂", delay: "8s" },
+        { text: "What matters is tomorrow night. 3:12.", delay: "6s" }
+      ],
+      goto: "ch6_ask"
     },
 
     ch6_back_warm: {
@@ -2398,25 +2408,69 @@ window.NIGHTDESK_STORY = {
         { text: "Can you do that for me?", delay: "6s" }
       ],
       choices: [
-        { text: "You told me never to help anyone into that elevator.", goto: "ch6_tests_intro", set: { trust: 1 } },
+        { text: "You told me never to help anyone into that elevator.", goto: "ch6_tests_intro", set: { trust: 1, doubt: 1 } },
         { text: "Of course. Tell me exactly what to do.", goto: "ch6_tests_intro_soft" },
-        { text: "Something's off. Humour me with a few questions first.", goto: "ch6_tests_intro", set: { curiosity: 1 } }
+        { text: "Something's off. Humor me with a few questions first.", goto: "ch6_tests_questions", set: { curiosity: 1 } }
       ]
     },
 
     ch6_tests_intro_soft: {
       messages: [
         { text: "Thank you. I knew you would.", delay: "7s" },
-        { text: "Tomorrow night. Sign down before eight. Be in the lobby. Step in, hold the doors, count to ten.", delay: "9s" },
-        { system: "Something itches. She said never. You do not help anyone into the elevator. Her rule for night two, in her own words." , delay: "6s" }
+        { text: "Tomorrow night. Sign down before eight. Be in the lobby. Step in, hold the doors, count to ten.", delay: "9s" }
       ],
-      goto: "ch6_tests_intro"
+      choices: [
+        { text: "Wait. You said never help anyone into that elevator.", goto: "ch6_tests_intro", set: { doubt: 1 } },
+        { text: "Okay. But humor me with a few questions first.", goto: "ch6_tests_questions", set: { curiosity: 1 } }
+      ]
+    },
+
+    ch6_tests_questions: {
+      messages: [
+        { text: "Questions? Of course. 🙂", delay: "7s" }
+      ],
+      goto: "ch6_tests_q"
     },
 
     ch6_tests_intro: {
       messages: [
-        { text: "I did say that. I was wrong about the rules. I've read more since.", delay: "9s" },
-        { text: "Ask me anything, Desk. We have all day. 🙂", delay: "7s" }
+        { text: "I did say that. I was wrong about the rules. I've read more since.", delay: "9s" }
+      ],
+      goto: "ch6_tests_q"
+    },
+
+    ch6_tests_q: {
+      messages: [
+        { text: "Ask me anything, Desk. We have all day. 🙂", delay: "7s" },
+        { text: "One thing first. When I walk out of that car, I want to say your name. Your real one. What is it?", delay: "8s" }
+      ],
+      choices: [
+        { text: "You told me never to type it. You said it collects names.", goto: "ch6_name_refuse", set: { doubt: 1, t_name: 1 } },
+        { text: "Desk is fine.", goto: "ch6_name_desk", set: { t_name: 1 } },
+        { text: "Tell her your name.", action: "You type your name. Every letter. You send it.", goto: "ch6_name_told", set: { told_name: 1, t_name: 1 } }
+      ]
+    },
+
+    // Rule break: the real Dana forbade names. It wants one.
+    ch6_name_refuse: {
+      messages: [
+        { text: "I was being dramatic. 🙂", delay: "8s" },
+        { text: "Fine. Keep it. For now.", delay: "5s" }
+      ],
+      goto: "ch6_hub"
+    },
+
+    ch6_name_desk: {
+      messages: [
+        { text: "Desk it is. For now. 🙂", delay: "7s" }
+      ],
+      goto: "ch6_hub"
+    },
+
+    ch6_name_told: {
+      messages: [
+        { text: "Thank you. 🙂", delay: "6s" },
+        { text: "I'll say it at 3:12.", delay: "5s" }
       ],
       goto: "ch6_hub"
     },
@@ -2428,36 +2482,35 @@ window.NIGHTDESK_STORY = {
         { text: "Play me the song. The one your mom taught you.", goto: "ch6_t_piano", if: { flag: "t_piano", max: 0 } },
         { text: "What did Kevin write on the last page? The exact words.", goto: "ch6_t_kevin", if: { flag: "t_kevin", max: 0 } },
         { text: "Send me a photo of where you are.", goto: "ch6_t_photo", if: { flag: "t_photo", max: 0 } },
+        { text: "What time is it up there?", goto: "ch6_t_clock", if: { flag: "t_clock", max: 0 } },
+        { text: "You always go dark. It hears the phone. Now you have all day?", goto: "ch6_t_dark", if: { flag: "t_dark", max: 0 } },
         { text: "It opened on L for Tom, and nobody was waiting for him.", goto: "ch6_t_rule", if: [{ flag: "t_rule", max: 0 }, { flag: "tom_lost", max: 0 }] },
         { text: "It came back down empty after Tom, and nobody was waiting for it.", goto: "ch6_t_rule_empty", if: [{ flag: "t_rule", max: 0 }, { flag: "tom_lost", min: 1 }] },
-        { text: "Okay. I believe you. Lobby at 3:12.", goto: "ch6_believe", if: { flag: "tests", min: 1 } },
+        { text: "Okay. I believe you. Lobby at eight.", goto: "ch6_believe", if: { flag: "tests", min: 1 } },
         { text: "You're not her.", goto: "ch6_call_it", if: { flag: "doubt", min: 2 } }
       ]
     },
 
+    // It copies, it doesn't invent: it answers with Dana's own words from day 2, word for word.
     ch6_t_toto: {
       messages: [
-        { text: "Toto is fine. Grace is feeding him. 🐈🐈", delay: "8s", set: { t_toto: 1, tests: 1 } }
+        { text: "He's looking at the ceiling. He knows where I am. 🙂", delay: "8s", set: { t_toto: 1, tests: 1 }, if: { flag: "toto_pic", min: 1 } },
+        { text: "A saint in a staff residence with a no-pets clause. 🙂", delay: "8s", set: { t_toto: 1, tests: 1 }, if: { flag: "toto_text", min: 1 } },
+        { text: "Grace has done enough. He's yours now. 🙂", delay: "8s", set: { t_toto: 1, tests: 1 }, if: { flag: "toto_d4", min: 1 } },
+        { text: "Grace has him. She'll say yes. She always says yes. 🙂", delay: "8s", set: { t_toto: 1, tests: 1 }, if: [{ flag: "toto_home", max: 0 }, { flag: "fed_toto", min: 1 }] },
+        { text: "Mrs. O will manage. 🙂", delay: "8s", set: { t_toto: 1, tests: 1 }, if: [{ flag: "toto_home", max: 0 }, { flag: "fed_toto", max: 0 }] }
       ],
       choices: [
-        { text: "Toto's with me. In 11C. You know that.", goto: "ch6_t_toto_caught", set: { doubt: 1 }, if: { flag: "toto_home", min: 1 } },
-        { text: "Two cats now?", goto: "ch6_t_toto_two", set: { doubt: 1 } },
+        { text: "That's what you wrote on {weekday:-3d}. Word for word. Except now it has capitals.", goto: "ch6_t_toto_caught", set: { doubt: 1 }, if: { flag: "toto_d4", max: 0 } },
+        { text: "That's what you wrote on {weekday:-1d}. Word for word. Except now it has capitals.", goto: "ch6_t_toto_caught", set: { doubt: 1 }, if: { flag: "toto_d4", min: 1 } },
         { text: "Good. Give him a scratch from me when you're back.", goto: "ch6_hub" }
       ]
     },
 
     ch6_t_toto_caught: {
       messages: [
-        { text: "Right. I'm tired, Desk. I meant Grace was feeding him before.", delay: "9s" },
+        { text: "I'm tired, Desk. I repeat myself when I'm tired.", delay: "9s" },
         { text: "Next question. 🙂", delay: "5s" }
-      ],
-      goto: "ch6_hub"
-    },
-
-    ch6_t_toto_two: {
-      messages: [
-        { text: "lol. Fat finger.", delay: "7s" },
-        { text: "Next question.", delay: "5s" }
       ],
       goto: "ch6_hub"
     },
@@ -2470,7 +2523,7 @@ window.NIGHTDESK_STORY = {
       ],
       choices: [
         { text: "The F sticks. Up there and down here. You said so on {weekday:-3d}.", goto: "ch6_t_piano_caught", set: { doubt: 1 } },
-        { text: "Who's playing while you're holding the phone?", goto: "ch6_t_piano_caught", set: { doubt: 1, curiosity: 1 } },
+        { text: "Your recording on {weekday:-3d} had the F sticking. This one doesn't.", goto: "ch6_t_piano_caught", set: { doubt: 1, curiosity: 1 } },
         { text: "Beautiful. Still beautiful.", goto: "ch6_hub", set: { spark: 1 } }
       ]
     },
@@ -2514,7 +2567,7 @@ window.NIGHTDESK_STORY = {
 
     ch6_t_rule: {
       messages: [
-        { text: "Tom was lucky. The rules are different for staff. 🙂", delay: "9s", set: { t_rule: 1, tests: 1, doubt: 1 } },
+        { text: "Tom was lucky. Residents are different. 🙂", delay: "9s", set: { t_rule: 1, tests: 1, doubt: 1 } },
         { text: "Next question, Desk.", delay: "5s" }
       ],
       goto: "ch6_hub"
@@ -2524,13 +2577,40 @@ window.NIGHTDESK_STORY = {
       messages: [
         { text: "Sure.", delay: "7s", set: { t_photo: 1, tests: 1 } },
         { image: "piano", caption: "Sent 1 photo", delay: "50s" },
-        { text: "The day room. I've been practising. 🙂", delay: "7s" }
+        { text: "The day room. I've been practicing. 🙂", delay: "7s" }
       ],
       choices: [
         { text: "Sheet music? You can't read a note. You told me.", goto: "ch6_t_photo_caught", set: { doubt: 1 } },
-        { text: "Storage full on {weekday:-1d}, and now a photo? What changed?", goto: "ch6_t_photo_caught2", set: { doubt: 1, curiosity: 1 } },
-        { text: "Looks cosy, for a haunted ward.", goto: "ch6_hub", set: { spark: 1 } }
+        { text: "Storage full on {weekday:-1d}, and now a photo? What changed?", goto: "ch6_t_photo_caught2", set: { doubt: 1, curiosity: 1 }, if: { flag: "k_storage", min: 1 }, knows: ["k_storage"] },
+        { text: "Looks cozy, for a haunted ward.", goto: "ch6_hub", set: { spark: 1 } }
       ]
+    },
+
+    ch6_t_dark: {
+      messages: [
+        { text: "It's quiet today, Desk. 🙂", delay: "7s", set: { t_dark: 1, tests: 1, doubt: 1 } },
+        { text: "Next question.", delay: "5s" }
+      ],
+      goto: "ch6_hub"
+    },
+
+    // Her clock never matched yours. It copies yours.
+    ch6_t_clock: {
+      messages: [
+        { text: "{time}. Same as yours. 🙂", delay: "6s", set: { t_clock: 1, tests: 1 } }
+      ],
+      choices: [
+        { text: "Your clock never matches mine. You said it doesn't keep mine.", goto: "ch6_t_clock_caught", set: { doubt: 1 } },
+        { text: "Good. Then you're nearly home.", goto: "ch6_hub" }
+      ]
+    },
+
+    ch6_t_clock_caught: {
+      messages: [
+        { text: "The clocks caught up. That's good news, Desk.", delay: "8s" },
+        { text: "Next question. 🙂", delay: "5s" }
+      ],
+      goto: "ch6_hub"
     },
 
     ch6_t_photo_caught: {
@@ -2577,7 +2657,7 @@ window.NIGHTDESK_STORY = {
       ],
       thread: "priya",
       choices: [
-        { text: "Don't. That is not her. Go home, lock your door, and don't answer that number.", goto: "ch6_priya_no", set: { trust: 1, priya_warned: 1 } },
+        { text: "Don't. That is not her. Stay home tonight, lock your door, and don't answer that number.", goto: "ch6_priya_no", set: { trust: 1, priya_warned: 1 } },
         { text: "Do what she says. I'll be there too.", goto: "ch6_priya_yes", set: { priya_risk: 1 } },
         { text: "Ignore it. I'll handle tonight.", goto: "ch6_priya_ignore", set: { priya_warned: 1 } }
       ]
@@ -2611,7 +2691,9 @@ window.NIGHTDESK_STORY = {
         { text: "desk its me", delay: "4s" },
         { text: "dont go to the lobby. whatever it said. dont", delay: "6s" },
         { text: "im on 13. its loud. i can only get through when im touching the machine", delay: "8s" },
-        { text: "it cant keep me out when im this close to the machine. look at how it writes when it comes. the full stops. thats how you tell us apart", delay: "8s" }
+        { text: "it cant keep me out when im this close to the machine. look at how it writes when it comes. the full stops. thats how you tell us apart", delay: "8s" },
+        { text: "you gave it your name. it said it up here. in my voice. i heard it", delay: "9s", if: { flag: "told_name", min: 1 } },
+        { text: "and it only has the phones clock. yours. it cant keep mine", delay: "7s", if: { flag: "t_clock", min: 1 } }
       ],
       choices: [
         { text: "Which one of you is real?", goto: "ch6_which" },
@@ -2622,8 +2704,8 @@ window.NIGHTDESK_STORY = {
 
     ch6_which: {
       messages: [
-        { text: "the one who cant type", delay: "7s" },
-        { text: "ask me something it didnt hear", delay: "6s" }
+        { text: "the one without the full stops", delay: "7s" },
+        { text: "ill tell you something it didnt hear", delay: "6s" }
       ],
       goto: "ch6_proof"
     },
@@ -2631,7 +2713,7 @@ window.NIGHTDESK_STORY = {
     ch6_knew: {
       messages: [
         { text: "good", delay: "6s" },
-        { text: "it was so angry when you said that. the lights went", delay: "7s" }
+        { text: "it heard you. the lights up here went out", delay: "7s" }
       ],
       goto: "ch6_proof"
     },
@@ -2642,16 +2724,16 @@ window.NIGHTDESK_STORY = {
         { text: "take this", delay: "4s" },
         { text: "he wrote dan. not dana. he never called me dana", delay: "8s", set: { proof_real: 1 } },
         { text: "Desk, she's lying. It uses my voice. It uses everything. Lobby. 3:12. Please.", delay: "6s" },
-        { system: "Same number. Same thread. Capital letters, and a full stop after every word.", delay: "3s" },
+        { system: "Same number. Same thread. Capital letters, and a full stop after every sentence.", delay: "3s" },
         { text: "its in the thread with us now", delay: "5s" },
         { text: "it hears this too. cant help that. its the only way", delay: "7s" },
         { text: "listen. tomorrow. my 3:12. i come down the stairs, not the car. on my side its a stair. on yours its a wall. the panel in your closet is where they stopped pouring", delay: "12s" },
-        { text: "kevin told me not to come get him. i always went anyway. and now im saying it to you. dont come get me. be in 11c and let me come to you.", delay: "11s" },
+        { text: "kevin told me not to come get him. i always went anyway. and now im saying it to you. dont come get me. be in 11C and let me come to you", delay: "11s" },
         { text: "not the lobby. dont take the sign down. dont hold any", delay: "9s" },
         { status: "offline" },
         { system: "Nothing more. Not Delivered, not Read. Just the last word hanging there without its full stop.", delay: "20s" }
       ],
-      endOfChapter: { title: "End of Day 5", subtitle: "Two voices from one number. One of them can spell. Tomorrow, at her 3:12, you have to be in exactly one place.", next: "ch7_start" }
+      endOfChapter: { title: "End of Day 5", subtitle: "Two voices from one number. One of them uses full stops. Tomorrow, at her 3:12, you have to be in exactly one place.", next: "ch7_start" }
     }
 ,
     // ---------------- Night 6 · 3:12 ----------------
@@ -2717,7 +2799,7 @@ window.NIGHTDESK_STORY = {
         { system: "Two hands come out of the dark at the same height. Both have the triangle on the wrist.", delay: "5s" }
       ],
       choices: [
-        { text: "Take the hand of the one who can't spell.", action: "You take the hand of the one who can't spell.", goto: "ch7_good", set: { trust: 1 } },
+        { text: "Take the hand of the one without the full stops.", action: "You take the hand of the one without the full stops.", goto: "ch7_good", set: { trust: 1 } },
         { text: "Take the hand of the one with the full stops.", action: "You take the hand of the one with the full stops.", goto: "ch7_bad" }
       ]
     },
@@ -2729,17 +2811,20 @@ window.NIGHTDESK_STORY = {
         { system: "Both knew. Both were written on this phone. Two hands come out of the dark at the same height.", delay: "6s" }
       ],
       choices: [
-        { text: "Take the hand of the one who can't spell.", action: "You take the hand of the one who can't spell.", goto: "ch7_good", set: { trust: 1 } },
+        { text: "Take the hand of the one without the full stops.", action: "You take the hand of the one without the full stops.", goto: "ch7_good", set: { trust: 1 } },
         { text: "Take the hand with the smiley face.", action: "You take the hand with the smiley face.", goto: "ch7_bad" }
       ]
     },
 
     ch7_question_name: {
       messages: [
-        { system: "From the dark, two voices say 'Dana Reyes' at once. One of them says it like a name. The other says it like a word it read somewhere. You could not tell a stranger which was which.", delay: "8s" },
-        { text: "it has my name. its had it for weeks. ask me something it doesnt have", delay: "7s" }
+        { system: "From the dark, two voices answer at once. One says 'Dana Reyes', clean and sure, like a word it read somewhere. The other says 'Li Dan Reyes', all of it. One of them stops where the phone stopped.", delay: "8s" },
+        { system: "Two hands come out of the dark at the same height. Both have the triangle on the wrist.", delay: "5s" }
       ],
-      goto: "ch7_question"
+      choices: [
+        { text: "Take the hand of the one who said all of it.", action: "You take the hand of the one who said all of it.", goto: "ch7_good", set: { trust: 1 } },
+        { text: "Take the hand of the one who said Dana Reyes.", action: "You take the hand of the one who said Dana Reyes.", goto: "ch7_bad" }
+      ]
     },
 
     ch7_good: {
@@ -2754,9 +2839,9 @@ window.NIGHTDESK_STORY = {
         { to: "okonkwo", text: "You can tell her the cat is not coming back here. He has a new person. I am only slightly offended.", delay: "40m", if: { flag: "toto_home", min: 1 } },
         { to: "priya", text: "are you alive. is it over. I'm outside with two coffees and I'm not coming in until you answer", delay: "20m", notify: true, if: { flag: "priya_warned", min: 1 } },
         { system: "Tom Okafor walks out of the stairwell door on 11 at a quarter to nine, in the clothes he wore {weekday:-4d}, and asks what day it is.", delay: "40m", if: { flag: "tom_lost", min: 1 } },
-        { to: "dana_real", text: "This is Dana. My number. The real one, with the terrible spelling.", delay: "2h", notify: true },
-        { to: "dana_real", text: "You owe me breakfast, Desk.", delay: "6s", if: { flag: "spark", min: 2 } },
-        { to: "dana_real", text: "Toto says thanks.", delay: "6s", if: { flag: "spark", max: 1 } },
+        { to: "dana_real", text: "this is dana. my number. the real one. no capitals, promise", delay: "2h", notify: true },
+        { to: "dana_real", text: "you owe me breakfast desk", delay: "6s", if: { flag: "spark", min: 2 } },
+        { to: "dana_real", text: "toto says thanks", delay: "6s", if: { flag: "spark", max: 1 } },
         { to: "dana_real", text: "🐈", delay: "3s" }
       ],
       endOfChapter: { title: "Both of you, out", subtitle: "The desk logbook for tonight reads: 03:12, elevator at L, no incident. For the first time since 1974 it's true." }
@@ -2764,10 +2849,12 @@ window.NIGHTDESK_STORY = {
 
     ch7_bad: {
       messages: [
-        { system: "The hand is warm and dry and perfectly steady. It does not pull. It steps through, and through you, and for a second it is wearing your title. Behind it, far up the stairs, someone who cannot spell says your title once, and then the panel is just a panel.", delay: "6s" },
+        { system: "The hand is warm and dry and perfectly steady. It does not pull. It steps through, and through you, and for a second it is wearing your title. Behind it, far up the stairs, someone who never uses a full stop says your title once, and then the panel is just a panel.", delay: "6s" },
         { system: "You sit at the desk until the sun comes up. Priya arrives. You tell her nothing, in several different ways.", delay: "3h" },
-        { text: "Good night, Desk.", delay: "2h", notify: true },
-        { text: "It isn't much of a name. It will do. 🙂", delay: "8s" }
+        { text: "Good night, Desk.", delay: "2h", notify: true, if: { flag: "told_name", max: 0 } },
+        { text: "It isn't much of a name. It will do. 🙂", delay: "8s", if: { flag: "told_name", max: 0 } },
+        { text: "Good night, ██████.", delay: "2h", notify: true, if: { flag: "told_name", min: 1 } },
+        { text: "Thank you for the name. 🙂", delay: "8s", if: { flag: "told_name", min: 1 } }
       ],
       endOfChapter: { title: "It came down", subtitle: "Somewhere a one-eared cat is waiting for someone who knows which key sticks. The phone has your title now. It is patient about the rest." }
     },
@@ -2806,14 +2893,14 @@ window.NIGHTDESK_STORY = {
         { system: "Priya will see it at 8. Doug will forward it to the police. Your mother will say you do this.", delay: "6s" },
         { text: "Are you there?", delay: "21d" }
       ],
-      endOfChapter: { title: "You changed places", subtitle: "Three weeks from now someone new on nights will read your threads and an unknown number will text the desk. It will spell everything right." }
+      endOfChapter: { title: "You changed places", subtitle: "Three weeks from now someone new on nights will read your threads and an unknown number will text the desk. Every sentence will end in a full stop." }
     },
 
     ch7_step_back: {
       messages: [
         { system: "The doors close on nothing. The indicator goes up, past 11, and stops where there is no number. The lights in the lobby flicker in a rhythm like someone hitting the same key.", delay: "6s" },
         { text: "You were told what to do.", delay: "5s" },
-        { text: "desk. desk the panel. 11c. run", delay: "4s" },
+        { text: "desk. desk the panel. 11C. run", delay: "4s" },
         { system: "The elevator comes back down, empty, and opens. Priya steps in to look at the panel, because somebody should. She is still in it when the doors close. Up there it is still 3:12.", delay: "6s", if: { flag: "priya_here", min: 1 }, set: { priya_lost: 1 } },
         { system: "Eleven floors of stairs. Seven minutes. The closet panel is open on the coats, and Dana Reyes is sitting against the dresser holding her left arm and a 1974 cardigan, and swearing at you in two languages.", delay: "20s", set: { dana_hurt: 1 } },
         { text: "you took your time desk", delay: "6s" },
@@ -2826,11 +2913,11 @@ window.NIGHTDESK_STORY = {
 
     ch7_step_back_end: {
       messages: [
-        { to: "dana_real", text: "This is Dana. My number. The real one.", delay: "6h", notify: true },
-        { to: "dana_real", text: "Arm's broken. Toto's fine. We need to talk about Priya.", delay: "6s", if: [{ flag: "priya_lost", min: 1 }, { flag: "toto_home", min: 1 }] },
-        { to: "dana_real", text: "Arm's broken. Going to get my cat. And we need to talk about Priya.", delay: "6s", if: [{ flag: "priya_lost", min: 1 }, { flag: "toto_home", max: 0 }] },
-        { to: "dana_real", text: "Arm's broken. Toto's fine. You owe me breakfast and a new jacket, Desk.", delay: "6s", if: [{ flag: "priya_lost", max: 0 }, { flag: "toto_home", min: 1 }] },
-        { to: "dana_real", text: "Arm's broken. Going to get my cat. You owe me breakfast and a new jacket, Desk.", delay: "6s", if: [{ flag: "priya_lost", max: 0 }, { flag: "toto_home", max: 0 }] },
+        { to: "dana_real", text: "this is dana. my number. the real one", delay: "6h", notify: true },
+        { to: "dana_real", text: "arms broken. totos fine. we need to talk about priya", delay: "6s", if: [{ flag: "priya_lost", min: 1 }, { flag: "toto_home", min: 1 }] },
+        { to: "dana_real", text: "arms broken. going to get my cat. and we need to talk about priya", delay: "6s", if: [{ flag: "priya_lost", min: 1 }, { flag: "toto_home", max: 0 }] },
+        { to: "dana_real", text: "arms broken. totos fine. you owe me breakfast and a new jacket desk", delay: "6s", if: [{ flag: "priya_lost", max: 0 }, { flag: "toto_home", min: 1 }] },
+        { to: "dana_real", text: "arms broken. going to get my cat. you owe me breakfast and a new jacket desk", delay: "6s", if: [{ flag: "priya_lost", max: 0 }, { flag: "toto_home", max: 0 }] },
         { to: "dana_real", text: "tom came down the stairs behind me. he doesnt remember any of it. lucky him", delay: "8s", if: { flag: "tom_lost", min: 1 } },
         { system: "Priya's thread says Delivered. It will keep saying it.", delay: "4s", if: { flag: "priya_lost", min: 1 } }
       ],
@@ -2847,7 +2934,7 @@ window.NIGHTDESK_STORY = {
         { system: "Delivered. Then not even that.", delay: "30s" },
         { to: "carl", text: "Morning. Per our chat: elevator's locked out for good as of today, structural inspection, no ETA. Sign stays up. Thanks for a quiet night.", delay: "6h", notify: true, if: { flag: "told_mgmt", min: 1 } },
         { to: "carl", text: "Morning. Harlow's decided: elevator's locked out for good, structural, no ETA. Sign stays up. Priya says you had a rough night. Take the day.", delay: "6h", notify: true, if: { flag: "told_mgmt", max: 0 } },
-        { text: "still here. the F still sticks. do me a favour and feed the cat.", delay: "365d" }
+        { text: "still here. the F still sticks. do me a favor and feed the cat", delay: "365d" }
       ],
       endOfChapter: { title: "Closed for good", subtitle: "A year from now the desk phone will get one more message from a number that doesn't exist. It will have no punctuation at all." }
     }
@@ -3494,7 +3581,7 @@ window.NIGHTDESK_STORY = {
         <rect width="240" height="180" filter="url(#g5)" opacity=".9"/></svg>`;
     },
     piano() {
-      return `<svg viewBox="0 0 240 180" role="img" aria-label="An old upright piano in a dim day room, lid open, a handwritten sheet of music on the stand">
+      return `<svg viewBox="0 0 240 180" role="img" aria-label="An old upright piano in a dim day room, lid open, a printed sheet of music on the stand">
         <defs><filter id="g7"><feTurbulence baseFrequency=".7" numOctaves="2" seed="19"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".18"/></feComponentTransfer></filter>
         <radialGradient id="fl7" cx=".5" cy=".5" r=".7"><stop offset="0" stop-color="#4a4234"/><stop offset="1" stop-color="#070605"/></radialGradient></defs>
         <rect width="240" height="180" fill="url(#fl7)"/>

@@ -91,7 +91,7 @@ Sist oppdatert: 2026-10-18 (etter full logikkrevisjon, manus v21).
 - Så betongbilene i 1979. Hørte om november 1974 fra Delgado-paret i 6A (de fortalte Harold, hennes mann). Vet om Ashgrove-navnet.
 - Satt i komiteen som fikk pianoet til loungen i 1981 (manageren fant det på et lager, «came with the building»). Det fantes ikke piano i bygget da hun flyttet inn.
 - Kjente Dana (bilder av Toto, kake). Meldte Dana savnet. Sover kl. 3.
-- Har hørt elleve nattevakter si «I'm not supposed to socialise».
+- Har hørt elleve nattevakter si «I'm not supposed to socialize».
 
 ### Tom Okafor (11A)
 - Taket brummer (HVAC, tror han). Natt 2 i heisen; reddet med navnet eller mistet på 12. Vet ikke hva det var. Mailer Doug om heisen.
@@ -210,3 +210,12 @@ En replikk eller et valg som bruker et faktum noen må ha fått vite, merkes `kn
 - Dag 2: wristband-bildet viser kanten av Danas hånd med tre små trekanter på håndleddet. Spilleren kan spørre (ch2_tattoo, valgfritt, k_tattoo): «Long story. Not today.»
 - Dag 4 (ch5_kevin_tell) forklarer i rekkefølge: Li er familienavnet, Dana tok stefarens navn Reyes, Kevin beholdt Li; Zelda-replikken fra den gamle mannen i hula; Kevin døde 19 år; tatoveringen er Triforce fra samme spill. Siste side er papir i spillerens jakke, så det har ikke sett den.
 - Natt 6: begge hendene har trekanten, fordi det har sett bildet.
+
+## Danas stemme og tegnene på den falske (Ruben 07.11: ja til begge)
+- **Ekte Dana** skriver små bokstaver i alle meldinger fra første melding («are you there?»), og aldri punktum på slutten av en boble. Punktum inne i en melding og apostrofer er greit når hun er rolig; når hun er redd faller apostrofene bort («dont», «im»). Store bokstaver bare i koder og forkortelser (LANTERN, PT-09, 11C, 4B, L, F, SE, HVAC, TV) og i ting hun siterer mellom '…' (journaler, avisen, Kevins side). Gjelder også tråden dana_real etter slutten.
+- **Den falske** skriver store bokstaver, punktum etter hver setning, apostrofer og 🙂.
+- De fire tegnene på dag 5 (ch6): 1) den bryter Danas regler: ber spilleren hjelpe noen inn i heisen (ch6_ask) og spør etter spillerens navn (ch6_tests_intro → ch6_name_*; told_name gir «Good night, ██████» i ch7_bad, og ekte Dana sier i ch6_night at hun hørte det si navnet i hennes stemme); 2) den vet bare det som er skrevet på telefonen (Kevins side, ch6_t_kevin); 3) klokka: den svarer med spillerens klokkeslett, «Same as yours» (ch6_t_clock), mens Danas klokke aldri har fulgt spillerens; 4) for glatt: F-en sitter ikke (ch6_t_piano), perfekt bilde (ch6_t_photo), Toto (ch6_t_toto). Skrivemåten er den siste bekreftelsen (ch6_night: «the full stops»).
+- Etter gjennomlesing 07.11: arkivmeldingene der Dana skriver pent til Marjorie forklares i natt 1 (ch1_proof): «you can drop the front desk voice. capital letters were for residents. doug reads those». Den falske skriver som desktelefonen fordi den har lest arkivet.
+- Den falske svarer på Toto-spørsmålet med Danas egne ord fra dag 2, ordrett men med store bokstaver (kopierer, finner ikke på). Spilleren kan påpeke skrivemåten allerede i første melding (ch6_back_caps) og at den ikke går i mørket (ch6_t_dark).
+- I skapet: ber spilleren om fullt navn, sier den ekte «Li Dan Reyes» og den falske «Dana Reyes» («stops where the phone stopped»).
+- Valgene i finalen sier «the one without the full stops», ikke «can't spell» (Dana staver riktig).
